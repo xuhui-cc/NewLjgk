@@ -1,0 +1,1 @@
+<web-view src="{{get_live}}"></web-view>

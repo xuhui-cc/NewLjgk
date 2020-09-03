@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "adWindow": "/components/adWindow/adWindow"
+  },
+  "navigationStyle": "custom"
+}

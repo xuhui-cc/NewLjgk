@@ -1,0 +1,244 @@
+/* pages/my/my.wxss */
+/* pages/user/user.wxss */
+page{
+  background-color: #F5F5F5;
+}
+/**index.wxss**/
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+   padding: 61rpx 0 0;
+}
+.userinfo-avatar {
+  width: 141rpx;
+  height: 141rpx;
+  border-radius: 50%;
+  overflow:hidden;
+}
+.ava{
+  width: 141rpx;
+  height: 141rpx;
+  border-radius: 50%;
+}
+.userinfo-nickname {
+  color: #272727;
+  font-size:34rpx;
+  font-family:PingFang SC;
+  font-weight:bold;
+   margin-top: 31rpx;
+   line-height:48rpx;
+}
+
+
+
+.list{
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+.list .list-li{
+   display: flex;
+   line-height: 105rpx;
+   align-items: center;
+   padding-left: 45rpx;
+   justify-content: flex-start;
+}
+.list .list-li .item-img{
+  width: 39rpx;
+  height: 39rpx;
+  flex-grow:0;
+}
+.item{
+  display: flex;
+  margin-left:23rpx;
+  justify-content: space-between;
+  flex-grow:1;
+  align-items: center;
+   box-sizing: border-box;
+   padding-right:34rpx; 
+}
+.item .right-img{
+width: 14rpx;
+height: 14rpx;
+border-top: 3rpx solid #DEDEDE;
+border-right: 3rpx solid #DEDEDE;
+transform: rotate(45deg);
+}
+.item-text{
+  font-size:26rpx;
+  color: #272727;
+}
+
+.list-li:last-child .item{
+  border-bottom:none;
+}
+
+
+/* 课程 */
+.login_read{
+  position: fixed;
+  margin-left: 30rpx;
+  margin-top: 450rpx;
+  width:690rpx;
+  height:210rpx;
+  background: transparent;
+  /* background-color: rgba(58,58,58,1); */
+  opacity:0.5;
+  z-index: 5;
+}
+.login_read::after {
+  border: none;
+}
+.login_ava{
+  position: fixed;
+  
+  width:141rpx;
+  height:141rpx;
+  background: transparent;
+  /* background-color: rgba(58,58,58,1);
+  opacity:0.5; */
+}
+.login_ava::after {
+  border: none;
+}
+.course-ul{
+  padding-top: 58rpx;
+  padding-bottom: 66rpx;
+  background: #fff;
+  display: flex;
+  justify-content:  space-around;
+}
+
+.course-li{
+  display: flex;
+  flex-direction:  column-reverse;
+  text-align: center;
+  width: 104rpx;
+  height: 109rpx;
+  align-items: center;
+}
+.course-li-title{
+  font-size:26rpx;
+  font-family:PingFang SC;
+  line-height:37rpx;
+  color:#010101;
+  margin-top: 12rpx;
+}
+.course-li-img{
+  width: 52rpx;
+  height: 51rpx;
+}
+.course-li-imgzhong{
+  width: 46rpx;
+  height: 59rpx;
+}
+.vip_layout{
+  width:750rpx;
+  background:#fff;
+  padding-bottom: 20rpx;
+}
+/* .vip{
+  margin-left: 30rpx;
+  margin-top: 40rpx;
+  width:690rpx;
+  height:121rpx;
+  background:linear-gradient(90deg,rgba(74,78,90,1) 0%,rgba(21,27,45,1) 100%);
+  border-radius:18rpx;
+} */
+.vip_img{
+  margin-left: 30rpx;
+  margin-top: 40rpx;
+  width:690rpx;
+  height:121rpx;
+}
+.king{
+  position: absolute;
+  margin-left: 62rpx;
+  margin-top: 67rpx;
+  width:30rpx;
+  height:25rpx;
+  /* z-index: 2; */
+}
+.open_vip{
+  position: absolute;
+  margin-left: 101rpx;
+  margin-top: 60rpx;
+  width:120rpx;
+  height:33rpx;
+  font-size:24rpx;
+  font-family:PingFang SC;
+  font-weight:400;
+  line-height:33rpx;
+  color:rgba(255,204,165,1);
+  
+}
+.open_vip1{
+  position: absolute;
+  margin-left: 138rpx;
+  margin-top: 68rpx;
+  width:200rpx;
+  height:33rpx;
+  font-size:30rpx;
+  font-weight:bold;
+  font-family:PingFang SC;
+  
+  line-height:33rpx;
+  color:rgba(255,204,165,1);
+  
+}
+.open_content{
+  position: absolute;
+  margin-left: 62rpx;
+  margin-top: 100rpx;
+  width:420rpx;
+  height:40rpx;
+  font-size:28rpx;
+  font-family:PingFang SC;
+  font-weight:bold;
+  
+  color:rgba(255,204,165,1);
+  
+}
+.open_time{
+  position: absolute;
+  margin-left: 138rpx;
+  margin-top: 109rpx;
+  width:276rpx;
+  height:30rpx;
+  font-size:22rpx;
+  font-family:PingFang SC;
+  font-weight:400;
+  color:rgba(255,231,183,1);
+
+}
+.vip_btn{
+  position: absolute;
+  margin-left: 525rpx;
+  margin-top: 69rpx;
+  width:180rpx;
+  height:59rpx;
+  font-size:26rpx;
+  font-family:PingFang SC;
+  font-weight:bold;
+  line-height:59rpx;
+  text-align: center;
+  color:rgba(23,29,47,1);
+  background:linear-gradient(127deg,rgba(255,229,209,1) 0%,rgba(242,167,110,1) 100%);
+  
+  border-radius:30rpx;
+}
+.vip_badge2{
+  position: absolute;
+  margin-left: 61rpx;
+  margin-top: 64rpx;
+  width:64rpx;
+  height:74rpx;
+}
+.heng{
+  margin-left: 104rpx;
+  width:646rpx;
+  height:0rpx;
+  border:1rpx solid rgba(241,241,241,1);
+  opacity:1;
+}

@@ -1,0 +1,12 @@
+<view class="container">
+  <image class="back" src="/images/navi/w_back2.png" bindtap="back"></image>
+  <image class="bg" src="./resource/bg3.png"></image>
+  <image class="exchange_bg" src="./resource/exchange_bg.png"></image>
+  <view class="content1">{{vip_info.top}}</view>
+  <view class="content2">{{vip_info.butr}}</view>
+  <view class="content2" style="margin-left:295rpx;">{{vip_info.butm}}</view>
+  <view class="content2" style="margin-left:490rpx;">{{vip_info.butl}}</view>
+
+  <button class="login1"  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" wx:if="{{!login}}"></button>
+  <view wx:else="" class="exchange" bindtap="check_1Vn"></view>
+</view>

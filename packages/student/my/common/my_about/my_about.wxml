@@ -1,0 +1,10 @@
+<!--pages/my_about/my_about.wxml-->
+<view class="container">
+  <view class="userinfo">
+      <image src="./resource/my_logo.png" class="userinfo-avatar"></image>
+       <view class="userinfo-nickname">
+          领军教育
+       </view>
+  </view>
+  <view class="content">{{my_about}}</view>
+</view>
