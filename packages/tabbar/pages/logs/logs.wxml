@@ -313,13 +313,13 @@
     <view wx:for="{{course.lists}}" wx:key="index">
 
       <view class="course_layout" bindtap="to_course_detail" data-xb="{{index}}" >
-        <image class="vip_laber" wx:if="{{(item.buy == 0 || item.buy == 2 || item.buy > 4) && item.vip == 1}}" src="/images/other/vip_laber2.png"></image>
-        <image class="laber" wx:if="{{item.buy == 1 || item.is_buy == 3 || item.is_buy == 4}}" src="./resource/isbuy.png"></image>
-        <image class="hot_group"  style="{{item.vip == 1?'margin-left:82rpx;':''}}" wx:if="{{(item.buy == 0 || item.buy == 6) && item.type == 1}}" src="./resource/hot_group.png"></image>
-        <image class="hot_group"  style="{{item.vip == 1?'margin-left:82rpx;':''}}" wx:if="{{(item.buy == 0 || item.buy == 6) && item.type == 2}}" src="./resource/hot_ms.png"></image>
-        <image class="laber" wx:if="{{item.buy == 2}}" src="./resource/group_laber.png"></image>
+        <image class="vip_laber" style="margin-top:30rpx" wx:if="{{(item.buy == 0 || item.buy == 2 || item.buy > 4) && item.vip == 1}}" src="/images/other/vip_laber2.png"></image>
+        <image class="laber"style="margin-top:30rpx" wx:if="{{item.buy == 1 || item.is_buy == 3 || item.is_buy == 4}}" src="./resource/isbuy.png"></image>
+        <image class="hot_group"   style="{{item.vip == 1?'margin-left:82rpx;margin-top:30rpx':'margin-top:30rpx'}}" wx:if="{{(item.buy == 0 || item.buy == 6) && item.type == 1}}" src="./resource/hot_group.png"></image>
+        <image class="hot_group"  style="{{item.vip == 1?'margin-left:82rpx;margin-top:30rpx':'margin-top:30rpx'}}" wx:if="{{(item.buy == 0 || item.buy == 6) && item.type == 2}}" src="./resource/hot_ms.png"></image>
+        <image class="laber" style="margin-top:30rpx" wx:if="{{item.buy == 2}}" src="./resource/group_laber.png"></image>
         <view class="flex">
-          <image class="course_fm" src="{{item.face}}"></image>
+          <image class="hot_fm" style="margin-top:30rpx" src="{{item.face}}"></image>
           <view style="margin-left:23rpx;">
             <view class="course_title">{{item.title}}</view>
             <view class="flex">

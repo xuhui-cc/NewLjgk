@@ -115,7 +115,7 @@ Page({
     var kid = that.data.course_cata.lists[xb].kid
     var eid = that.data.course_cata.lists[xb].eid
     var mid = that.data.course_cata.lists[xb].mid
-    if (that.data.course_cata.lists[xb].cateid == 1) {
+    if (that.data.course_cata.lists[xb].cateid == 1||that.data.course_cata.lists[xb].cateid == 2) {
       wx.navigateTo({
         url: app.getPagePath('live') + '?id=' + id + '&kid=' + kid,    //直播
       })
@@ -598,6 +598,6 @@ Page({
   onShareAppMessage: function () {
     let that = this;
     let paramsStr = 'isshare=1&gid=' + that.data.gid + '&kid=' + that.data.kid
-    return app.shareTool.getShareReturnInfo('0,1', 'course_detail', paramsStr, '/images/other/share1.png', '领军网校')
+    return app.shareTool.getShareReturnInfo('0,1', 'course_detail', paramsStr, '/images/other/share1.png')
   },
 })

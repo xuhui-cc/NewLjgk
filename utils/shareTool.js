@@ -58,7 +58,7 @@ function getShareReturnInfo(role, targetPageName ,paramsStr, imageUrl, title) {
   }
   console.log("获取分享源路径：\n", path)
   return {
-    title: title ? title : '领军网校',
+    title: title ? title : '领军公考',
     path: path,
     imageUrl: (imageUrl && imageUrl != '') ? imageUrl : '/images/other/share1.png',
     success (res) {
@@ -116,7 +116,7 @@ function shareTarget () {
       // 分享的页面为 tabbar页面 切换tabbar选中item
       setTimeout(function(){
         wx.switchTab({
-          url: app.getPagePath(shareOption.target),
+          url: pagePath.getPagePath(shareOption.target),
         })
       }, 100)
     }
