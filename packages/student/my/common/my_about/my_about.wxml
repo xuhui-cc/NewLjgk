@@ -6,5 +6,9 @@
           领军教育
        </view>
   </view>
-  <view class="content">{{my_about}}</view>
+  <!-- <view class="content">{{my_about}}</view> -->
+  <view class="content">
+    <rich-text nodes="{{my_about}}"></rich-text>
+  </view>
+  
 </view>

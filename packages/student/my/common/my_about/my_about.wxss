@@ -26,11 +26,16 @@ page{
    line-height:48rpx;
 }
 
-.content{
+/* .content{
   margin: 62rpx 44rpx 30rpx;
   font-size:28rpx;
 font-family:PingFang SC;
 font-weight:400;
 line-height:47rpx;
 color:#272727;
+} */
+.content{
+  margin-left: 30rpx;
+  margin-top: 30rpx;
+  width: 690rpx;
 }
