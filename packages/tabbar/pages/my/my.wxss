@@ -78,10 +78,10 @@ transform: rotate(45deg);
 /* 课程 */
 .login_read{
   position: fixed;
-  margin-left: 30rpx;
-  margin-top: 450rpx;
-  width:690rpx;
-  height:210rpx;
+  /* margin-left: 30rpx; */
+  margin-top: 480rpx;
+  width:750rpx;
+  height:220rpx;
   background: transparent;
   /* background-color: rgba(58,58,58,1); */
   opacity:0.5;
@@ -177,7 +177,7 @@ transform: rotate(45deg);
   position: absolute;
   margin-left: 138rpx;
   margin-top: 68rpx;
-  width:200rpx;
+  width:300rpx;
   height:33rpx;
   font-size:30rpx;
   font-weight:bold;
@@ -214,7 +214,7 @@ transform: rotate(45deg);
 }
 .vip_btn{
   position: absolute;
-  margin-left: 525rpx;
+  margin-left: 520rpx;
   margin-top: 69rpx;
   width:180rpx;
   height:59rpx;

@@ -165,9 +165,18 @@ Page({
 
   // 跳转我的课程
   gourlCourse: function () {
-    wx.navigateTo({
-      url: app.getPagePath('my_course'),
-    })
+    let that = this
+    if(!that.data.login){
+      wx.showToast({
+        title: '请先登录',
+        icon:"none"
+      })
+    }else{
+      wx.navigateTo({
+        url: app.getPagePath('my_course'),
+      })
+    }
+    
   },
   // 跳转我的错题本
   gourlError: function () {

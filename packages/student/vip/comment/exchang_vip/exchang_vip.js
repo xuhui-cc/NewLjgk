@@ -14,12 +14,21 @@ Page({
    */
   onLoad: function (options) {
     let that = this 
-    var csid = decodeURIComponent(options.q).match(/\d+/g)
+    var vip_id
+    if(options.q){
+      var csid = decodeURIComponent(options.q).match(/\d+/g)
     // console.log(decodeURIComponent(options.q).match(/\d+/g))
-    console.log(csid[1])
+      console.log(csid[1])
+      vip_id = csid[1]
+    }
+    if(options.id){
+      console.log(options.id)
+      vip_id = options.id
+    }
+    
     
     that.setData({
-      id:csid[1],
+      id:vip_id,
       gid:"1",
       login:wx.getStorageSync('login')
     })

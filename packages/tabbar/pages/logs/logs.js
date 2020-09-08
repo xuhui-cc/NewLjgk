@@ -61,9 +61,10 @@ Page({
     let that = this
     var params = {
       "token": wx.getStorageSync("token"),
+      "gid":that.data.gid
     }
     // console.log(params, "会员列表参数")
-    app.ols.v4_viplist(params).then(d => {
+    app.ols.v4_courseViplist(params).then(d => {
       console.log(d, "会员列表数据")
       if (d.data.code == 0) {
         if(d.data.data.lists[0].course){
@@ -359,6 +360,8 @@ Page({
           that.setData({
             grade_select: false
           })
+          that.getsubject()   //获取科目
+          that.hot()  //获取热门
         }
       })
     }else{
