@@ -149,16 +149,18 @@
   opacity:1;
 }
 .avatar{
-  margin-left: 42rpx;
+  /* margin-left: 42rpx; */
   margin-top: 50rpx;
+  margin-right: 15rpx;
   width:51rpx;
   height:51rpx;
   border-radius: 50%;
 }
 .name{
-  margin-left: 30rpx;
+  margin-left: -15rpx;
   margin-top: 8rpx;
   margin-bottom: 20rpx;
+  margin-right: 10rpx;
   width:88rpx;
   height:30rpx;
   font-size:22rpx;
@@ -170,7 +172,8 @@
   opacity:1;
 }
 .num_layout{
-  margin-left: 350rpx;
+  position: absolute;
+  margin-left: 400rpx;
   margin-top: 100rpx;
   margin-bottom: 20rpx;
   width:92rpx;

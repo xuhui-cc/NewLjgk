@@ -24,6 +24,8 @@ App({
     // 登录
     wx.login({
       success: res => {
+        console.log("app.js登录")
+        wx.setStorageSync('code', res.code)
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
     })
@@ -116,6 +118,7 @@ App({
   getPagePath(pageName) {
     return pagePath.getPagePath(pageName)
   },
+  
 
   globalData: {
     userInfo: null,

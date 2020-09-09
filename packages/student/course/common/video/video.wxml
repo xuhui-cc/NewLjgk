@@ -36,11 +36,11 @@
       <view class="course_layout" data-xb="{{index}}" bindtap="to_course_detail">
         <view class="title">{{item.title}}</view>
         <view class="intro">{{item.intro}}</view>
-        <view class="flex">
-          <view class="flex" >
+        <view class="flex" style="margin-left:40rpx;">
+          <view class="flex"  wx:for="{{item.teacher}}" wx:key="index_tea" wx:for-item="tea">
             <view>
-              <image class="avatar" src="{{item.avatar}}"></image>
-              <view class="name">{{item.nick}}</view>
+              <image class="avatar" src="{{tea.avatar}}"></image>
+              <view class="name">{{tea.nick}}</view>
             </view>
          
           </view>

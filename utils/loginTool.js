@@ -10,12 +10,13 @@ function getPhoneNumber(e, gid, callback) {
   wx.showLoading({
     title: '登录中...',
   })
-  wx.login({
-    success(res) {
-      console.log("cccs.code" + res.code)
+  // wx.login({
+  //   success(res) {
+      // console.log("cccs.code" + res.code)
       let iv = encodeURIComponent(e.detail.iv);
       let encryptedData = encodeURIComponent(e.detail.encryptedData);
-      let code = res.code
+      // let code = res.code
+      let code = wx.getStorageSync('code')
       var params = {
         "code": code,
         "iv": iv,
@@ -23,17 +24,17 @@ function getPhoneNumber(e, gid, callback) {
         "gid": gid
       }
       login(params, callback)
-    },
-    fail (res) {
-      wx.hideLoading({
-        success: (r) => {
-          wx.showToast({
-            title: '登录失败\n'+res.errMsg,
-          })
-        },
-      })
-    }
-  })
+  //   },
+  //   fail (res) {
+  //     wx.hideLoading({
+  //       success: (r) => {
+  //         wx.showToast({
+  //           title: '登录失败\n'+res.errMsg,
+  //         })
+  //       },
+  //     })
+  //   }
+  // })
 }
 
 /**
