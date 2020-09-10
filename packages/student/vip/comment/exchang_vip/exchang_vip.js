@@ -32,6 +32,7 @@ Page({
       gid:"1",
       login:wx.getStorageSync('login')
     })
+    wx.setStorageSync('gid', 1)
     
   },
 

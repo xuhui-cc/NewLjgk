@@ -114,11 +114,11 @@ function info_1Vn(params) {
 }
 //验证一对多VIP有效
 function check_1Vn(params) {
-  return fetch.olsfetchpost(URI, 'v1/redeem/checkredeemonecode', params,"扫码一对多VIP信息")
+  return fetch.olsfetchpost(URI, 'v1/redeem/checkredeemonecode', params,"验证一对多VIP有效")
 }
 //兑换一对多VIP
 function exchange_1Vn(params) {
-  return fetch.olsfetchpost(URI, 'v1/redeem/exchangeredeem2', params,"扫码一对多VIP信息")
+  return fetch.olsfetchpost(URI, 'v1/redeem/exchangeredeem2', params,"兑换一对多VIP")
 }
 //课程直播/伪直播链接获取
 function get_live(params) {
