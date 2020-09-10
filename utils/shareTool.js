@@ -7,13 +7,13 @@ let firstPageName = 'first_page'
 
 // 各角色首页路径
 let homePageName = [
-  'index',
+  'logs',
   'teacher_studentList',
   'parent_childList'
 ]
 // tabbar各首页路径
 let tabbarPageName = [
-  'logs',
+  // 'logs',
   'my',
 ]
 

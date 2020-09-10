@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    exchange_page:false
   },
 
   /**
@@ -29,6 +29,7 @@ Page({
     
     that.setData({
       id:vip_id,
+      // id:"9",
       gid:"1",
       login:wx.getStorageSync('login')
     })
@@ -70,6 +71,24 @@ getPhoneNumber: function (e) {
   })
 },
 
+yes_exchange:function(){
+  let that =this 
+  that.exchange_1Vn(that.data.exchangeVip_info.id)
+},
+
+exchange_page:function(){
+  let that = this
+    that.setData({
+      exchange_page:false,
+      
+    })
+},
+
+  /**阻止页面滚动。模拟器中页面仍然可以滚动，真机上不能滚动。*/
+  preventTouchMove: function (e) {
+  
+  },  
+
 check_1Vn:function(){
   let that = this
   var params = {
@@ -79,7 +98,11 @@ check_1Vn:function(){
   app.ols.check_1Vn(params).then(d => {
     
     if (d.data.code == 0) {
-      that.exchange_1Vn(d.data.data.id)
+      that.setData({
+        exchangeVip_info:d.data.data,
+        exchange_page:true
+      })
+      // that.exchange_1Vn(d.data.data.id)
       
     } 
     else if(d.data.code == 5){
@@ -92,14 +115,14 @@ check_1Vn:function(){
         wx.showToast({
           title: d.data.msg,
           icon: "none",
-          duration: 2950
+          duration: 950
         })
         setTimeout(function () {
           console.log("跳转")
           wx.switchTab({
             url: app.getPagePath('logs'),
           })
-        }, 3000)
+        }, 1000)
       }
       
     }

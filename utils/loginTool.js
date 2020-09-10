@@ -23,7 +23,7 @@ function getPhoneNumber(e, gid, callback) {
         "encryptedData": encryptedData,
         "gid": gid
       }
-      login(params, callback)
+      login(e, gid,params, callback)
   //   },
   //   fail (res) {
   //     wx.hideLoading({
@@ -47,7 +47,7 @@ function getPhoneNumber(e, gid, callback) {
  * 返回值：
  *    role：1-学生 2-家长 3-老师
 */
-function login(params, callback) {
+function login(e, gid,params, callback) {
   console.log(params, "登录参数")
   ols.login(params).then(d => {
     wx.hideLoading()
@@ -86,6 +86,32 @@ function login(params, callback) {
         icon: 'none',
         duration: 3000
       })
+       wx.login({
+      success(res) {
+      console.log("cccs.code" + res.code)
+      let iv = encodeURIComponent(e.detail.iv);
+      let encryptedData = encodeURIComponent(e.detail.encryptedData);
+      let code = res.code
+      wx.setStorageSync('code', res.code)
+      // let code = wx.getStorageSync('code')
+      var params = {
+        "code": code,
+        "iv": iv,
+        "encryptedData": encryptedData,
+        "gid": gid
+      }
+      login(params, callback)
+    },
+    fail (res) {
+      wx.hideLoading({
+        success: (r) => {
+          wx.showToast({
+            title: '登录失败\n'+res.errMsg,
+          })
+        },
+      })
+    }
+  })
       typeof callback == "function" && callback(false, "登录失败")
     }
   })

@@ -386,3 +386,4 @@
   
 
 </view>
+<adWindow wx:if="{{adWindowModel}}" imgSrc="{{adWindowModel.picurl}}" type="{{adWindowModel.type}}"></adWindow>
