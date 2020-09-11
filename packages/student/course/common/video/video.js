@@ -275,7 +275,8 @@ Page({
     let that = this
     var params = {
       "token": wx.getStorageSync("token"),
-      "id": that.data.id
+      "id": that.data.id,
+      "gid":wx.getStorageSync('gid')
     }
     app.ols.getplaypushlist(params).then(d => {
       console.log(d)

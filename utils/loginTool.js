@@ -17,6 +17,7 @@ function getPhoneNumber(e, gid, callback) {
       let encryptedData = encodeURIComponent(e.detail.encryptedData);
       // let code = res.code
       let code = wx.getStorageSync('code')
+      console.log(gid)
       var params = {
         "code": code,
         "iv": iv,

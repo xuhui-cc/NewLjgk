@@ -58,7 +58,8 @@ Page({
         that.v4_viplist()
     }else{
       that.setData({
-        login: wx.getStorageSync("login")
+        login: wx.getStorageSync("login"),
+        gid:wx.getStorageSync("gid")
       })
       if(options.ewm_exchange){
         that.setData({
@@ -315,6 +316,8 @@ getPhoneNumber: function (e) {
   var that = this
   var type = e.currentTarget.dataset.type
   console.log(type)
+  console.log(that.data.gid,"that.data.gid")
+  console.log(wx.getStorageSync("gid"),"wx.getStorageSync")
   app.loginTool.getPhoneNumber(e, that.data.gid, function(success, message){
     if (success) {
       that.setData({
