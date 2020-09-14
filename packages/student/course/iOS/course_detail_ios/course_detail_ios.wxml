@@ -37,7 +37,7 @@
       <view wx:if="{{item.cateid == 1 || item.cateid == 2}}">
         <view class="flex">
           <view wx:if="{{index < 9}}" class="course_order">0{{index + 1}}</view>
-          <view wx:else class="course_order">0{{index + 1}}</view>
+          <view wx:else class="course_order">{{index + 1}}</view>
           <image class="record_img" src="/images/other/live.png"></image>
           
           <view class="course_title">{{item.name}}</view>
@@ -89,7 +89,7 @@
       <view wx:if="{{item.cateid == 0}}">
         <view class="flex">
           <view wx:if="{{index < 9}}" class="course_order">0{{index + 1}}</view>
-          <view wx:else class="course_order">0{{index + 1}}</view>
+          <view wx:else class="course_order">{{index + 1}}</view>
           <image class="record_img" src="/images/other/record.png"></image>
           
           <view class="course_title">{{item.name}}</view>
@@ -136,7 +136,7 @@
       </view>
     </view>
 
-    <view class="end_test">
+    <view class="end_test" hidden="true">
       <view class="btn_end_test" wx:if="{{(course_cata.res.buy == 1 || course_cata.res.buy == 3 || course_cata.res.buy == 4 || course_cata.res.buy == 5) && course_cata.res.mark_status == 0 }}" bindtap="to_test">去考试</view>
       <view class="btn_end_test" wx:if="{{course_cata.res.mark_status == 1 && (course_cata.res.buy == 1 || course_cata.res.buy == 3 || course_cata.res.buy == 4 || course_cata.res.buy == 5)}}"  style="background:rgba(204,204,204,1);">批改中</view>
       <view class="btn_end_test" wx:if="{{course_cata.res.mark_status == 2 && (course_cata.res.buy == 1 || course_cata.res.buy == 3 || course_cata.res.buy == 4 || course_cata.res.buy == 5)}}" bindtap="to_test_report" style="background:rgba(77,151,246,1);">查看报告</view>

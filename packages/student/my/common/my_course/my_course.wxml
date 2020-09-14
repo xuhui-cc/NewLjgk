@@ -28,7 +28,7 @@
               <view class="r-view">
                 <progress percent="{{item.study_percent}}"  border-radius="2.5" stroke-width="5" color="#fff" active="{{true}}" activeColor="#02DC9F" />
               </view>
-              <text class="lear">已学习{{item.study_percent}}%</text>
+              <text class="lear">学习{{item.study_percent}}%</text>
           </view>
       </view>
     </view>

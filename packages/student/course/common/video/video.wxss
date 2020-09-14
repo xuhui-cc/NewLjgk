@@ -173,9 +173,10 @@
 }
 .num_layout{
   position: absolute;
-  margin-left: 400rpx;
+  /* margin-left: 400rpx; */
   margin-top: 100rpx;
   margin-bottom: 20rpx;
+  right: 60rpx;
   width:92rpx;
   height:39rpx;
   line-height: 39rpx;
@@ -210,7 +211,7 @@
 }
 .buy_num{
   position: absolute;
-  margin-left: 535rpx;
+  margin-left: 525rpx;
   margin-top: 53rpx;
   width:140rpx;
   height:30rpx;
