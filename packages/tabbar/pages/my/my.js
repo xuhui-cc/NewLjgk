@@ -193,7 +193,7 @@ Page({
   //跳转我的优惠券
   to_myCoupon:function(){
     wx.navigateTo({
-      url: app.getPagePath('my_conpon'),
+      url: app.getPagePath('my_coupon'),
     })
   },
   //订阅测试

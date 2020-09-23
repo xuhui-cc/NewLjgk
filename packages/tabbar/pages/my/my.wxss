@@ -81,7 +81,7 @@ transform: rotate(45deg);
   /* margin-left: 30rpx; */
   margin-top: 480rpx;
   width:750rpx;
-  height:220rpx;
+  height:440rpx;
   background: transparent;
   /* background-color: rgba(58,58,58,1); */
   opacity:0.5;

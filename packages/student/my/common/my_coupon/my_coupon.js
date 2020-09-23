@@ -1,11 +1,12 @@
 // packages/student/my/common/my_coupon/my_coupon.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    cs:["hhh","hhh","hhhh"]
   },
 
   /**
@@ -26,7 +27,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let that = this 
+    that.couponList()
+    that.couponTea()
   },
 
   /**
@@ -62,5 +65,41 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+
+  //------------------------------------------------------接口---------------------------------------------------//
+  /**
+   * 优惠券列表接口
+   */
+  couponList:function(){
+    let that = this 
+    
+    var params = {
+      "token":wx.getStorageSync('token')
+    }
+    app.ols.couponList(params).then(d => {
+      if (d.data.code == 0) {
+        that.setData({
+          couponList:d.data.data
+        })
+      }
+    })
+    
+  },
+  couponTea:function(){
+    let that = this 
+    
+    var params = {
+      // "token":wx.getStorageSync('token')
+    }
+    app.ols.couponTea(params).then(d => {
+      if (d.data.code == 0) {
+        that.setData({
+          couponTea:d.data.data
+        })
+      }
+    })
+    
+  },
 })

@@ -207,7 +207,7 @@ page{
   
   margin-top: 30rpx;
   width:370rpx;
-  height:84rpx;
+  height:42rpx;
   font-size:30rpx;
   font-family:PingFang SC;
   font-weight:bold;
@@ -218,7 +218,7 @@ page{
   text-overflow: ellipsis;
   word-break: break-all;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
 }
 
 .margin_shu{
@@ -564,18 +564,18 @@ page{
   margin-left: 25rpx;
   margin-top: 20rpx;
   width:352rpx;
-  height:80rpx;
+  height:50rpx;
   font-size:30rpx;
   font-family:PingFang SC;
   font-weight:bold;
-  line-height:40rpx;
+  line-height:50rpx;
   color:rgba(39,39,39,1);
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-all;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
 }
 .hot_laber{
   margin-left: 88rpx;
@@ -810,4 +810,32 @@ page{
   bottom: 20rpx;
   width: 167rpx;
   height: 211rpx;
+}
+.sign{
+  margin-top: 15rpx;
+  margin-left: 25rpx;
+  width: 123rpx;
+  height: 40rpx;
+  background: #FF4B20;
+  font-size: 22rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 40rpx;
+  color: #FFFFFF;
+  text-align: center;
+  border-radius: 26rpx;
+}
+.sign1{
+  margin-top: 15rpx;
+  margin-left: 25rpx;
+  width: 123rpx;
+  height: 40rpx;
+  background: rgba(255,75,32,0.18);
+  font-size: 22rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 40rpx;
+  color: #FF4B20;
+  text-align: center;
+  border-radius: 26rpx;
 }

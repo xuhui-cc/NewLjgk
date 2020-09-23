@@ -85,6 +85,7 @@ let pathDic = {
   my_wrongbook: '/packages/student/my/common/my_wrongbook/my_wrongbook',
   wrong: '/packages/student/my/common/wrong/wrong',
   my_about: '/packages/student/my/common/my_about/my_about',
+  my_coupon: '/packages/student/my/common/my_coupon/my_coupon',
 
   // 学生-我的-安卓
   my_order: '/packages/student/my/android/my_order/my_order',

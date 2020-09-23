@@ -69,9 +69,9 @@
       "current": -1,
       "list": [
         {
-          "id": -1,
-          "name": "pages/logs/logs",
-          "pathName": "pages/logs/logs",
+          "id": 0,
+          "name": "my_coupon",
+          "pathName": "packages/student/my/common/my_coupon/my_coupon",
           "query": "",
           "scene": null
         },
@@ -226,6 +226,7 @@
           "id": -1,
           "name": "exchang_vip",
           "pathName": "packages/student/vip/comment/exchang_vip/exchang_vip",
+          "query": "",
           "scene": null
         }
       ]

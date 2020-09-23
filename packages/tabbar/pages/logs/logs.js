@@ -119,6 +119,12 @@ Page({
       //   url: '/pages/book_detail/book_detail?bid=' + bid
       // })
     }
+    else if(type == 4){
+      console.log("会员卡")
+      wx.navigateTo({
+        url: app.getPagePath('vip_detail'),
+      })
+    }
     
   },
 
