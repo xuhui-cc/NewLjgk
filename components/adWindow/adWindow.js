@@ -21,6 +21,14 @@ Component({
       type: Number,
       value: 1
     },
+
+    /**
+     * 关联的文章或课程ID或关联的链接
+    */
+    attachid: {
+      type: String,
+      value: ''
+    }
   },
 
   /**
@@ -78,11 +86,37 @@ Component({
     adImageClicked: function() {
       switch(this.data.type*1) {
         case 1: {
+          // 关联文章
+          wx.navigateTo({
+            url: pagePath.getPagePath('webView'),
+            success (res) {
+              res.eventChannel.emit('webView', {url: this.data.attachid})
+            }
+          })
+          break
+        }
+        case 2: {
+          // 关联课程
+          wx.navigateTo({
+            url: pagePath.getPagePath('course_detail') + '?kid=' + this.data.attachid,
+          })
+          break
+        }
+        case 3: {
+          // 管理链接
+          wx.navigateTo({
+            url: pagePath.getPagePath('webView'),
+            success (res) {
+              res.eventChannel.emit('webView', {url: this.data.attachid})
+            }
+          })
+          break
+        }
+        case 4: {
           // 会员卡广告
           wx.navigateTo({
             url: pagePath.getPagePath('vip_detail'),
           })
-
           break
         }
       }

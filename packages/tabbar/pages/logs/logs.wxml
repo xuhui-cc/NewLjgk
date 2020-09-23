@@ -386,4 +386,4 @@
   
 
 </view>
-<adWindow wx:if="{{adWindowModel}}" imgSrc="{{adWindowModel.picurl}}" type="{{adWindowModel.type}}"></adWindow>
+<adWindow wx:if="{{adWindowModel}}" imgSrc="{{adWindowModel.picurl}}" type="{{adWindowModel.type}}" attachid="{{adWindowModel.attachid}}"></adWindow>

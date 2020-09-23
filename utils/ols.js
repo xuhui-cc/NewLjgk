@@ -1,5 +1,5 @@
-// const URI_base = "http://gkcs.lingjun.net/" //测试域名
-const URI_base = "https://gk.lingjun.net/" // 正式域名
+const URI_base = "http://gkcs.lingjun.net/" //测试域名
+// const URI_base = "https://gk.lingjun.net/" // 正式域名
 
 const URI = URI_base + 'api.php/'    //接口地址
 
@@ -30,7 +30,7 @@ function hot_list4(params) {
 }
 // 获取广告弹窗数据
 function getAdWindow(params) {
-  return fetch.olsfetchpost(URI, 'v1/ad/getlist', params, '获取广告弹窗数据')
+  return fetch.olsfetchpost(URI, 'v1/activity/getlist', params, '获取广告弹窗数据')
 }
 //轮播图
 function banner3(params) {
