@@ -28,8 +28,6 @@
     
   <!-- </picker> -->
 
-
-
   <scroll-view  scroll-x="true" class="tab-h" wx:if="{{subject}}">
     <view wx:for="{{subject}}" wx:key="index" class="tab-item {{current_subject==index?'active':''}}" data-current="{{index}}"  bindtap="swichNav_subject">{{item.title}}</view> 
   </scroll-view> 
@@ -80,7 +78,7 @@
     
     </view> -->
 
-    <view class="head2"  style="margin-top:300rpx;margin-left:30rpx;">热门课程限时抢</view>
+    <view class="head2"  style="{{banner3?'margin-top:30rpx;margin-left:30rpx;':'margin-top:300rpx;margin-left:30rpx;'}}">热门课程限时抢</view>
     <image wx:if="{{hot1 == '' && hot2 == '' &&  hot3 == ''}}" class="course_null" style="margin-top:200rpx;" src="/images/null/course_null.png"></image>
     <text wx:if="{{hot1 == '' && hot2 == '' &&  hot3 == ''}}" class="course_nulltip" >暂无课程</text>
     <view class="hot_layout" >
@@ -314,7 +312,7 @@
 
       <view class="course_layout" bindtap="to_course_detail" data-xb="{{index}}" >
         <image class="vip_laber" style="margin-top:30rpx" wx:if="{{(item.buy == 0 || item.buy == 2 || item.buy > 4) && item.vip == 1}}" src="/images/other/vip_laber2.png"></image>
-        <image class="laber"style="margin-top:20rpx" wx:if="{{item.buy == 1 || item.is_buy == 3 || item.is_buy == 4}}" src="./resource/isbuy.png"></image>
+        <image class="laber"style="margin-top:10rpx" wx:if="{{item.buy == 1 || item.is_buy == 3 || item.is_buy == 4}}" src="./resource/isbuy.png"></image>
         <image class="hot_group"   style="{{item.vip == 1?'margin-left:82rpx;margin-top:20rpx':'margin-top:20rpx'}}" wx:if="{{(item.buy == 0 || item.buy == 6) && item.type == 1}}" src="./resource/hot_group.png"></image>
         <image class="hot_group"  style="{{item.vip == 1?'margin-left:82rpx;margin-top:20rpx':'margin-top:20rpx'}}" wx:if="{{(item.buy == 0 || item.buy == 6) && item.type == 2}}" src="./resource/hot_ms.png"></image>
         <image class="laber" style="margin-top:20rpx" wx:if="{{item.buy == 2}}" src="./resource/group_laber.png"></image>
