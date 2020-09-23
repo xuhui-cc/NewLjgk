@@ -591,6 +591,7 @@ Page({
     let that = this
     that.judge_login()    //登陆判断
     that.get_banner3()  //轮播图
+    that.couponShow()    //优惠券显示状态
     if(that.data.grade){
       for (var i = -0; i < that.data.grade.length; i++) {
         if (that.data.gid == that.data.grade[i].id) {
@@ -743,38 +744,65 @@ Page({
    * 获取弹窗广告
   */
  getAd: function() {
-  let params = {
-    // token: wx.getStorageSync("token"),
-  }
-  let that = this
-  app.ols.getAdWindow(params).then(d=>{
-    if (d.data.code == 0) {
-      let adModel = d.data.data
-      if (adModel && adModel != '') {
-        let storageAdIdArray = wx.getStorageSync('adIDArray')
-        let canLoadAd = false
-        if (storageAdIdArray && storageAdIdArray.length != 0) {
-          // 若有已存的广告ID
-          if(storageAdIdArray.indexOf(adModel.id) == -1) {
-            // 是新的ID
+    let params = {
+      // token: wx.getStorageSync("token"),
+    }
+    let that = this
+    app.ols.getAdWindow(params).then(d=>{
+      if (d.data.code == 0) {
+        let adModel = d.data.data
+        if (adModel && adModel != '') {
+          let storageAdIdArray = wx.getStorageSync('adIDArray')
+          let canLoadAd = false
+          if (storageAdIdArray && storageAdIdArray.length != 0) {
+            // 若有已存的广告ID
+            if(storageAdIdArray.indexOf(adModel.id) == -1) {
+              // 是新的ID
+              canLoadAd = true
+              storageAdIdArray.push(adModel.id)
+              wx.setStorageSync('adIDArray', storageAdIdArray)
+            }
+          } else {
+            // 若没有已存的广告ID
+            wx.setStorageSync('adIDArray', [adModel.id])
             canLoadAd = true
-            storageAdIdArray.push(adModel.id)
-            wx.setStorageSync('adIDArray', storageAdIdArray)
           }
-        } else {
-          // 若没有已存的广告ID
-          wx.setStorageSync('adIDArray', [adModel.id])
-          canLoadAd = true
-        }
-        if (canLoadAd) {
-          that.setData({
-            adWindowModel: adModel
-          })
+          if (canLoadAd) {
+            that.setData({
+              adWindowModel: adModel
+            })
+          }
         }
       }
+    })
+  },
+
+  //优惠券悬浮
+  couponShow:function(){
+    let that = this
+    if(wx.getStorageSync('login')){
+      var params = {
+        "token":wx.getStorageSync('token')
+      }
+      app.ols.couponShow(params).then(d => {
+        if (d.data.code == 0) {
+          that.setData({
+            couponShow:d.data.data.res
+          })
+        }else{
+          
+        }
+      })
     }
-  })
-},
+  },
+
+  //优惠券 页跳转
+  to_coupon:function(){
+    let that = this 
+    wx.navigateTo({
+      url: app.getPagePath('my_coupon'),
+    })
+  },
 
     
 })

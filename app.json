@@ -68,7 +68,8 @@
         "my_course/my_course",
         "my_wrongbook/my_wrongbook",
         "wrong/wrong",
-        "my_about/my_about"
+        "my_about/my_about",
+        "my_coupon/my_coupon"
       ],
       "name": "my_common"
     },

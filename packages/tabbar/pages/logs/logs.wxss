@@ -804,3 +804,10 @@ page{
 .login_read::after {
   border: none;
 }
+.couponShow{
+  position: fixed;
+  right: 5rpx;
+  bottom: 20rpx;
+  width: 167rpx;
+  height: 211rpx;
+}
