@@ -804,16 +804,11 @@ page{
 .login_read::after {
   border: none;
 }
-.couponShow{
-  position: fixed;
-  right: 5rpx;
-  bottom: 20rpx;
-  width: 167rpx;
-  height: 211rpx;
-}
+
 .sign{
-  margin-top: 15rpx;
-  margin-left: 25rpx;
+  position: absolute;
+  margin-top: -45rpx;
+  margin-left: 315rpx;
   width: 123rpx;
   height: 40rpx;
   background: #FF4B20;
@@ -824,10 +819,12 @@ page{
   color: #FFFFFF;
   text-align: center;
   border-radius: 26rpx;
+  z-index: 20;
 }
 .sign1{
-  margin-top: 15rpx;
-  margin-left: 25rpx;
+  position: absolute;
+  margin-top: -45rpx;
+  margin-left: 315rpx;
   width: 123rpx;
   height: 40rpx;
   background: rgba(255,75,32,0.18);
@@ -838,4 +835,30 @@ page{
   color: #FF4B20;
   text-align: center;
   border-radius: 26rpx;
+  z-index: 20;
+}
+.couponShow{
+  position: fixed;
+  right: 5rpx;
+  bottom: 20rpx;
+  width: 167rpx;
+  height: 211rpx;
+}
+.coupon_price{
+  position: fixed;
+  right: 45rpx;
+  bottom: 80rpx;
+  width: 101rpx;
+  height: 59rpx;
+  font-size: 40rpx;
+  font-family: PingFang SC;
+  font-weight: 800;
+  line-height: 59rpx;
+  text-align: center;
+  color: #FD971D;
+  z-index: 2000;
+}
+.fuhao{
+  
+  font-size: 20rpx;
 }

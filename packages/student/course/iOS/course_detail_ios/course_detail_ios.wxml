@@ -153,6 +153,7 @@
     <view class="price">{{course_info.price}}</view>
     <button class="login_read"  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" wx:if="{{!login}}"></button>
     <!--  -->
+    
     <view wx:if="{{course_info.price == 0 && login}}" class="button_buy"  bindtap="to_free" >立即报名</view>
     <view wx:elif="{{course_info.price == 0 && !login}}" class="button_buy"  >立即报名</view>
     <view wx:elif="{{course_info.price > 0 && login}}" class="button_buy"  bindtap="to_pay" >立即购买</view>
@@ -162,7 +163,17 @@
   
 
 
-
+  <!-- 登录蒙层 -->
+  <view class="mask1" wx:if="{{login == false}}"></view>
+  <view class="login_layout" wx:if="{{login == false}}">
+  
+    <!-- <image class="login_del" src="../../images/del.png"></image> -->
+    <image class="unlogin" src="/images/other/unlogin.png" style="margin-top:75rpx;"></image>
+    <view class="login_tip">您当前尚未登录! </view>
+    <view class="login_tip">请点击下方按钮登录</view>
+    <button class="login_read1"  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
+    <image class="tologin" src="/images/other/tologin.png"></image>
+  </view>
 
 
 

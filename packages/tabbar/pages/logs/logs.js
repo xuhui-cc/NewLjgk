@@ -793,7 +793,8 @@ Page({
       app.ols.couponShow(params).then(d => {
         if (d.data.code == 0) {
           that.setData({
-            couponShow:d.data.data.res
+            couponShow:d.data.data.res,
+            copon_price:d.data.data.total
           })
         }else{
           
@@ -808,6 +809,41 @@ Page({
     wx.navigateTo({
       url: app.getPagePath('my_coupon'),
     })
+  },
+
+  cs:function(){
+    let that = this 
+    wx.requestSubscribeMessage({
+      tmplIds: ['leet7lbTpajEaI84ml4bop06JleNT7Gn4XjiJjbDQOk'], // 此处可填写多个模板 ID，但低版本微信不兼容只能授权一个
+      success(res) { 
+        console.log(res)
+        var params = {
+          "token":wx.getStorageSync('token'),
+          "course_id":that.data.select_kid
+        }
+        app.ols.subMsg(params).then(d => {
+          if (d.data.code == 0) {
+            that.hot()  //热门课程
+            that.getcourse()     //获取课程
+            that.v4_viplist()   //获取vip
+          }else{
+            
+          }
+        })
+      }
+    })
+  },
+
+  subMsg:function(e){
+    let that = this 
+    // var kid = 
+    that.setData({
+      select_kid:e.currentTarget.dataset.kid
+    })
+    
+    // console.log(kid)
+    that.cs()
+    
   },
 
     
