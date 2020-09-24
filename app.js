@@ -104,6 +104,11 @@ App({
         console.log('清除本地信息失败', res)
       },
       complete: (res) => {
+        wx.login({
+          success(res) {
+            wx.setStorageSync('code', res.code)
+          }
+        })
         console.log('清空数据完成，即将跳转至first_page')
         wx.reLaunch({
           url: pagePath.getPagePath('first_page'),
