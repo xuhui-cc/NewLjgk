@@ -67,6 +67,14 @@ function olsfetchpost(api, path, params, log, showToast, loadingMsg) {
             }
             break
           }
+          case 6: {
+            // 自动登录 获取用户信息
+            let userInfo = res.data.data
+            wx.setStorageSync('login', true)
+            wx.setStorageSync('token', userInfo.token)
+            wx.setStorageSync('userinfo', userInfo)
+            break
+          }
           case 20: {
             // token过期
             let gid = wx.getStorageSync('gid')
