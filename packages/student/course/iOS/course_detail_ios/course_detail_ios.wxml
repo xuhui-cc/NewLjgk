@@ -57,7 +57,7 @@
           <view wx:elif="{{item.mt == 4}}" class="study_rate" >回放已生成</view>
           <view wx:elif="{{item.mt == 1}}" class="study_rate" >未开课</view>
           <view wx:else="{{item.mt == 0}}" class="study_rate" >直播已删除</view>
-          <view class="class="study_rate""></view>
+          <view class="study_rate"></view>
           <!-- <image class="xu" src="/images/other/xu.png" ></image> -->
           <!-- <view class="flex" bindtap="{{click_file?'':'to_course_file'}}"  data-xb="{{index}}" wx:if="{{item.annex_num > 0 }}">
             <image class="file-img1" src="/images/other/file1.png"></image>
