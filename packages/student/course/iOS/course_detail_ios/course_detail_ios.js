@@ -374,9 +374,9 @@ Page({
         if (d.data.code == 0) {
           console.log(d.data.data)
           for(var i=0;i<d.data.data.lists.length;i++){
-            // d.data.data.lists[i].livetime = d.data.data.lists[i].starttime.slice(0,17)
-            var time = "d.data.data.lists[i].starttime.slice(0,17)"
-            console.log(time)
+            d.data.data.lists[i].livetime = d.data.data.lists[i].starttime.substr(5,11) + " - " + d.data.data.lists[i].endtime.substr(11,5)
+            // var time = "d.data.data.lists[i].starttime.slice(0,17)"
+            console.log(d.data.data.lists[i].livetime)
           }
           that.setData({
             course_cata: d.data.data
