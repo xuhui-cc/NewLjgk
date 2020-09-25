@@ -750,8 +750,10 @@ Page({
    * 获取弹窗广告
   */
  getAd: function() {
-    let params = {
-      // token: wx.getStorageSync("token"),
+    let params = {}
+    let token = wx.getStorageSync('token')
+    if (token && token != '') {
+      params.token = token
     }
     let that = this
     app.ols.getAdWindow(params).then(d=>{
