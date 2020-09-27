@@ -107,6 +107,10 @@ Page({
         that.setData({
           couponList:d.data.data
         })
+      }else{
+        that.setData({
+          couponList:''
+        })
       }
     })
     
