@@ -139,7 +139,8 @@
       "root": "packages/common",
       "pages": [
         "study_record/study_record",
-        "webView/webView"
+        "webView/webView",
+        "book_detail/book_detail"
       ],
       "name": "common"
     }

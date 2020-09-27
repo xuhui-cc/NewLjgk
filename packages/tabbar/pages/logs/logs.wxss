@@ -856,7 +856,7 @@ page{
   line-height: 59rpx;
   text-align: center;
   color: #FD971D;
-  z-index: 2000;
+  z-index: 501;
 }
 .fuhao{
   

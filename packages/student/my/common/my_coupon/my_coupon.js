@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    cs:["hhh","hhh","hhhh"]
+    // cs:["hhh","hhh","hhhh"],
+    coupon_use:false
   },
 
   /**
@@ -67,6 +68,29 @@ Page({
 
   },
 
+  /*------------------------------------------------------交互---------------------------------------------------*/
+
+  to_ues:function(){
+    let that = this 
+    that.setData({
+      coupon_use:!that.data.coupon_use
+    })
+  },
+
+  copy:function(){
+    var that = this;
+    wx.setClipboardData({
+    data: that.data.couponTea.phone,
+    success: function(res) {
+      wx.showToast({
+        title: '复制成功',
+      })
+
+    }
+  });
+
+  },
+
 
   //------------------------------------------------------接口---------------------------------------------------//
   /**
@@ -96,7 +120,7 @@ Page({
     app.ols.couponTea(params).then(d => {
       if (d.data.code == 0) {
         that.setData({
-          couponTea:d.data.data
+          couponTea:d.data.data.res
         })
       }
     })

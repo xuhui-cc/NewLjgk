@@ -1,0 +1,9 @@
+<view class="container">
+  <view class="info">
+    <rich-text nodes="{{essay.content}}"></rich-text>
+
+  </view>
+ 
+</view>
+
+
