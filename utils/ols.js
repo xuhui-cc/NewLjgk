@@ -65,7 +65,7 @@ function my_course_all4(params) {
 function v4_myVip(params) {
   return fetch.olsfetchpost(URI, 'v1/vipcard/getvipcard', params,"我的vip")
 }
-// 刷新用户基本信息
+// 刷新用户基本信息 (废弃)
 function refreshUserInfo(params) {
   return fetch.olsfetchpost(URI, 'v1/member/getinfo', params, '刷新用户基本信息')
 }

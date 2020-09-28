@@ -1,4 +1,5 @@
 let pagePath = require('./pagePath.js')
+
 /*
 *api    根地址
 *path   请求路径
@@ -52,9 +53,25 @@ function olsfetchpost(api, path, params, log, showToast, loadingMsg) {
           }
           case 1: {
             // 参数不合法
+            resolve(res)
+            if (showToast) {
+              wx.showToast({
+                title: '参数不合法',
+                icon: 'none'
+              })
+            }
+            break
           }
           case 2: {
             // 无效请求方式
+            resolve(res)
+            if (showToast) {
+              wx.showToast({
+                title: '无效请求方式',
+                icon: 'none'
+              })
+            }
+            break
           }
           case 5: {
             // 数据查询返回空数据组
@@ -73,6 +90,7 @@ function olsfetchpost(api, path, params, log, showToast, loadingMsg) {
             wx.setStorageSync('login', true)
             wx.setStorageSync('token', userInfo.token)
             wx.setStorageSync('userinfo', userInfo)
+            resolve(res)
             break
           }
           case 20: {
@@ -80,16 +98,11 @@ function olsfetchpost(api, path, params, log, showToast, loadingMsg) {
             let gid = wx.getStorageSync('gid')
             wx.clearStorageSync()
             wx.setStorageSync('gid', gid)
-            wx.login({
-              success(login_res) {
-                wx.setStorageSync('code', login_res.code)
-              }
-            })
             wx.reLaunch({
               url: pagePath.getPagePath('first_page'),
             })
             wx.showToast({
-              title: '登录已失效',
+              title: '登录已失效, 正在重新登录',
               icon: 'none'
             })
             break
@@ -102,6 +115,7 @@ function olsfetchpost(api, path, params, log, showToast, loadingMsg) {
                 icon: 'none'
               })
             }
+            break
           }
         }
       },
@@ -120,6 +134,7 @@ function olsfetchpost(api, path, params, log, showToast, loadingMsg) {
             icon: "none"
           })
         }
+        reject(res)
       }
     })
   })
@@ -159,7 +174,6 @@ function olsfetchUpload(api, path, filePath, log, showToast, loadingMsg) {
           if (result.code == 0) {
             resolve(result)
           } else {
-            debugger
             if (showToast) {
               wx.showToast({
                 title: result.msg && result.msg != '' ? result.msg : '上传失败',

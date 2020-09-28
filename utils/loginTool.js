@@ -5,6 +5,24 @@ const pagePath = require('./pagePath.js')
 // 注册口令
 var password = null
 
+/**
+ * 启动加载初始数据
+*/
+function firstLaunch(callback) {
+  wx.login({
+    success(res) {
+      let code = res.code
+      loginOrGetRegisterPassword(code, callback)
+    },
+    fail(res) {
+      typeof callback == 'function' && callback(false)
+    }
+  })
+}
+
+/**
+ * 点击button 获取手机号码
+*/
 function getPhoneNumber(e, gid, callback) {
   var that = this
   if (e.detail.errMsg != "getPhoneNumber:ok") {
@@ -16,7 +34,7 @@ function getPhoneNumber(e, gid, callback) {
 /**
  * 登录 / 获取注册口令
 */
-function loginOrGetRegisterPassword(code) {
+function loginOrGetRegisterPassword(code, callback) {
   let params = {
     code: code,
   }
@@ -24,6 +42,11 @@ function loginOrGetRegisterPassword(code) {
   ols.loginOrGetRegisterPassword(params).then(d=>{
     if (d.data.code == 0) {
       password = d.data.data.password
+      typeof callback == 'function' && callback(true)
+    } else if(d.data.code == 6) {
+      typeof callback == 'function' && callback(true)
+    } else {
+      typeof callback == 'function' && callback(false)
     }
   })
 }
@@ -72,5 +95,5 @@ function register(e, gid, callback) {
 
 module.exports = {
   getPhoneNumber, 
-  loginOrGetRegisterPassword
+  firstLaunch
 }

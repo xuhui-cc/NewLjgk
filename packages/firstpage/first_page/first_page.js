@@ -1,5 +1,6 @@
 // pages/first_page/first_page.js
 const app = getApp()
+let loginTool = require('../../../utils/loginTool.js')
 Page({
 
   /**
@@ -17,69 +18,69 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // wx.reLaunch({
-    //   url: '../../pages/teacher_studentList/teacher_studentList',
-    // })
-    // return
-    app.shareTool.setShareOption
     let that = this
-    let login = wx.getStorageSync('login')
-    if (login) {
-      // 已登陆
-      let userinfo = wx.getStorageSync('userinfo')
-      if (options.share == 1) {
-        app.shareTool.getFirstPageShareParam(options, userinfo.role)
-      }
-      switch(userinfo.role*1) {
-        case 1:{
-          // 学生
+    // 加载启动数据
+    loginTool.firstLaunch(function(success){
+      app.shareTool.setShareOption
+
+      let login = wx.getStorageSync('login')
+      if (login) {
+        // 已登陆
+        let userinfo = wx.getStorageSync('userinfo')
+        if (options.share == 1) {
+          app.shareTool.getFirstPageShareParam(options, userinfo.role)
+        }
+        switch(userinfo.role*1) {
+          case 1:{
+            // 学生
+            wx.switchTab({
+              url: app.getPagePath('logs'),
+            })
+            break
+          }
+          case 2: {
+            // 家长
+            wx.reLaunch({
+              url: app.getPagePath('parent_childList'),
+            })
+            break
+          }
+          case 3: {
+            // 老师
+            wx.reLaunch({
+              url: app.getPagePath('teacher_studentList'),
+            })
+            break
+          }
+        }
+      } else {
+        // 未登录
+        let gid = 0
+        if (options.share == 1) {
+          app.shareTool.getFirstPageShareParam(options, 0)
+        }
+        if (options.gid) {
+          gid = options.gid
+        } else {
+          gid = wx.getStorageSync("gid")
+        }
+        
+        if (gid != null && gid != 0) {
+          // 已选择过年级
           wx.switchTab({
             url: app.getPagePath('logs'),
           })
-          break
-        }
-        case 2: {
-          // 家长
-          wx.reLaunch({
-            url: app.getPagePath('parent_childList'),
+        } else {
+          // 未选择过年级
+          that.setData({
+            gid: gid,
+            showPageContent: true
           })
-          break
-        }
-        case 3: {
-          // 老师
-          wx.reLaunch({
-            url: app.getPagePath('teacher_studentList'),
-          })
-          break
+          that.get_grade()
+          that.getJoinNumber()
         }
       }
-    } else {
-      // 未登录
-      let gid = 0
-      if (options.share == 1) {
-        app.shareTool.getFirstPageShareParam(options, 0)
-      }
-      if (options.gid) {
-        gid = options.gid
-      } else {
-        gid = wx.getStorageSync("gid")
-      }
-      
-      if (gid != null && gid != 0) {
-        // 已选择过年级
-        wx.switchTab({
-          url: app.getPagePath('logs'),
-        })
-      } else {
-        // 未选择过年级
-        that.setData({
-          gid: gid,
-          showPageContent: true
-        })
-        that.get_grade()
-        that.getJoinNumber()
-      }
-    }
+    })
   },
 
   //关闭弹框
