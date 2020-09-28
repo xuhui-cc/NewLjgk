@@ -28,6 +28,8 @@ Page({
       console.log(d)
       if (d.data.code == 0) {
         console.log(d.data.data)
+        // d.data.data = d.data.data.replace(/http:/gi, 'https:')
+        // d.data.data = d.data.data.replaceFirst("^(?:http:)?//", "https://");
         that.setData({
           get_live: d.data.data
         })

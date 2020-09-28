@@ -168,8 +168,8 @@
 
 
   <!-- 登录蒙层 -->
-  <view class="mask1" wx:if="{{login == false}}"></view>
-  <view class="login_layout" wx:if="{{login == false}}">
+  <view class="mask1" wx:if="{{login == false && isshare == 1}}"></view>
+  <view class="login_layout" wx:if="{{login == false && isshare == 1}}">
   
     <!-- <image class="login_del" src="../../images/del.png"></image> -->
     <image class="unlogin" src="/images/other/unlogin.png" style="margin-top:75rpx;"></image>
