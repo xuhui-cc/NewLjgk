@@ -125,12 +125,10 @@ Page({
     app.ols.exchange_code4(params).then(d => {
       
       if (d.data.code == 0) {
-        that.v4_viplist()
-        that.setData({
-          exchange_page:false,
-          pay:true,
-          code:''
-        })
+        that.v4_viplist(1)
+        // that.setData({
+          
+        // })
         // that.setData({
           
         // })
@@ -154,8 +152,9 @@ Page({
   
 
   //获取会员卡列表
-  v4_viplist:function(){
+  v4_viplist:function(type){
     let that = this
+
     var params = {
       "token": wx.getStorageSync("token"),
     }
@@ -166,11 +165,21 @@ Page({
         if(d.data.data.lists[0].course){
           d.data.data.lists[0].course_num = d.data.data.lists[0].course.length
         }
-        
-        that.setData({
-          vip:d.data.data,
-          vip_list:d.data.data.lists
-        })
+        if(type == 1){
+          that.setData({
+            vip:d.data.data,
+            vip_list:d.data.data.lists,
+            exchange_page:false,
+          pay:true,
+          code:''
+          })
+        }else{
+          that.setData({
+            vip:d.data.data,
+            vip_list:d.data.data.lists
+          })
+        }
+       
         // console.log("会员列表成功")
       } else {
         // console.log("会员列表失败==============" + d.data.msg)

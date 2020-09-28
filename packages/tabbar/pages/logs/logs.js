@@ -54,8 +54,6 @@ Page({
       console.log(d,"轮播")
 
       if (d.data.code == 0) {
-
-        
         that.setData({
           banner3: d.data.data.lists
         })
@@ -97,6 +95,8 @@ Page({
     var id = e.currentTarget.dataset.id
     var type = e.currentTarget.dataset.type
     var cate = e.currentTarget.dataset.cate
+    
+    // console.log(picurl)
     if(type == 2) {
       if(cate == 0){
         wx.navigateTo({
@@ -115,9 +115,9 @@ Page({
       }
     }else if(type == 1){
       console.log("文章")
-      // wx.navigateTo({
-      //   url: '/pages/book_detail/book_detail?bid=' + bid
-      // })
+      wx.navigateTo({
+        url: app.getPagePath('book_detail') + '?id=' + id,
+      })
     }
     else if(type == 4){
       console.log("会员卡")
@@ -341,55 +341,60 @@ Page({
   subject_sel: function (e) {
     let that = this
     var xb = e.currentTarget.dataset.xb
-    that.setData({
-      grade_index: xb,
-      gid: that.data.grade[xb].id,
-      current_subject: 0,
-      hot2:'',
-      hot3:'',
-    })
-    if (wx.getStorageSync("login")) {
-      
-      var params = {
-        "token": wx.getStorageSync("token"),
-        "gid": that.data.grade[xb].id
-      }
-      console.log(params, "params")
-      app.ols.grade_update(params).then(d => {
-        console.log(d,"年级切换")
-
-        if (d.data.code == 0) {
-          clearInterval(timer);   
-          wx.setStorageSync('gid', that.data.grade[xb].id)
-          that.getsubject()   //获取科目
-          that.hot()  //获取热门
-          that.setData({
-            grade_select: false
-          })
-          console.log("更新接口存班级")
-        } else {
-          wx.showToast({
-            title: '现在就是这个年级哦',
-            icon: "none",
-            duration: 3000
-          })
-          that.setData({
-            grade_select: false
-          })
-          that.getsubject()   //获取科目
-          that.hot()  //获取热门
-        }
+    if(xb == that.data.grade_index){
+      wx.showToast({
+        title: '现在就是这个年级哦',
+        icon: "none",
+        duration: 3000
       })
-    }else{
-      clearInterval(timer);   
-      wx.setStorageSync('gid', that.data.grade[xb].id)
-      that.getsubject()   //获取科目
-      that.hot()  //获取热门
-
       that.setData({
         grade_select: false
       })
+    }else{
+      that.setData({
+        grade_index: xb,
+        gid: that.data.grade[xb].id,
+        current_subject: 0,
+        hot2:'',
+        hot3:'',
+      })
+      if (wx.getStorageSync("login")) {
+        
+        var params = {
+          "token": wx.getStorageSync("token"),
+          "gid": that.data.grade[xb].id
+        }
+        console.log(params, "params")
+        app.ols.grade_update(params).then(d => {
+          console.log(d,"年级切换")
+  
+          if (d.data.code == 0) {
+            clearInterval(timer);   
+            wx.setStorageSync('gid', that.data.grade[xb].id)
+            that.getsubject()   //获取科目
+            that.hot()  //获取热门
+            that.setData({
+              grade_select: false
+            })
+            console.log("更新接口存班级")
+          } else {
+            
+            // that.getsubject()   //获取科目
+            // that.hot()  //获取热门
+          }
+        })
+      }else{
+        clearInterval(timer);   
+        wx.setStorageSync('gid', that.data.grade[xb].id)
+        that.getsubject()   //获取科目
+        that.hot()  //获取热门
+  
+        that.setData({
+          grade_select: false
+        })
+      }
     }
+    
 
   },
 
