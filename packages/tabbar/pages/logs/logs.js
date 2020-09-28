@@ -3,9 +3,6 @@ var timer,ms_timer
 Page({
   // 是否要跳转到分享的页面
   toSharePage: false,
-  
-  // 是否页面第一次出现
-  firstShow: true,
 
   data: {
     // subject:[ {'id':-1, 'title': '推荐'},{'id':-2, 'title': 'VIP'}],
@@ -625,7 +622,7 @@ Page({
     that.getcourse()     //获取课程
     that.v4_viplist()   //获取vip
 
-    if ((this.firstShow && !this.toSharePage) || (!this.firstShow && this.toSharePage)) {
+    if (!this.toSharePage) {
       this.toSharePage = false
       this.getAd()
     } else {
@@ -633,7 +630,6 @@ Page({
         adWindowModel: null
       })
     }
-    this.firstShow = false
    
   },
 

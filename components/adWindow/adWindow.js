@@ -71,6 +71,8 @@ Component({
       })
     },
 
+    //-------------------------------------------交互事件-------------------------------------------
+
     /**
      * 关闭按钮 点击事件
     */
@@ -88,10 +90,7 @@ Component({
         case 1: {
           // 关联文章
           wx.navigateTo({
-            url: pagePath.getPagePath('webView'),
-            success (res) {
-              res.eventChannel.emit('webView', {url: this.data.attachid})
-            }
+            url: pagePath.getPagePath('book_detail') + '?id=' + this.data.attachid,
           })
           break
         }

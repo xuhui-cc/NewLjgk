@@ -5,12 +5,12 @@ const pagePath = require('./pagePath.js')
 // 注册口令
 var password = null
 
-function getPhoneNumber(e, callback) {
+function getPhoneNumber(e, gid, callback) {
   var that = this
   if (e.detail.errMsg != "getPhoneNumber:ok") {
     return
   }
-  register(e, callback)
+  register(e, gid, callback)
 }
 
 /**
@@ -28,13 +28,13 @@ function loginOrGetRegisterPassword(code) {
   })
 }
 
-function register(e, callback) {
+function register(e, gid, callback) {
   let iv = encodeURIComponent(e.detail.iv);
   let encryptedData = encodeURIComponent(e.detail.encryptedData);
   var params = {
     "iv": iv,
     "encryptedData": encryptedData,
-    "gid": gid,
+    gid: gid,
     password: password
   }
   ols.registerWithPassword(params).then(d=>{
