@@ -23,7 +23,7 @@
   </view>
 
   <image class="null_img" src="/images/null/order_null.png" wx:if="{{couponList == ''}}"></image>
-  <view class="null_tip">暂无优惠券</view>
+  <view class="null_tip" wx:if="{{couponList == ''}}">暂无优惠券</view>
 
   <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{coupon_use}}"></view>
   <view style="position: fixed;z-index: 101;" wx:if="{{coupon_use}}">
