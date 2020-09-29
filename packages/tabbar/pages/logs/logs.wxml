@@ -163,9 +163,9 @@
               <view>
                 <view class="hot_title">{{item.title}}</view>
                 <view class="flex" style="margin-left:30rpx;margin-top:-20rpx;">
-                  <view class="course_text" wx:if="{{item.live == 1}}" style="width:75rpx;">直播课</view>
-                  <view class="margin_shu" wx:if="{{item.live == 1}}"></view>
-                  <view class="course_text" style="{{item.live == 1?'margin-left:15rpx;':''}}">{{item.order_num}}人学习</view>
+                  <view class="course_text" wx:if="{{item.cate == 1}}" style="width:75rpx;">直播课</view>
+                  <view class="margin_shu" wx:if="{{item.cate == 1}}"></view>
+                  <view class="course_text" style="{{item.cate == 1?'margin-left:15rpx;':''}}">{{item.order_num}}人学习</view>
                   <view class="margin_shu"></view>
                   <view class="course_num">{{item.class_hour}}课时</view>
                 </view>
@@ -259,9 +259,9 @@
                 <view wx:if="{{item.buy != 5}}">
                   <view wx:if="{{item.type == 0}}">
                     <view class="flex" style="margin-left:30rpx;margin-top:-20rpx;" >
-                      <view class="course_text" style="width:75rpx;" wx:if="{{item.live == 1}}">直播课</view>
-                      <view class="margin_shu" wx:if="{{item.live == 1}}"></view>
-                      <view class="course_text" style="{{item.live == 1?'margin-left:15rpx;':''}}">{{item.order_num}}人学习</view>
+                      <view class="course_text" style="width:75rpx;" wx:if="{{item.cate == 1}}">直播课</view>
+                      <view class="margin_shu" wx:if="{{item.cate == 1}}"></view>
+                      <view class="course_text" style="{{item.cate == 1?'margin-left:15rpx;':''}}">{{item.order_num}}人学习</view>
                       <view class="margin_shu"></view>
                       <view class="course_num">{{item.class_hour}}课时</view>
                     </view>
@@ -330,9 +330,9 @@
           <view style="margin-left:23rpx;">
             <view class="course_title">{{item.title}}</view>
             <view class="flex">
-              <view class="course_text" wx:if="{{item.live == 1}}" style="width:75rpx;">直播课</view>
-              <view class="margin_shu" wx:if="{{item.live == 1}}"></view>
-              <view class="course_text" style="{{item.live == 1?'margin-left:15rpx;':''}}">{{item.order_num}}人学习</view>
+              <view class="course_text" wx:if="{{item.cate == 1}}" style="width:75rpx;">直播课</view>
+              <view class="margin_shu" wx:if="{{item.cate == 1}}"></view>
+              <view class="course_text" style="{{item.cate == 1?'margin-left:15rpx;':''}}">{{item.order_num}}人学习</view>
               <view class="margin_shu"></view>
               <view class="course_num">{{item.class_hour}}课时</view>
             </view>
