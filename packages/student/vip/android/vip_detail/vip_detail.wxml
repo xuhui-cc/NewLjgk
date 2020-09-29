@@ -107,7 +107,7 @@
   <view style="margin-top:-120rpx;" hidden="{{!pay}}">
     <image class="success_img" src="./resource/seuccess_vip1.png" ></image>
     <view class="checkinfo_head">{{vip_list[0].title}}</view>
-    <view class="checkinfo_intro">{{vip_list[0].remark}}</view>
+    <view class="checkinfo_intro">{{vip_list[0].memo}}</view>
     <view class="cuccess_tip">您已成功开通{{vip_list[0].title}}</view>
     <view class="cuccess_tip1">立即开启您的学习成功之旅</view>
     <view class="success_yes" bindtap="success_yes">查看会员权限</view>
