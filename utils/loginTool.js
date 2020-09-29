@@ -46,6 +46,7 @@ function loginOrGetRegisterPassword(code, callback, count) {
     if (d.data.code == 0) {
       openid = d.data.data.openid
       session_key = d.data.data.session_key
+      typeof callback == 'function' && callback(true)
     } else {
       typeof callback == 'function' && callback(false)
     }
