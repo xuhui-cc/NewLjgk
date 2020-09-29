@@ -107,7 +107,7 @@ function olsfetchpost(api, path, params, log, showToast, loadingMsg) {
               url: pagePath.getPagePath('first_page'),
             })
             wx.showToast({
-              title: '登录已失效, 正在重新登录',
+              title: '登录已失效, 请重新登录',
               icon: 'none'
             })
             break
