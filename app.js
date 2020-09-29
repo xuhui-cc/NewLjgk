@@ -21,6 +21,8 @@ App({
   notiNameDic: notiNameDic,
   onLaunch: function () {
 
+    loginTool.firstLaunch()
+    
     // 获取用户信息
     wx.getSetting({
       success: res => {

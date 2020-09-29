@@ -84,20 +84,20 @@ function olsfetchpost(api, path, params, log, showToast, loadingMsg) {
             }
             break
           }
-          case 6: {
-            // 自动登录 获取用户信息
-            let userInfo = res.data.data
-            let gid = wx.getStorageSync('gid')
-            if (!gid || gid == '') {
-              gid = userInfo.gid
-            }
-            wx.setStorageSync('login', true)
-            wx.setStorageSync('token', userInfo.token)
-            wx.setStorageSync('userinfo', userInfo)
-            wx.setStorageSync('gid', gid)
-            resolve(res)
-            break
-          }
+          // case 6: {
+          //   // 自动登录 获取用户信息
+          //   let userInfo = res.data.data
+          //   let gid = wx.getStorageSync('gid')
+          //   if (!gid || gid == '') {
+          //     gid = userInfo.gid
+          //   }
+          //   wx.setStorageSync('login', true)
+          //   wx.setStorageSync('token', userInfo.token)
+          //   wx.setStorageSync('userinfo', userInfo)
+          //   wx.setStorageSync('gid', gid)
+          //   resolve(res)
+          //   break
+          // }
           case 20: {
             // token过期
             let gid = wx.getStorageSync('gid')

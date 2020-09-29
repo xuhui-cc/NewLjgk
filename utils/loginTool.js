@@ -2,8 +2,11 @@
 const ols = require('./ols')
 const pagePath = require('./pagePath.js')
 
-// 注册口令
+// 注册口令 (废弃)
 var password = null
+
+var openid = null
+var session_key = null
 
 /**
  * 启动加载初始数据
@@ -34,17 +37,15 @@ function getPhoneNumber(e, gid, callback) {
 /**
  * 登录 / 获取注册口令
 */
-function loginOrGetRegisterPassword(code, callback) {
+function loginOrGetRegisterPassword(code, callback, count) {
   let params = {
     code: code,
   }
   let that = this
   ols.loginOrGetRegisterPassword(params).then(d=>{
     if (d.data.code == 0) {
-      password = d.data.data.password
-      typeof callback == 'function' && callback(true)
-    } else if(d.data.code == 6) {
-      typeof callback == 'function' && callback(true)
+      openid = d.data.data.openid
+      session_key = d.data.data.session_key
     } else {
       typeof callback == 'function' && callback(false)
     }
@@ -55,10 +56,12 @@ function register(e, gid, callback) {
   let iv = encodeURIComponent(e.detail.iv);
   let encryptedData = encodeURIComponent(e.detail.encryptedData);
   var params = {
-    "iv": iv,
-    "encryptedData": encryptedData,
+    iv: iv,
+    encryptedData: encryptedData,
     gid: gid,
-    password: password
+    password: password,
+    session_key: session_key,
+    openid: openid
   }
   ols.registerWithPassword(params).then(d=>{
     if (d.data.code == 0) {
@@ -66,6 +69,7 @@ function register(e, gid, callback) {
       wx.setStorageSync("login", true)
       wx.setStorageSync("token", userinfo.token)
       wx.setStorageSync('userinfo', userinfo)
+      wx.setStorageSync('gid', userinfo.gid)
       switch(userinfo.role * 1) {
         case 1: {
           // 学生
@@ -88,7 +92,8 @@ function register(e, gid, callback) {
         }
       }
     } else {
-      typeof callback == "function" && callback(false, "登录失败")
+      firstLaunch()
+      typeof callback == "function" && callback(false, "登录失败, 请重试")
     }
   })
 }

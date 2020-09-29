@@ -19,8 +19,9 @@ Page({
    */
   onLoad: function (options) {
     let that = this
+    
     // 加载启动数据
-    loginTool.firstLaunch(function(success){
+    // loginTool.firstLaunch(function(success){
       app.shareTool.setShareOption
 
       let login = wx.getStorageSync('login')
@@ -80,7 +81,7 @@ Page({
           that.getJoinNumber()
         }
       }
-    })
+    // })
   },
 
   //关闭弹框
