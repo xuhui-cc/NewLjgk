@@ -103,8 +103,6 @@ function removeNotification(name,observer) {
         }
       }
     }
-
-
 }
 
 /**
