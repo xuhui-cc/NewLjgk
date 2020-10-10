@@ -850,7 +850,7 @@ page{
   bottom: 80rpx;
   width: 101rpx;
   height: 59rpx;
-  font-size: 40rpx;
+  font-size: 32rpx;
   font-family: PingFang SC;
   font-weight: 800;
   line-height: 59rpx;

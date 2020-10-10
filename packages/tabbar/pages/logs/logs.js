@@ -1,4 +1,5 @@
 const app = getApp()
+
 var timer,ms_timer
 Page({
   // 是否要跳转到分享的页面
@@ -114,6 +115,16 @@ Page({
       console.log("文章")
       wx.navigateTo({
         url: app.getPagePath('book_detail') + '?id=' + id,
+      })
+    }
+    else if(type == 3){
+      // 管理链接
+      console.log("链接")
+      wx.navigateTo({
+        url: app.getPagePath('webView'),
+        success (res) {
+          res.eventChannel.emit('webView', {url: id})
+        }
       })
     }
     else if(type == 4){

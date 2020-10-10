@@ -62,6 +62,19 @@
 .login_read1::after {
   border: none;
 }
+.login_read2{
+  position: absolute;
+  /* margin-left: 132rpx; */
+  /* margin-top: 50rpx; */
+  width:750rpx;
+  height:100rpx;
+  background: transparent;
+  /* opacity:0.5;
+  background-color: rgb(161, 228, 240); */
+}
+.login_read2::after {
+  border: none;
+}
 .login_read{
   position: absolute;
   margin-left: 410rpx;

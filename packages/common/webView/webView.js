@@ -1,4 +1,5 @@
 // packages/common/webView/webView.js
+const app = getApp()
 Page({
 
   /**
@@ -13,12 +14,23 @@ Page({
    */
   onLoad: function (options) {
     let that = this
-    let eventChannel = this.getOpenerEventChannel()
+    // console.log(options,"options")
+    if(options.url){
+      console.log(options.url,"options")
+      that.setData({
+        url: options.url
+      })
+    }else{
+      
+      let eventChannel = this.getOpenerEventChannel()
     eventChannel.on('webView', function(data){
       that.setData({
         url: data.url
       })
+      console.log(that.data.url,"eventChannel")
     })
+    }
+    
   },
 
   /**
@@ -67,6 +79,8 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    let that = this;
+    let paramsStr = 'isshare=1&gid=1' + '&url=' + that.data.url
+    return app.shareTool.getShareReturnInfo('0,1', 'webView', paramsStr, '/images/other/share1.png')
   }
 })
