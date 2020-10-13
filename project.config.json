@@ -228,6 +228,13 @@
           "pathName": "packages/student/vip/comment/exchang_vip/exchang_vip",
           "query": "",
           "scene": null
+        },
+        {
+          "id": -1,
+          "name": "webView",
+          "pathName": "packages/common/webView/webView",
+          "query": "",
+          "scene": null
         }
       ]
     }

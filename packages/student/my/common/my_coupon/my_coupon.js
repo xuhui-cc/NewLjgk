@@ -14,7 +14,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let that = this 
 
+    if (options.isshare == 1){
+      wx.setStorageSync("gid", options.gid)
+      that.setData({
+        isshare:options.isshare,
+        gid:options.gid,
+        login:wx.getStorageSync('login')
+      })
+    }
   },
 
   /**
@@ -29,8 +38,12 @@ Page({
    */
   onShow: function () {
     let that = this 
-    that.couponList()
+    
+    if(wx.getStorageSync('login')){
+      that.couponList()
     that.couponTea()
+    }
+    
   },
 
   /**
@@ -65,7 +78,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    let that = this;
+    let paramStr = 'isshare=1&gid=' + wx.getStorageSync('gid') 
+    return app.shareTool.getShareReturnInfo('0,1', 'my_coupon', paramStr, '/images/other/share1.png')
+  
   },
 
   /*------------------------------------------------------交互---------------------------------------------------*/
@@ -85,11 +101,25 @@ Page({
       wx.showToast({
         title: '复制成功',
       })
-
+      
     }
+    
   });
 
   },
+
+  //获取微信绑定手机号登录
+getPhoneNumber: function (e) {
+  var that = this
+  app.loginTool.getPhoneNumber(e, that.data.gid, function(success, message){
+    if (success) {
+      that.setData({
+        login: true
+      })
+      that.onShow()
+    }
+  })
+},
 
 
   //------------------------------------------------------接口---------------------------------------------------//

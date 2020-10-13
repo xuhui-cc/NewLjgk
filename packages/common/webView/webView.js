@@ -14,7 +14,7 @@ Page({
    */
   onLoad: function (options) {
     let that = this
-    // console.log(options,"options")
+    console.log(options,"options")
     if(options.url){
       console.log(options.url,"options")
       that.setData({
@@ -30,6 +30,10 @@ Page({
       console.log(that.data.url,"eventChannel")
     })
     }
+
+    // that.setData({
+    //   url: 'http://open.talk-fun.com/watch/PD05JCErKmgnaiAt?roomid=1038827&public=1&sign=1512466da801dbcabbb39d8ddcb11234'
+    // })
     
   },
 
