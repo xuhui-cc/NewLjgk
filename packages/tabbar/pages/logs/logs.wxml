@@ -396,7 +396,7 @@
 
   
   <image class="couponShow" src="./resource/couponShow.png" wx:if="{{couponShow}}" bindtap="to_coupon"></image>
-  <view class="coupon_price" wx:if="{{couponShow}}" bindtap="to_coupon"><text class="fuhao">¥ </text>{{copon_price}}</view>
+  <view class="coupon_price"  wx:if="{{couponShow}}" bindtap="to_coupon"><text class="fuhao">¥ </text>{{copon_price}}</view>
 
 </view>
 <adWindow wx:if="{{adWindowModel}}" imgSrc="{{adWindowModel.picurl}}" type="{{adWindowModel.type}}" attachid="{{adWindowModel.attachid}}"></adWindow>
