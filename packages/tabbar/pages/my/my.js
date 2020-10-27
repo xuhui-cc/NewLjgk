@@ -197,14 +197,14 @@ Page({
     })
   },
   //订阅测试
-  dycs:function(){
-    let that = this
-    wx.requestSubscribeMessage({
-      tmplIds: ['leet7lbTpajEaI84ml4bop06JleNT7Gn4XjiJjbDQOk'], // 此处可填写多个模板 ID，但低版本微信不兼容只能授权一个
-      success(res) { 
-        console.log(res)
+  // dycs:function(){
+  //   let that = this
+  //   wx.requestSubscribeMessage({
+  //     tmplIds: ['leet7lbTpajEaI84ml4bop06JleNT7Gn4XjiJjbDQOk'], // 此处可填写多个模板 ID，但低版本微信不兼容只能授权一个
+  //     success(res) { 
+  //       console.log(res)
        
-      }
-    })
-  }
+  //     }
+  //   })
+  // }
 })
