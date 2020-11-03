@@ -88,14 +88,11 @@ Page({
     let that = this
     console.log(d, "课程详情接口数据")
     if (d.data.code == 0) {
-      console.log(d.data.data)
+      d.data.data.content = d.data.data.content.replace(/<img/gi, '<img style="max-width:100%;height:auto;display:block"')
       that.setData({
         course_info: d.data.data
       })
-      var cs = "course_info.content"
-      that.setData({
-        [cs]: that.data.course_info.content.replace(/<img/gi, '<img style="max-width:100%;height:auto;display:block"')
-      })
+      that.to_free()
       if (that.data.course_info.buy == 1 || (that.data.course_info.buy >= 3 && that.data.course_info.buy <= 5)) {
         that.setData({
           currentData: 1
@@ -185,8 +182,10 @@ Page({
     app.ols.get_free(params).then(d => {
       console.log(d)
       if (d.data.code == 0) {
-        console.log(d.data.data)
-        that.onShow()     //刷新页面
+        that.getcourse_cata()   //获取课程目录
+        that.setData({
+          currentData:1
+        })
         console.log("获取免费课程接口调取成功")
       } else {
         console.log("获取免费课程==============" + d.data.msg)

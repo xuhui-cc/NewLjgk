@@ -381,6 +381,7 @@ Page({
             wx.setStorageSync('gid', that.data.grade[xb].id)
             that.getsubject()   //获取科目
             that.hot()  //获取热门
+            that.coursePushList() //后台推荐课
             that.setData({
               grade_select: false
             })
@@ -396,6 +397,7 @@ Page({
         wx.setStorageSync('gid', that.data.grade[xb].id)
         that.getsubject()   //获取科目
         that.hot()  //获取热门
+        that.coursePushList() //后台推荐课
   
         that.setData({
           grade_select: false
@@ -611,6 +613,7 @@ Page({
     that.judge_login()    //登陆判断
     that.get_banner3()  //轮播图
     that.couponShow()    //优惠券显示状态
+    that.coursePushList()   //后台推荐课程
     if(that.data.grade){
       for (var i = -0; i < that.data.grade.length; i++) {
         if (that.data.gid == that.data.grade[i].id) {
@@ -825,7 +828,7 @@ Page({
     })
   },
 
-  cs:function(){
+  toSubMsg:function(){
     let that = this 
     wx.requestSubscribeMessage({
       tmplIds: ['leet7lbTpajEaI84ml4bop06JleNT7Gn4XjiJjbDQOk'], // 此处可填写多个模板 ID，但低版本微信不兼容只能授权一个
@@ -861,8 +864,29 @@ Page({
     })
     
     // console.log(kid)
-    that.cs()
+    that.toSubMsg()
     
+  },
+
+  //后台推荐课程
+  coursePushList:function(){
+    let that = this 
+    var params = {
+      // "gid":wx.getStorageSync('gid'),
+      "token":0
+    }
+    app.ols.coursePushList(params).then(d => {
+      if (d.data.code == 0) {
+        that.setData({
+          coursePushList:d.data.data.lists
+        })
+      }else{
+        that.setData({
+          coursePushList:''
+        })
+      }
+    })
+  
   },
 
     
