@@ -178,24 +178,26 @@ Page({
   //免费课领取
   to_free:function(e){
     let that = this
-    // var kid = e.currentTarget.dataset.kid
-    // console.log(kid)
-    var params = {
-      "token": wx.getStorageSync("token"),
-      "kid": that.data.kid
-    }
-    app.ols.get_free(params).then(d => {
-      console.log(d)
-      if (d.data.code == 0) {
-        that.getcourse_cata()   //获取课程目录
-        that.setData({
-          currentData:1
-        })
-        console.log("获取免费课程接口调取成功")
-      } else {
-        console.log("获取免费课程==============" + d.data.msg)
+    if(that.data.course_info.price == 0 && (that.data.course_info.buy < 1 || that.data.course_info.buy > 5 )){
+      var params = {
+        "token": wx.getStorageSync("token"),
+        "kid": that.data.kid
       }
-    })
+      app.ols.get_free(params).then(d => {
+        console.log(d)
+        if (d.data.code == 0) {
+          that.course_detail() //获取课程详情
+          // that.getcourse_cata()   //获取课程目录
+          // that.setData({
+          //   currentData:1
+          // })
+          console.log("获取免费课程接口调取成功")
+        } else {
+          console.log("获取免费课程==============" + d.data.msg)
+        }
+      })
+    }
+    
   },
 
 

@@ -421,7 +421,7 @@ function end_report4(params) {
 
 //获取免费课
 function get_free(params) {
-  return fetch.olsfetchpost(URI, 'wepay/freeorder', params)
+  return fetch.olsfetchpost(URI, 'wepay/freeorder', params,"开通免费课")
 }
 
 

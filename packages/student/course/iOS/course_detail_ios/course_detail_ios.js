@@ -180,12 +180,12 @@ Page({
       "kid": that.data.kid
     }
     app.ols.get_free(params).then(d => {
-      console.log(d)
       if (d.data.code == 0) {
-        that.getcourse_cata()   //获取课程目录
-        that.setData({
-          currentData:1
-        })
+        that.course_detail()   //获取课程详情
+        // that.getcourse_cata()   //获取课程目录
+        // that.setData({
+        //   currentData:1
+        // })
         console.log("获取免费课程接口调取成功")
       } else {
         console.log("获取免费课程==============" + d.data.msg)
