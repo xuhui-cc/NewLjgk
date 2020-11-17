@@ -191,14 +191,12 @@ transform: rotate(45deg);
   position: absolute;
   margin-left: 62rpx;
   margin-top: 100rpx;
-  width:420rpx;
+  width:457rpx;
   height:40rpx;
   font-size:28rpx;
   font-family:PingFang SC;
   font-weight:bold;
-  
   color:rgba(255,204,165,1);
-  
 }
 .open_time{
   position: absolute;
@@ -242,3 +240,20 @@ transform: rotate(45deg);
   border:1rpx solid rgba(241,241,241,1);
   opacity:1;
 }
+
+/* 会员卡可叠加新增修改 */
+.vip_center{
+  position: absolute;
+  margin-left: 135rpx;
+  margin-top: 68rpx;
+  width: 120rpx;
+  height: 37rpx;
+}
+.to_vipCenter{
+  position: absolute;
+  margin-left: 487rpx;
+  margin-top: 70rpx;
+  width: 205rpx;
+  height: 62rpx;
+}
+/* 会员卡可叠加新增修改 */

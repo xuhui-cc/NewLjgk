@@ -15,7 +15,9 @@ Page({
    */
   onLoad: function (options) {
     let that = this 
-
+    that.setData({
+      couponUseTip:wx.getStorageSync('couponUseTip')
+    })
     if (options.isshare == 1){
       wx.setStorageSync("gid", options.gid)
       that.setData({
@@ -41,7 +43,7 @@ Page({
     
     if(wx.getStorageSync('login')){
       that.couponList()
-    that.couponTea()
+    
     }
     
   },
@@ -121,6 +123,17 @@ getPhoneNumber: function (e) {
   })
 },
 
+//展开使用须知详情
+fold:function(e){
+  let that = this
+  console.log(e.currentTarget.dataset.xb)
+  var fold = "couponList[" + e.currentTarget.dataset.xb + "].fold"
+  that.setData({
+    [fold]:!that.data.couponList[e.currentTarget.dataset.xb].fold
+  })
+},
+
+
 
   //------------------------------------------------------接口---------------------------------------------------//
   /**
@@ -128,12 +141,15 @@ getPhoneNumber: function (e) {
    */
   couponList:function(){
     let that = this 
-    
     var params = {
       "token":wx.getStorageSync('token')
     }
     app.ols.couponList(params).then(d => {
       if (d.data.code == 0) {
+        for(var i = 0;i<d.data.data.length;i++ ){
+          d.data.data[i].memoLength = d.data.data[i].memo.length
+          d.data.data[i].fold = false
+        }
         that.setData({
           couponList:d.data.data
         })
@@ -145,19 +161,5 @@ getPhoneNumber: function (e) {
     })
     
   },
-  couponTea:function(){
-    let that = this 
-    
-    var params = {
-      // "token":wx.getStorageSync('token')
-    }
-    app.ols.couponTea(params).then(d => {
-      if (d.data.code == 0) {
-        that.setData({
-          couponTea:d.data.data.res
-        })
-      }
-    })
-    
-  },
+  
 })

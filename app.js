@@ -46,6 +46,7 @@ App({
   },
 
   onShow: function() {
+    this.couponUseTip()
   },
 
   /**
@@ -53,6 +54,21 @@ App({
   */
   getPagePath(pageName) {
     return pagePath.getPagePath(pageName)
+  },
+
+
+  //优惠券使用提示
+  couponUseTip(){
+    var params = {}
+    ols.couponTea(params).then(d => {
+      if (d.data.code == 0) {
+        wx.setStorageSync('couponUseTip', d.data.data.res)
+        // that.setData({
+        //   couponUseTip:d.data.data.res
+        // })
+      }
+    })
+    
   },
   
 

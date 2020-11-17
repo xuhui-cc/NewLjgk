@@ -97,6 +97,8 @@ let pathDic = {
 
   //vip-公共
   exchang_vip:'packages/student/vip/comment/exchang_vip/exchang_vip',
+  myVipCard:'/packages/student/vip/comment/myVipCard/myVipCard',
+  vipCardDetail:'/packages/student/vip/comment/vipCardDetail/vipCardDetail',
   // vip-安卓
   vip_detail: '/packages/student/vip/android/vip_detail/vip_detail',
 
@@ -118,7 +120,7 @@ let pathDic = {
 
   // 通用页面
   study_record: '/packages/common/study_record/study_record',
-  
+  exchangeCode_2C:'/packages/common/exchangeCode_2C/exchangeCode_2C',
   webView: '/packages/common/webView/webView',
   book_detail: '/packages/common/book_detail/book_detail'
 }

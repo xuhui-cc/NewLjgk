@@ -6,13 +6,19 @@ page{
 .layout{
   margin-top: 16rpx;
   margin-left: 30rpx;
-  margin-bottom: 380rpx;
+  /* margin-bottom: 380rpx; */
 }
 .bg_img{
-  position: absolute;
+  /* position: absolute; */
   width: 690rpx;
-  height: 361rpx;
+  height: 220rpx;
   z-index: -1;
+}
+.coupon_whiteLayout{
+  margin-top: -8rpx;
+  width: 690rpx;
+  background: #FFFFFF;
+  border-radius: 0rpx 0rpx 15rpx 15rpx;
 }
 .title{
   position: absolute;
@@ -45,13 +51,14 @@ page{
 .price_icon{
   position: absolute;
   padding-top: 105rpx;
-  margin-left: 429rpx;
+  margin-left: 410rpx;
   width: 24rpx;
 height: 56rpx;
 font-size: 40rpx;
 font-family: PingFang SC;
 font-weight: 800;
 line-height: 36rpx;
+text-align: right;
 color: rgba(255, 255, 255, 1);
 opacity: 1;
 
@@ -59,7 +66,7 @@ opacity: 1;
 .price{
   position: absolute;
   padding-top: 112rpx;
-  margin-left: 461rpx;
+  margin-left: 441rpx;
   width: 197rpx;
 height: 115rpx;
 font-size: 82rpx;
@@ -71,17 +78,17 @@ opacity: 1;
 
 }
 .coupon_time{
-  position: absolute;
-  padding-top: 228rpx;
+  
+  padding-top: 28rpx;
   margin-left: 33rpx;
   width: 293rpx;
-height: 33rpx;
-font-size: 24rpx;
-font-family: PingFang SC;
-font-weight: 400;
-line-height: 36rpx;
-color: #B1B1B1;
-opacity: 1;
+  height: 33rpx;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 36rpx;
+  color: #B1B1B1;
+
 
 }
 .coupon_tip{
@@ -100,7 +107,7 @@ opacity: 1;
 }
 .btn1{
   position: absolute;
-  margin-top: 248rpx;
+  margin-top: 27rpx;
   margin-left: 493rpx;
   width: 165rpx;
   height: 60rpx;
@@ -117,7 +124,7 @@ opacity: 1;
 }
 .btn2{
   position: absolute;
-  margin-top: 248rpx;
+  margin-top: 27rpx;
   margin-left: 493rpx;
   width: 185rpx;
   height: 60rpx;
@@ -290,4 +297,62 @@ z-index: 101;
 }
 .login_read1::after {
   border: none;
+}
+.coupon_tipTitle{
+  padding-top: 12rpx;
+  margin-left: 33rpx;
+  width: 432rpx;
+  height: 36rpx;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 36rpx;
+  color: #B1B1B1;
+  
+
+}
+.fold_img{
+  width: 50rpx;
+  height: 50rpx;
+}
+.fold_btn{
+  width: 44rpx;
+  height: 50rpx;
+  font-size: 22rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 50rpx;
+  text-align: center;
+  color: #CBCBCB;
+}
+.coupon_tip1{
+  
+  padding-top: 10rpx;
+  margin-left: 33rpx;
+  width: 611rpx;
+  height: 72rpx;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 36rpx;
+  color: #B1B1B1;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.coupon_tip2{
+  
+  padding-top: 10rpx;
+  margin-left: 33rpx;
+  width: 611rpx;
+  /* height: 69rpx; */
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  line-height: 36rpx;
+  color: #B1B1B1;
+  
 }

@@ -19,6 +19,9 @@ Page({
   onLoad: function (options) {
     options = app.shareTool.getShareOption()
     let that = this
+    that.setData({
+      couponUseTip:wx.getStorageSync('couponUseTip')
+    })
     if (options.share && options.share == 1) {
       this.toSharePage = true
     }
@@ -62,32 +65,7 @@ Page({
     })
   },
 
-  //获取会员卡列表
-  v4_viplist:function(){
-    let that = this
-    var params = {
-      "token": wx.getStorageSync("token"),
-      "gid":that.data.gid
-    }
-    // console.log(params, "会员列表参数")
-    app.ols.v4_courseViplist(params).then(d => {
-      console.log(d, "会员列表数据")
-      if (d.data.code == 0) {
-        if(d.data.data.lists[0].course){
-          d.data.data.lists[0].course_num = d.data.data.lists[0].course.length
-        }
-        
-        that.setData({
-          vip_list:d.data.data.lists,
-          vip:d.data.data
-        })
-        console.log("会员列表成功")
-      } else {
-        console.log("会员列表失败==============" + d.data.msg)
-      }
-    })
-  },
-
+  
   //广告条跳转
   ad_detail: function (e) {
     var id = e.currentTarget.dataset.id
@@ -887,6 +865,46 @@ Page({
       }
     })
   
+  },
+
+  /*-------------------------------------------------------接口------------------------------------------------ */
+  //会员卡标签数据
+  v4_viplist:function(){
+    let that = this
+    if(that.data.login){
+      var params = {
+        "token": wx.getStorageSync("token"),
+        // "gid":that.data.gid
+      }
+      app.ols.cardInfo(params).then(d => {
+        if (d.data.code == 0) {
+          that.setData({
+            // vip_list:d.data.data.lists,
+            vip:d.data.data
+          })
+        } else {
+          that.setData({
+            
+            vip:''
+          })
+        }
+      })
+    }else{
+      console.log("未登录")
+      that.setData({
+        vip:''
+      })
+    }
+    
+  },
+
+  /*------------------------------------------------------方法---------------------------------------------- */
+  //开通会员按钮
+  signBtn:function(){
+    let that = this 
+    that.setData({
+      signBtn:!that.data.signBtn
+    })
   },
 
     

@@ -45,7 +45,7 @@ Page({
       }
     }
     
-    app.ols.v4_myVip(params).then(d => {
+    app.ols.cardInfo(params).then(d => {
       console.log(d)
       if (d.data.code == 0) {
         that.setData({
