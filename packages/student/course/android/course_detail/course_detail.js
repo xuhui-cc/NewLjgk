@@ -571,7 +571,7 @@ Page({
   //复制老师联系方式
   copy:function(){
     var that = this;
-    var tel = that.data.course_cata.tel.substr(4,11)
+    var tel = that.data.course_cata.tel.substr(4,12)
     console.log(tel)
       wx.setClipboardData({
       data: tel,

@@ -108,7 +108,7 @@ Page({
       "token": wx.getStorageSync("token"),
       "code":that.data.code
     }
-    app.ols.cheek_code5(params).then(d => {
+    app.ols.cheek_code(params).then(d => {
       
       if (d.data.code == 0) {
         that.setData({
