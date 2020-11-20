@@ -149,7 +149,7 @@ Page({
       "token": wx.getStorageSync("token"),
       "id":that.data.codeinfo.id
     }
-    app.ols.exchange_code5(params).then(d => {
+    app.ols.exchange_code(params).then(d => {
       
       if (d.data.code == 0) {
         that.allVipCourse()   //获取全部关联课程

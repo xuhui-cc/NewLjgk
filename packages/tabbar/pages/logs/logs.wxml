@@ -428,7 +428,7 @@
                       <view class="margin_shu"></view>
                       <view class="course_num">{{item.class_hour}}课时</view>
                     </view>
-                  <view class="free">免费学</view>
+                  <view class="free" style="margin-left: 280rpx;">免费学</view>
                 </view>
                 
               </view>

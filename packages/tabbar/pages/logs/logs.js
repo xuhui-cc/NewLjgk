@@ -599,7 +599,7 @@ Page({
   to_course_detail:function(e){
     let that = this
     var xb = e.currentTarget.dataset.xb
-    var course = that.data.course.lists[xb]
+    var course = that.data.course[xb]
     if(course.type == 0){
       wx.navigateTo({
         url: app.getPagePath('course_detail') + '?kid=' + course.kid,
@@ -618,7 +618,7 @@ Page({
   vip_course_detail:function(e){
     let that = this
     var xb = e.currentTarget.dataset.xb
-    var course = that.data.vip_list[0].course[xb]
+    var course = that.data.vipCourseList[xb]
     if(course.type == 0){
         wx.navigateTo({
           url: app.getPagePath('course_detail') + '?kid=' + course.kid,
@@ -859,7 +859,10 @@ Page({
         that.setData({
           login: true
         })
-        that.onShow()
+        that.signBtn()
+        // that.onShow()
+        that.v4_viplist()   //获取vip
+      that.allVipCourse()   //获取vip课程
       }
     })
   },

@@ -88,7 +88,7 @@
           <image class="work_img" src="/images/other/work.png"></image>
           <view class="file">课后作业</view>
         </view> -->
-        <view class="heng2" wx:if="{{course_info.buy == 0 || buy == 6}}"></view>
+        <view class="heng2" wx:if="{{course_info.buy == 0 || course_info.buy == 6}}"></view>
       </view>
 
       <view wx:if="{{item.cateid == 0}}" bindtap="course_authority" >
