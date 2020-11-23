@@ -98,7 +98,7 @@ Page({
   copy:function(){
     var that = this;
     wx.setClipboardData({
-    data: that.data.couponTea.phone,
+    data: that.data.couponUseTip.phone,
     success: function(res) {
       wx.showToast({
         title: '复制成功',

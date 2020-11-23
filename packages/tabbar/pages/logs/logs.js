@@ -41,13 +41,13 @@ Page({
       console.log("非分享打开")
     }
     
-    that.judge_login()    //登陆判断
+    
     app.shareTool.shareTarget()
   },
   
   onShow: function () {
     let that = this
-    
+    that.judge_login()    //登陆判断
     that.getgrade()    //获取年级 
     that.getsubject()   //获取学科
     that.get_banner3()  //轮播图

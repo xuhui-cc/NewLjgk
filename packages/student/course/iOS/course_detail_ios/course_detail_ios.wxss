@@ -136,7 +136,7 @@
 .buy_num{
   margin-left: 477rpx;
   margin-top: 42rpx;
-  width:85rpx;
+  width:100rpx;
   height:33rpx;
   font-size:24rpx;
   font-family:PingFang SC;

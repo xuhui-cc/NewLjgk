@@ -88,11 +88,16 @@ Page({
     let that = this
     console.log(d, "课程详情接口数据")
     if (d.data.code == 0) {
+      console.log(d.data.data)
       d.data.data.content = d.data.data.content.replace(/<img/gi, '<img style="max-width:100%;height:auto;display:block"')
       that.setData({
         course_info: d.data.data
       })
-      that.to_free()
+      // var cs = "course_info.content"
+      // that.setData({
+      //   [cs]: that.data.course_info.content.replace(/<img/gi, '<img style="max-width:100%;height:auto;display:block"')
+      // })
+      that.to_free()       //开通免费课
       if (that.data.course_info.buy == 1 || (that.data.course_info.buy >= 3 && that.data.course_info.buy <= 5)) {
         that.setData({
           currentData: 1
@@ -113,7 +118,7 @@ Page({
     var kid = that.data.course_cata.lists[xb].kid
     var eid = that.data.course_cata.lists[xb].eid
     var mid = that.data.course_cata.lists[xb].mid
-    if (that.data.course_cata.lists[xb].cateid == 1||that.data.course_cata.lists[xb].cateid == 2) {
+    if (that.data.course_cata.lists[xb].cateid == 1 ||that.data.course_cata.lists[xb].cateid == 2) {
       wx.navigateTo({
         url: app.getPagePath('live') + '?id=' + id + '&kid=' + kid,    //直播
       })
@@ -173,24 +178,26 @@ Page({
   //免费课领取
   to_free:function(e){
     let that = this
-    // var kid = e.currentTarget.dataset.kid
-    // console.log(kid)
-    var params = {
-      "token": wx.getStorageSync("token"),
-      "kid": that.data.kid
-    }
-    app.ols.get_free(params).then(d => {
-      if (d.data.code == 0) {
-        that.course_detail()   //获取课程详情
-        // that.getcourse_cata()   //获取课程目录
-        // that.setData({
-        //   currentData:1
-        // })
-        console.log("获取免费课程接口调取成功")
-      } else {
-        console.log("获取免费课程==============" + d.data.msg)
+    if(that.data.course_info.price == 0 && (that.data.course_info.buy < 1 || that.data.course_info.buy > 5 )){
+      var params = {
+        "token": wx.getStorageSync("token"),
+        "kid": that.data.kid
       }
-    })
+      app.ols.get_free(params).then(d => {
+        console.log(d)
+        if (d.data.code == 0) {
+          that.course_detail() //获取课程详情
+          // that.getcourse_cata()   //获取课程目录
+          // that.setData({
+          //   currentData:1
+          // })
+          console.log("获取免费课程接口调取成功")
+        } else {
+          console.log("获取免费课程==============" + d.data.msg)
+        }
+      })
+    }
+    
   },
 
 
@@ -369,12 +376,12 @@ Page({
       }
     }
       // console.log(params, "获取课程目录参数")
-      app.ols.course_cata4(params).then(d => {
+      app.ols.course_cata(params).then(d => {
         // console.log(d, "获取课程目录接口数据")
         if (d.data.code == 0) {
-          console.log(d.data.data)
+          // console.log(d.data.data)
           for(var i=0;i<d.data.data.lists.length;i++){
-            d.data.data.lists[i].livetime = d.data.data.lists[i].starttime.substr(5,11) + " - " + d.data.data.lists[i].endtime.substr(11,5)
+            d.data.data.lists[i].livetime = d.data.data.lists[i].startline.substr(5,11) + " - " + d.data.data.lists[i].endline.substr(11,5)
             // var time = "d.data.data.lists[i].starttime.slice(0,17)"
             console.log(d.data.data.lists[i].livetime)
           }
@@ -527,7 +534,6 @@ Page({
       }
     })
   },
-
   //课程权限提示
   course_authority:function(e){
     let that = this
@@ -540,6 +546,11 @@ Page({
     if (buy == 1|| (buy >= 3 && buy <= 5)) {
       console.log("有课程权限")
     } else {
+      // wx.showToast({
+      //   title: '没有观看权限哦',
+      //   icon:"none",
+      //   duration:2000
+      // })
       that.setData({
         coupon_use:true
       })
@@ -547,6 +558,7 @@ Page({
     }
     
   },
+
 
   //关闭联系老师蒙层
   to_ues:function(){
@@ -559,8 +571,8 @@ Page({
   //复制老师联系方式
   copy:function(){
     var that = this;
-    var tel = that.data.course_cata.tel.substr(4,12)
-    console.log(tel)
+    var tel = that.data.course_cata.mobile
+    // console.log(tel)
       wx.setClipboardData({
       data: tel,
       success: function(res) {
