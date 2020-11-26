@@ -20,7 +20,7 @@ Page({
         login:wx.getStorageSync('login'),
         id:options.id,
         ewm:options.ewm,
-        // id:'61',
+        // id:'34',
         // ewm:'1'
       })
     
@@ -88,8 +88,8 @@ Page({
       })
     }
     else{
-      wx.redirectTo({
-        url: app.getPagePath('vip_detail') ,
+      wx.navigateBack({
+        delta: 0,
       })
     }
     
@@ -158,7 +158,7 @@ Page({
         "token": wx.getStorageSync("token"),
         "id": id
       }
-      app.ols.exchange_code5(params).then(d => {
+      app.ols.exchange_code(params).then(d => {
         if (d.data.code == 0) {
           that.setData({
             open_rightBag:true
@@ -176,7 +176,7 @@ Page({
       "token": wx.getStorageSync("token"),
       "id":ex_id
     }
-    app.ols.exchange_1Vn_v5(params).then(d => {
+    app.ols.exchange_1Vn(params).then(d => {
       
       if (d.data.code == 0) {
         that.setData({
@@ -212,7 +212,7 @@ Page({
         "token": wx.getStorageSync("token"),
         "id":that.data.id
       }
-      app.ols.check_1Vn_v5(params).then(d => {
+      app.ols.check_1Vn(params).then(d => {
         if (d.data.code == 0) {
           
           that.exchange_1Vn(d.data.data.id)   //兑换权益包

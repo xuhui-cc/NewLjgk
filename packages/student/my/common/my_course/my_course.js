@@ -94,7 +94,7 @@ Page({
     var xb = e.currentTarget.dataset.xb
     console.log(xb)
     wx.navigateTo({
-      url: app.getPagePath('course_detail') + '?kid=' + that.data.course[xb].kid,
+      url: app.getPagePath('course_detail') + '?kid=' + that.data.courseList[xb].kid,
     })
   },
 

@@ -11,7 +11,7 @@ function showPay() {
     }
     case 'ios': {
       // iphone/ipad
-      showPay = false
+      showPay = true
       break
     }
     case 'android': {
@@ -134,6 +134,7 @@ function getPagePath(pageName, notIos) {
       return iOSPagePath
     }
   }
+  // console.log(pathDic[pageName] + "path")
   return pathDic[pageName]
 }
 

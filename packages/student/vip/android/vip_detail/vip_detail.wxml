@@ -105,7 +105,7 @@
         <image class="vip2_next" src="/images/navi/next.png" bindtap="to_myCoupon"></image>
       </view>
 
-      <scroll-view scroll-x="true" style=" white-space: nowrap;display: flex;margin-bottom:50rpx;margin-left:30rpx;margin-top:32rpx;width:720rpx" wx:if="{{couponList != ''}}">
+      <scroll-view scroll-x="true" style="white-space: nowrap;display: flex;margin-bottom:50rpx;margin-left:30rpx;margin-top:32rpx;width:720rpx" wx:if="{{couponList != ''}}">
         <view wx:for="{{couponList}}" wx:key="index" style="width: 387rpx; height: 194rpx; display: inline-block;margin-right:20rpx;">
           <view >
             <view class="vip2_couponTitle">{{item.title}}</view>

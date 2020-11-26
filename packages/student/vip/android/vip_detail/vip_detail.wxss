@@ -705,15 +705,18 @@ border-radius: 20px 20px 0px 0px;
 }
 .vip2_couponTitle{
   position: absolute;
+  white-space: normal;
+  /* display: block; */
   margin-top: 35rpx;
   margin-left: 47rpx;
-  width: 274rpx;
-  height: 42rpx;
+  width: 280rpx;
+  /* height: 84rpx; */
   font-size: 30rpx;
   font-family: PingFang SC;
   font-weight: bold;
-  line-height: 38rpx;
+  /* line-height: 38rpx; */
   color: #0A0A0A;
+  /* background: #aa3c3c; */
 }
 .vip2_couponPrice{
   position: absolute;

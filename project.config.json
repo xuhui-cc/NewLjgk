@@ -235,6 +235,12 @@
           "pathName": "packages/common/webView/webView",
           "query": "",
           "scene": null
+        },
+        {
+          "id": -1,
+          "name": "packages/common/exchangeCode_2C/exchangeCode_2C",
+          "pathName": "packages/common/exchangeCode_2C/exchangeCode_2C",
+          "scene": null
         }
       ]
     }

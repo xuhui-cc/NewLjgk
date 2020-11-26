@@ -34,6 +34,15 @@ function getPhoneNumber(e, gid, callback) {
   register(e, gid, callback)
 }
 
+
+/**
+ * 获取openid
+*/
+function getOpenid() {
+  var that = this
+    return openid
+}
+
 /**
  * 登录 / 获取注册口令
 */
@@ -101,5 +110,6 @@ function register(e, gid, callback) {
 
 module.exports = {
   getPhoneNumber, 
-  firstLaunch
+  firstLaunch,
+  getOpenid
 }

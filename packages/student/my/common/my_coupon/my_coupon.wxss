@@ -24,19 +24,19 @@ page{
   position: absolute;
   padding-top: 30rpx;
   margin-left: 40rpx;
-  width: 432rpx;
-  height: 67rpx;
-  font-size: 48rpx;
+  width: 430rpx;
+  height: 90rpx;
+  font-size: 43rpx;
   font-family: PingFang SC;
   font-weight: 800;
-  line-height: 36rpx;
+  line-height: 45rpx;
   color: #FFFFFF;
   opacity: 1;
 
 }
 .coupon_id{
   position: absolute;
-  padding-top: 102rpx;
+  padding-top: 150rpx;
   margin-left: 40rpx;
   width: 235rpx;
   height: 40rpx;

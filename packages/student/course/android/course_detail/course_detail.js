@@ -1,16 +1,32 @@
 // pages/course_detail/course_detail.js
 const app = getApp()
+let col1H = 0;
+let col2H = 0;
 Page({
   // 打开的文件路径 在onShow中删除文件
   openFilePath: '',
+
+  // 分享图片的路径
+  shareImagePath: '',
+
   /**
    * 页面的初始数据
    */
   data: {
     currentData: 0,
     btn_buy:app.globalData.btn_buy,
-    coupon_use:false
+    coupon_use:false,
+    showCanvas:false,
+    scrollH: 0,
+    imgWidth: 0,
+    loadingCount: 0,
+    images: [],
+    col1: [],
+    col2: [],
+    scrollTop: null,
   },
+
+  // openSetting() {  wx.openSetting()},
 
   /**
    * 生命周期函数--监听页面加载
@@ -20,12 +36,13 @@ Page({
     that.setData({
       kid: options.kid
     })
+    // var openid = app.loginTool.getOprnid()
+    // console.log(openid,'openid')
     if (options.isshare == 1) {
       wx.setStorageSync("gid", options.gid)
       that.setData({
         isshare: options.isshare,
         gid: options.gid,
-        
         login: wx.getStorageSync("login")
       })
       // wx.setStorageSync("gid", options.gid)
@@ -33,13 +50,24 @@ Page({
 
     } else {
       that.judge_login()    //登陆判断
-     
       console.log("非分享打开")
     }
 
     
     that.course_detail()  //获取课程详情
-    
+    wx.getSystemInfo({
+      success: (res) => {
+          let ww = res.windowWidth;
+          let wh = res.windowHeight;
+          let imgWidth = ww * 0.48;
+          let scrollH = wh;
+
+          this.setData({
+              scrollH: scrollH,
+              imgWidth: imgWidth
+          });
+      }
+  })
   },
 
   //登录判断
@@ -71,7 +99,7 @@ Page({
       })
     }else{
       var params = {
-        "token": '',
+        "token": '0',
         "kid": that.data.kid
       }
       console.log(params, "课程详情接口参数")
@@ -89,6 +117,8 @@ Page({
     console.log(d, "课程详情接口数据")
     if (d.data.code == 0) {
       console.log(d.data.data)
+      that.dealAva(d.data.data.face)
+      // wx.setStorageSync('face', d.data.data.face)
       d.data.data.content = d.data.data.content.replace(/<img/gi, '<img style="max-width:100%;height:auto;display:block"')
       that.setData({
         course_info: d.data.data
@@ -104,6 +134,7 @@ Page({
         })
         that.getcourse_cata()  //获取课程目录
       }
+      
     } else {
       console.log("课程详情介绍接口==============" + d.data.msg)
     }
@@ -371,7 +402,7 @@ Page({
       }
     }else{
       var params = {
-        "token": '',
+        "token": '0',
         "kid": that.data.kid
       }
     }
@@ -493,7 +524,17 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    let that = this
+    col1H = 0;
+    col2H = 0;
+    that.setData({
+      scrollH: 0,
+      imgWidth: 0,
+      loadingCount: 0,
+      images: [],
+      col1: [],
+      col2: [],
+    })
   },
 
   /**
@@ -535,7 +576,7 @@ Page({
     })
   },
   //课程权限提示
-  course_authority:function(e){
+  course_authority:function(){
     let that = this
     // var xb = e.currentTarget.dataset.xb
     // console.log(xb)
@@ -663,6 +704,221 @@ Page({
   onShareAppMessage: function () {
     let that = this;
     let paramsStr = 'isshare=1&gid=' + that.data.gid + '&kid=' + that.data.kid
-    return app.shareTool.getShareReturnInfo('0,1', 'course_detail', paramsStr, '/images/other/share1.png')
+    return app.shareTool.getShareReturnInfo('0,1', 'course_detail', paramsStr, this.shareImagePath ? this.shareImagePath : '')
   },
+
+
+  /**
+   * 点击报名
+   */
+  toSubMsg:function(){
+    let that = this 
+    var params = {
+      "openid":app.loginTool.getOpenid(),
+      "kid":that.data.kid
+    }
+    app.ols.clickSign(params).then(d => {
+      
+    })
+    if(that.data.course_info.buy ==1 || (that.data.course_info.buy >= 3 && that.data.course_info.buy <= 5)){
+      console.log("触发报名")
+    wx.requestSubscribeMessage({
+      tmplIds: ['leet7lbTpajEaI84ml4bop06JleNT7Gn4XjiJjbDQOk'], // 此处可填写多个模板 ID，但低版本微信不兼容只能授权一个
+      success(res) { 
+        console.log(res)
+        var params = {
+          "token":wx.getStorageSync('token'),
+          "course_id":that.data.kid
+        }
+        app.ols.subMsg(params).then(d => {
+          if (d.data.code == 0 || d.data.code == 4) {
+            that.course_detail()
+            that.getcourse_cata()
+            var params = {
+              "kid":that.data.kid
+            }
+            app.ols.succeedSign(params).then(d => {
+              
+            })
+          }
+        })
+      },
+      fail(res){
+        console.log("报名失败")
+        wx.showModal({
+          title: '提示', //提示的标题,
+          content: '请打开订阅消息权限', //提示的内容,
+          showCancel: true, //是否显示取消按钮,
+          
+          success: res => {
+            if (res.confirm) {
+              wx.openSetting({
+                success(res) {
+                },
+                fail(res) {
+                }
+              })
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        });
+    } 
+    })
+    }else{
+      that.getcourse_cata()
+      that.course_authority()
+    }
+    
+  },
+
+  /*-----------------------------------------------------分享图------------------------------------- */
+
+// 处理图片
+dealAva:function(face){
+  let that = this 
+  
+    wx.getImageInfo({
+      src: face,
+      success: function (res) {
+        console.log(res,"res");
+        var face = res.path
+        that.drawShareImage(face)
+      }
+    })
+    // console.log(promise3,"promise3")
+  
+},
+
+
+/**
+   * 绘制分享图片
+  */
+ drawShareImage: function (face) {
+  this.setData({
+    showCanvas: true
+  })
+  var title1,title2
+  if(this.data.course_info.title.length > 12){
+    var title1 = this.data.course_info.title.substr(0,12)
+    var title2 = this.data.course_info.title.substr(12,12)
+    console.log(title1)
+    console.log(title2)
+  }else{
+    var title1 = this.data.course_info.title
+  }
+  // var title = "判断推理系统课判断推理系统课判断推理系统课"
+  
+  const ctx = wx.createCanvasContext('shareCanvas')
+  ctx.drawImage(face, 0, 0, 375, 170)
+  ctx.drawImage("/images/other/share_course.png", 0, 131, 375, 170)
+
+  // //画头像
+  // ctx.save();
+  // ctx.beginPath();
+  // ctx.arc(187 , 80, 37, 0, 2 * Math.PI);
+  // ctx.setStrokeStyle('white')
+  // ctx.stroke()
+  // ctx.clip()
+  // ctx.drawImage(face, 150, 43, 80, 100)
+
+  //画昵称
+  ctx.restore()
+  ctx.beginPath()
+  ctx.setFontSize(20)
+  ctx.setFillStyle('#272727')
+  ctx.font = "bold 20px sans-serif";
+  ctx.setTextAlign('center')
+  // ctx.setStrokeStyle('white')
+  ctx.fillText(title1, 187, 207,300)
+  if(title2){
+    ctx.fillText(title2 + "...", 187, 235,300)
+  }
+  ctx.stroke()
+  if(title2){
+    ctx.drawImage("/images/other/num_bg.png", 140, 250, 100, 20)
+  }else{
+    ctx.drawImage("/images/other/num_bg.png", 140, 230, 100, 20)
+  }
+  
+
+  ctx.restore()
+  ctx.beginPath()
+  ctx.setFontSize(12)
+  ctx.setFillStyle('#FFFFFF')
+  ctx.setTextAlign('center')
+  if(title2){
+    ctx.fillText(this.data.course_info.order_num + "人学习", 190,265 ,100)
+  }else{
+    ctx.fillText(this.data.course_info.order_num + "人学习", 190,245 ,100)
+  }
+  
+  ctx.stroke()
+  // //画职位
+  // ctx.restore()
+  // ctx.beginPath()
+  // ctx.setFontSize(16)
+  // ctx.setFillStyle('#13E0B2')
+  // ctx.setTextAlign('center')
+  // ctx.fillText(this.data.teacherIntro.discipline, 187, 175 ,120)
+  // ctx.stroke()
+
+  // //画简介
+  // ctx.restore()
+  // ctx.beginPath()
+  // ctx.setFontSize(17)
+  // ctx.setFillStyle('#FFFFFF')
+  // ctx.setTextAlign('left')
+  // ctx.fillText('this.data.teacherIntro.intro', 40,260)
+  ctx.stroke()
+
+
+  // ctx.beginPath();
+  
+  // ctx.closePath();
+  //   // ctx.fill();
+  // ctx.clip()
+  // // 底图
+  
+  
+  
+
+  
+
+  
+
+  console.log("画图完成")
+
+  let that = this
+  ctx.draw(true,function(e) {
+    console.log("开始画图")
+    wx.canvasToTempFilePath({
+      x: 0,
+      y: 0,
+      width: 375,
+      height: 320,
+      canvasId: 'shareCanvas',
+      success(res) {
+        console.log(res.tempFilePath)
+        that.shareImagePath = res.tempFilePath
+        console.log(that.shareImagePath,"图片地址")
+        // wx.previewImage({
+        //   urls: [that.shareImagePath],
+        // })
+        that.setData({
+          showCanvas: false,
+          teacher_info:true
+        })
+      },
+      fail (res) {
+        console.log("失败")
+        that.setData({
+          showCanvas: false,
+          teacher_info:true
+        })
+      }
+    })
+  })
+
+},
 })

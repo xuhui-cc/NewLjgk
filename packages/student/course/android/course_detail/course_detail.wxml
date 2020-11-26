@@ -1,5 +1,5 @@
-<view class="container">
-
+<view class="container" style="margin-bottom:500rpx;">
+<!-- style="margin-bottom:500rpx;" -->
   <!-- <image class="report_img" src="../../images/report.png" bindtap="to_end_report" wx:if="{{course_info.mark_status == 2 || course_cata.mark_status == 2 }}"></image> -->
 
   <view class="flex">
@@ -167,16 +167,16 @@
   
 
   <!-- 登录蒙层 -->
-  <view class="mask1" wx:if="{{login == false && isshare == 1}}"></view>
+  <!-- <view class="mask1" wx:if="{{login == false && isshare == 1}}"></view>
   <view class="login_layout" wx:if="{{login == false && isshare == 1}}">
   
-    <!-- <image class="login_del" src="../../images/del.png"></image> -->
+    
     <image class="unlogin" src="/images/other/unlogin.png" style="margin-top:75rpx;"></image>
     <view class="login_tip">您当前尚未登录! </view>
     <view class="login_tip">请点击下方按钮登录</view>
     <button class="login_read1"  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
     <image class="tologin" src="/images/other/tologin.png"></image>
-  </view>
+  </view> -->
 
 
   <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{coupon_use}}"></view>
@@ -193,32 +193,10 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <button class="login_read_sign"  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" wx:if="{{!login && course_info.live == 1 && course_info.apply == 0}}"></button>
+  <view class="sign" bindtap="toSubMsg" wx:if="{{course_info.live == 1 && course_info.apply == 0 }}">立即报名</view>
+  <!-- <button bindtap="openSetting" class="hhh">打开设置页</button>   -->
 <!-- container -->
 </view>
+<canvas canvas-id="shareCanvas" style="width:375px; height:320px;top:500rpx;" wx:if="{{showCanvas}}"></canvas>
+<!-- <image class="position: fixed;z-index:1000" src="{{shareImagePath}}" wx:if="{{showCanvas}}"></image> -->

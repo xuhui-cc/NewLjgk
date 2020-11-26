@@ -1,5 +1,5 @@
-const URI_base = "http://gkcs.lingjun.net/" //测试域名
-// const URI_base = "https://gk.lingjun.net/" // 正式域名
+// const URI_base = "http://gkcs.lingjun.net/" //测试域名
+const URI_base = "https://gk.lingjun.net/" // 正式域名
 // const URI_base = "https://zy.lingjun.net/" // 正式域名
 
 const URI = URI_base + 'api.php/'    //接口地址
@@ -92,18 +92,7 @@ function judge_share4(params) {
 function grade_update(params) {
   return fetch.olsfetchpost(URI, 'v1/member/update', params,"更新年级")
 }
-//扫码一对多VIP信息
-function info_1Vn(params) {
-  return fetch.olsfetchpost(URI, 'v1/redeem/lookredeemonecode', params,"扫码一对多VIP信息")
-}
-//验证一对多VIP有效
-function check_1Vn(params) {
-  return fetch.olsfetchpost(URI, 'v1/redeem/checkredeemonecode', params,"验证一对多VIP有效")
-}
-//兑换一对多VIP
-function exchange_1Vn(params) {
-  return fetch.olsfetchpost(URI, 'v1/redeem/exchangeredeem2', params,"兑换一对多VIP")
-}
+
 //课程直播/伪直播链接获取
 function get_live(params) {
   return fetch.olsfetchpost(URI, 'v1/lesson/getmtcourseurl', params,"欢拓直播/伪直播")
@@ -211,10 +200,46 @@ function course_cata(params) {
 }
 // course_cata2,course_cata4
 
+// 权益包展示数据
+function rightBagInfo(params) {
+  return fetch.olsfetchpost(URI, 'v2/vipcard/getEquityPackage', params,"权益包展示数据")
+}
+//扫码一对多VIP信息
+// function info_1Vn(params) {
+//   return fetch.olsfetchpost(URI, 'v1/redeem/lookredeemonecode', params,"扫码一对多VIP信息")
+// }
+// //验证一对多VIP有效
+// function check_1Vn(params) {
+//   return fetch.olsfetchpost(URI, 'v1/redeem/checkredeemonecode', params,"验证一对多VIP有效")
+// }
+// //兑换一对多VIP
+// function exchange_1Vn(params) {
+//   return fetch.olsfetchpost(URI, 'v1/redeem/exchangeredeem2', params,"兑换一对多VIP")
+// }
+//扫码一对多VIP信息
+function info_1Vn(params) {
+  return fetch.olsfetchpost(URI, 'v2/redeem/lookredeemonecode', params,"扫码一对多VIP信息")
+}
+//验证一对多VIP有效
+function check_1Vn(params) {
+  return fetch.olsfetchpost(URI, 'v2/redeem/checkredeemonecode', params,"验证一对多VIP有效")
+}
+//兑换一对多VIP
+function exchange_1Vn(params) {
+  return fetch.olsfetchpost(URI, 'v2/redeem/exchangeredeem2', params,"兑换一对多VIP")
+}
+//课程详情点击报名按钮次数记录
+function clickSign(params) {
+  return fetch.olsfetchpost(URI, 'v1/lesson_spread/setlessonspread', params,"课程详情点击报名按钮次数记录")
+}
+//课程详情报名成功记录
+function succeedSign(params) {
+  return fetch.olsfetchpost(URI, 'v1/lesson_spread/signlessonspread', params,"课程详情报名成功记录")
+}
 
 /*v2调整/新增接口 */
 
-module.exports = { login, getclassroom, add_adress, getdefault, setinfo, getlist, discipline, gettoplist, order_all, wrong, my_course_all4, test_ques1, test_ques2, grade_course1, grade_course2, course_info1, course_info2, grade_update, course_cata1, handout, getvideo, getvideo_info, preorder, order_detail, order_wait, order_ed, order_close, test_id, setmark, test_explain, ques_detail, ques_info, cp_ans_submit, update_cpsubmit, cp_report, cp_analysis, cp_ans_id, wrong_id, wrong_detail, get_live, work_submit, cp_comment, update_testsubmit, test_report, end_report1, end_report2, end_report3, end_report4, get_free, user_number, getpushlist, testques_info, getplaypushlist, avatar_update, video_end, video_start, test_start, test_end,judge_share,grade_course4,course_info4,course_cata3,hot_list4,group_preorder3,order_all3,group_del3,group_detail3,group_share3,all_group3,banner3,v4_viplist,v4_vipPreorder,v4_myVip,judge_share4,cheek_code, teacherGetStudentsList, getReocrdTagList, submitReocrd, getStudentRecordListByDay, getPeriodRecordStatusList, getStudentCourseHourInfo, getClearCourseHourList, recordUploadFile, getStudentNewRecord, getRecordUploadPath_h5, haveRelationWithStudent,exchange_code,addImg,parentGetChildsList,dummy,group_del4, refreshUserInfo, get7v1Intro_h5,v5_getTeacherList,v5_getTeacherIntro, getAdWindow,my_about,info_1Vn,check_1Vn,exchange_1Vn,couponShow,couponList,couponTea,subMsg, loginOrGetRegisterPassword , registerWithPassword , essayDetail,coursePushList,vipRight,cardInfo,allVipCourse,allVipCoupon,getVipList,my_course_all,getVipInfo,course_cata}
+module.exports = { login, getclassroom, add_adress, getdefault, setinfo, getlist, discipline, gettoplist, order_all, wrong, my_course_all4, test_ques1, test_ques2, grade_course1, grade_course2, course_info1, course_info2, grade_update, course_cata1, handout, getvideo, getvideo_info, preorder, order_detail, order_wait, order_ed, order_close, test_id, setmark, test_explain, ques_detail, ques_info, cp_ans_submit, update_cpsubmit, cp_report, cp_analysis, cp_ans_id, wrong_id, wrong_detail, get_live, work_submit, cp_comment, update_testsubmit, test_report, end_report1, end_report2, end_report3, end_report4, get_free, user_number, getpushlist, testques_info, getplaypushlist, avatar_update, video_end, video_start, test_start, test_end,judge_share,grade_course4,course_info4,course_cata3,hot_list4,group_preorder3,order_all3,group_del3,group_detail3,group_share3,all_group3,banner3,v4_viplist,v4_vipPreorder,v4_myVip,judge_share4,cheek_code, teacherGetStudentsList, getReocrdTagList, submitReocrd, getStudentRecordListByDay, getPeriodRecordStatusList, getStudentCourseHourInfo, getClearCourseHourList, recordUploadFile, getStudentNewRecord, getRecordUploadPath_h5, haveRelationWithStudent,exchange_code,addImg,parentGetChildsList,dummy,group_del4, refreshUserInfo, get7v1Intro_h5,v5_getTeacherList,v5_getTeacherIntro, getAdWindow,my_about,info_1Vn,check_1Vn,exchange_1Vn,couponShow,couponList,couponTea,subMsg, loginOrGetRegisterPassword , registerWithPassword , essayDetail,coursePushList,vipRight,cardInfo,allVipCourse,allVipCoupon,getVipList,my_course_all,getVipInfo,course_cata,rightBagInfo,clickSign,succeedSign}
 
 // v4_courseViplist,
 
