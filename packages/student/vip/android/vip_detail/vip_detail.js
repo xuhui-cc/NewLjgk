@@ -152,6 +152,7 @@ Page({
     app.ols.exchange_code(params).then(d => {
       
       if (d.data.code == 0) {
+        that.coursePage = 1
         that.allVipCourse()   //获取全部关联课程
         that.allVipCoupon()    //获取关联会员卡
         that.viplist()  //获取会员卡信息
@@ -172,6 +173,7 @@ Page({
           exchange_page:false,
           code:'',
         })
+        that.coursePage = 1
         that.viplist()  //获取会员卡信息
         that.allVipCourse()   //获取全部关联课程
         that.allVipCoupon()    //获取关联会员卡
@@ -379,6 +381,10 @@ Page({
   onShow: function () {
     let that = this
     that.viplist()  //获取会员卡信息
+    that.coursePage = 1
+    // that.setData({
+    //   total:''
+    // })
     that.allVipCourse()  //获取会员卡课程
     that.allVipCoupon()   //获取展示优惠券
   },
@@ -486,7 +492,7 @@ Page({
   allVipCourse:function(){
     let that = this
     if(that.data.login){
-      if(!that.data.total || (that.data.courseList.length < that.data.total)){
+      
         var params = {
           "token": wx.getStorageSync("token"),
           "num":that.pageNum,
@@ -494,9 +500,12 @@ Page({
         }
         app.ols.allVipCourse(params).then(d => {
           if (d.data.code == 0) {
+            that.setData({
+              total:d.data.data.total,
+            })
+            if(!that.data.total || (that.data.courseList.length < that.data.total)){
             if(that.coursePage == 1){
               that.setData({
-                total:d.data.data.total,
                 courseList:d.data.data.lists
               })
             }else{
@@ -507,11 +516,12 @@ Page({
             }
             
           } 
+        }
           else{
             
           }
         })
-      }
+      
       
     }
     

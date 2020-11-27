@@ -67,9 +67,21 @@ Page({
     })
     // that.hot()  //热门课程
     if(that.data.current_subject == 1){
+      that.vipCoursePage = 1
+      that.setData({
+        vipCourseList:'',
+        total:''
+      })
+  //     subjectCoursePage:1,
+  // vipCoursePage:1,
       that.v4_viplist()   //获取vip
       that.allVipCourse()   //获取vip课程
     }else if(that.data.current_subject > 1){
+      that.subjectCoursePage = 1
+      that.setData({
+        course:'',
+        courseTotal:''
+      })
       that.getcourse()     //获取课程
     }
     if (!this.toSharePage) {
@@ -756,6 +768,7 @@ Page({
         current_special:-1,
         special:''
       })
+      that.vipCoursePage = 1
       console.log("vip模块")
       that.v4_viplist()  //获取vip
       that.allVipCourse()   //获取vip课程
@@ -766,6 +779,7 @@ Page({
         did: that.data.subject[cur].id,
         courseTotal:''
       })
+      that.subjectCoursePage = 1
       console.log("普通科目切换")
       that.getcourse()     //获取课程
     }
