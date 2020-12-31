@@ -18,10 +18,10 @@ Page({
     wx.setStorageSync('gid', 1)
       that.setData({
         login:wx.getStorageSync('login'),
-        // id:options.id,
-        // ewm:options.ewm,
-        id:'90',
-        ewm:'1'
+        id:options.id,
+        ewm:options.ewm,
+        // id:'90',
+        // ewm:'1'
       })
     
     

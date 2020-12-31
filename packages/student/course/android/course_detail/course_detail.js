@@ -17,16 +17,8 @@ Page({
     btn_buy:app.globalData.btn_buy,
     coupon_use:false,
     showCanvas:false,
-    scrollH: 0,
-    imgWidth: 0,
-    loadingCount: 0,
-    images: [],
-    col1: [],
-    col2: [],
-    scrollTop: null,
+    
   },
-
-  // openSetting() {  wx.openSetting()},
 
   /**
    * 生命周期函数--监听页面加载
@@ -36,8 +28,6 @@ Page({
     that.setData({
       kid: options.kid
     })
-    // var openid = app.loginTool.getOprnid()
-    // console.log(openid,'openid')
     if (options.isshare == 1) {
       wx.setStorageSync("gid", options.gid)
       that.setData({
@@ -45,29 +35,13 @@ Page({
         gid: options.gid,
         login: wx.getStorageSync("login")
       })
-      // wx.setStorageSync("gid", options.gid)
-      console.log("分享打开", that.data.isshare, that.data.gid, that.data.gid)
+      console.log("分享打开")
 
     } else {
       that.judge_login()    //登陆判断
       console.log("非分享打开")
     }
-
-    
     that.course_detail()  //获取课程详情
-    wx.getSystemInfo({
-      success: (res) => {
-          let ww = res.windowWidth;
-          let wh = res.windowHeight;
-          let imgWidth = ww * 0.48;
-          let scrollH = wh;
-
-          this.setData({
-              scrollH: scrollH,
-              imgWidth: imgWidth
-          });
-      }
-  })
   },
 
   //登录判断
@@ -525,16 +499,7 @@ Page({
    */
   onUnload: function () {
     let that = this
-    col1H = 0;
-    col2H = 0;
-    that.setData({
-      scrollH: 0,
-      imgWidth: 0,
-      loadingCount: 0,
-      images: [],
-      col1: [],
-      col2: [],
-    })
+    
   },
 
   /**
@@ -704,7 +669,7 @@ Page({
   onShareAppMessage: function () {
     let that = this;
     let paramsStr = 'isshare=1&gid=' + that.data.gid + '&kid=' + that.data.kid
-    return app.shareTool.getShareReturnInfo('0,1', 'course_detail', paramsStr, this.shareImagePath ? this.shareImagePath : '')
+    return app.shareTool.getShareReturnInfo('0,1', 'course_detail', paramsStr, this.shareImagePath ? this.shareImagePath : '', that.data.course_info.title)
   },
 
 

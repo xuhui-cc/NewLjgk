@@ -225,8 +225,6 @@
   <!-- 登录蒙层 -->
   <!-- <view class="mask1" wx:if="{{isshare == 1 && login == false}}"></view>
   <view class="login_layout" wx:if="{{isshare == 1 && login == false}}">
-  
-    
     <image class="unlogin" src="../../images/unlogin.png" style="margin-top:75rpx;"></image>
     <view class="login_tip">您当前尚未登录! </view>
     <view class="login_tip">请点击下方按钮登录</view>
@@ -256,7 +254,7 @@
   <image class="mask_closeImg" src="/images/other/exchange_close.png" bindtap="signBtn" wx:if="{{signBtn}}"></image>
 
   <!--  -->
-  
+  <image class="backTopTop_image" src="./resource/backToTop.png" bindtap="backToTop" wx:if="{{top}}"></image>
 
 <!-- container -->
 </view>

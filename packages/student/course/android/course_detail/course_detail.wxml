@@ -5,7 +5,6 @@
   <view class="flex">
     <view class="head">{{course_info.title}}</view>
     <button class="share_btn"  open-type="share"></button>
-    <!-- <button open-type="share"></button> -->
     <image class="share" src="/images/other/share.png"></image>
   </view>
 
@@ -26,7 +25,6 @@
 
 
   <view wx:if="{{currentData == 0}}" class="course_intro">
-    <!-- <image class="course_intro_img" src="../../images/intro.png" mode="widthFix"></image> -->
     <rich-text nodes="{{course_info.content}}"></rich-text>
   </view>
 
@@ -195,8 +193,8 @@
 
   <button class="login_read_sign"  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" wx:if="{{!login && course_info.live == 1 && course_info.apply == 0}}"></button>
   <view class="sign" bindtap="toSubMsg" wx:if="{{course_info.live == 1 && course_info.apply == 0 }}">立即报名</view>
-  <!-- <button bindtap="openSetting" class="hhh">打开设置页</button>   -->
+  
 <!-- container -->
 </view>
 <canvas canvas-id="shareCanvas" style="width:375px; height:320px;top:500rpx;" wx:if="{{showCanvas}}"></canvas>
-<!-- <image class="position: fixed;z-index:1000" src="{{shareImagePath}}" wx:if="{{showCanvas}}"></image> -->
+

@@ -8,14 +8,15 @@ Page({
   subjectCoursePage:1,
   vipCoursePage:1,
   pageNum:10,
+  vipTotal:0,  // 会员权益课程总数
+  courseTotal:0,   //普通科目下课程总数
 
   data: {
-    // subject:[ {'id':-1, 'title': '推荐'},{'id':-2, 'title': 'VIP'}],
-    // subject:[ {'id':-1, 'title': '推荐'}],
     current_special:-1,
     current_subject: 0,
     btn_buy:app.globalData.btn_buy,
-    did:-1,
+    // did:-1,
+
     // 广告弹窗读对象
     adWindowModel: null,
   },
@@ -47,43 +48,47 @@ Page({
   
   onShow: function () {
     let that = this
+    that.vipCoursePage = 1
+    that.subjectCoursePage = 1
+    that.setData({
+      current_special:-1,
+    })
+
     that.judge_login()    //登陆判断
     that.getgrade()    //获取年级 
     that.getsubject()   //获取学科
     that.get_banner3()  //轮播图
     that.couponShow()    //优惠券显示状态
-    that.coursePushList()   //后台推荐课程
-    if(that.data.grade){
-      for (var i = -0; i < that.data.grade.length; i++) {
-        if (that.data.gid == that.data.grade[i].id) {
-          that.setData({
-            grade_index: i
-          })
-        }
-      }
-    }
-    that.setData({
-      current_special:-1,
-    })
+    // that.coursePushList()   //后台推荐课程
+    // if(that.data.grade){
+    //   for (var i = 0; i < that.data.grade.length; i++) {
+    //     if (that.data.gid == that.data.grade[i].id) {
+    //       that.setData({
+    //         grade_index: i
+    //       })
+    //     }
+    //   }
+    // }
+    
     // that.hot()  //热门课程
-    if(that.data.current_subject == 1){
-      that.vipCoursePage = 1
-      that.setData({
-        vipCourseList:'',
-        total:''
-      })
-  //     subjectCoursePage:1,
-  // vipCoursePage:1,
-      that.v4_viplist()   //获取vip
-      that.allVipCourse()   //获取vip课程
-    }else if(that.data.current_subject > 1){
-      that.subjectCoursePage = 1
-      that.setData({
-        course:'',
-        courseTotal:''
-      })
-      that.getcourse()     //获取课程
-    }
+  //   if(that.data.current_subject == 1){
+      
+  //     that.setData({
+  //       vipCourseList:'',
+  //       total:''
+  //     })
+  // //     subjectCoursePage:1,
+  // // vipCoursePage:1,
+  //     that.v4_viplist()   //获取vip
+  //     that.allVipCourse()   //获取vip课程
+  //   }else if(that.data.current_subject > 1){
+      
+  //     that.setData({
+  //       course:'',
+  //       courseTotal:''
+  //     })
+  //     that.getcourse()     //获取课程
+  //   }
     if (!this.toSharePage) {
       this.toSharePage = false
       this.getAd()
@@ -111,27 +116,19 @@ Page({
     let that = this 
     console.log("触底")
     if(that.data.current_subject == 1){
-      if(that.data.vipCourseList.length < that.data.total){
+      if(that.data.vipCourseList.length < that.vipTotal){
         that.vipCoursePage += 1
         that.allVipCourse()
       }
       else{
-        // wx.showToast({
-        //   title: '没有更多咯',
-        // })
       }
     }else if(that.data.current_subject > 1){
-      if(that.data.course.length < that.data.courseTotal){
+      if(that.data.course.length < that.courseTotal){
         that.subjectCoursePage += 1
       that.getcourse()
       }
       else{
-        // wx.showToast({
-        //   title: '没有更多咯',
-        // })
       }
-      
-      
     }
 
   },
@@ -156,7 +153,7 @@ Page({
       "gid": that.data.gid
     }
     app.ols.discipline(params).then(d => {
-      console.log(d)
+      // console.log(d)
       if (d.data.code == 0) {
         var subject=[ {'id':-1, 'title': '推荐'},{'id':-2, 'title': 'VIP'}]
         for (let i in d.data.data) {
@@ -165,15 +162,22 @@ Page({
         that.setData({
           subject: subject
         })
-        if(that.data.current_subject > -1){
-          that.setData({
-            did: that.data.subject[that.data.current_subject].id
-          })
-          if (that.data.current_special != -1) {
-            that.special_course()  //获取专题课程
+        if(that.data.current_subject > 1){
+          if(that.data.current_subject < subject.length){
+            that.courseTotal = 0
+            that.getspecial()  //获取专题
+            that.getcourse()     //获取课程
           }else{
-            that.getcourse()    //获取课程
+            that.setData({
+              current_subject:0,
+            })
           }
+        }else if(that.data.current_subject == 1){
+          that.vipTotal = 0
+          that.v4_viplist()   //获取vip
+          that.allVipCourse()
+        }else{
+          that.coursePushList()   //后台推荐课程
         }
       } else {
         that.setData({
@@ -197,8 +201,8 @@ Page({
         "gid": that.data.gid,
         "did": that.data.did,
         "cid": that.data.special[that.data.current_special].id,
-        "num": 30,
-        "page": 1
+        "num": that.pageNum,
+        "page":that.subjectCoursePage
       }
       app.ols.grade_course4(params).then(d => {
       // app.ols.grade_course2(params).then(d => {
@@ -341,24 +345,18 @@ Page({
             clearInterval(timer);   
             wx.setStorageSync('gid', that.data.grade[xb].id)
             that.getsubject()   //获取科目
-            // that.hot()  //获取热门
             that.coursePushList() //后台推荐课
             that.setData({
               grade_select: false
             })
             console.log("更新接口存班级")
-          } else {
-            // that.getsubject()   //获取科目
-            // that.hot()  //获取热门
-          }
+          } 
         })
       }else{
         clearInterval(timer);   
         wx.setStorageSync('gid', that.data.grade[xb].id)
         that.getsubject()   //获取科目
-        // that.hot()  //获取热门
         that.coursePushList() //后台推荐课
-  
         that.setData({
           grade_select: false
         })
@@ -382,12 +380,12 @@ Page({
       "num": that.pageNum,
       "page": that.subjectCoursePage
     }
-    if(!that.data.courseTotal || (that.data.course.length < that.data.courseTotal))
+    if(!that.courseTotal || (that.data.course.length < that.courseTotal))
     app.ols.grade_course4(params).then(d => {
       if (d.data.code == 0) {
         if(that.subjectCoursePage == 1){
+          that.courseTotal = d.data.data.total
           that.setData({
-            courseTotal:d.data.data.total,
             course: d.data.data.lists
           })
         }else{
@@ -396,9 +394,6 @@ Page({
             course:coursefinalList
           })
         }
-        // that.setData({
-        //   course: d.data.data
-        // })
       } else {
         that.setData({
           course: ''
@@ -544,22 +539,23 @@ Page({
           if (d.data.code == 0 || d.data.code == 4) {
             if(that.data.current_subject == 0){
               that.coursePushList()   //后台推荐课程
-              // that.hot()  //热门课程
             }else if(that.data.current_subject == 1){
               this.vipCoursePage=1,
-              that.setData({
-                courseTotal:'',
-                vipCourseList:''
-              })
+              this.vipTotal = 0
+              // that.setData({
+              //   // courseTotal:'',
+              //   vipCourseList:''
+              // })
               that.v4_viplist()   //获取vip
               that.allVipCourse()   //获取vip课程
             }else{
               
-              that.setData({
-                courseTotal:'',
-                course:''
-              })
+              // that.setData({
+              //   courseTotal:'',
+              //   course:''
+              // })
               that.subjectCoursePage = 1
+              this.courseTotal = 0
               that.getcourse()     //获取课程
             }
           }
@@ -593,7 +589,7 @@ Page({
   //获取会员卡课程
   allVipCourse:function(){
     let that = this
-    if(!that.data.total || (that.data.vipCourseList.length < that.data.total)){
+    if(!that.vipTotal || (that.data.vipCourseList.length < that.vipTotal)){
       var params = {
         "token": wx.getStorageSync("token"),
         "num":that.pageNum,
@@ -602,8 +598,8 @@ Page({
       app.ols.allVipCourse(params).then(d => {
         if (d.data.code == 0) {
           if(that.vipCoursePage == 1){
+            that.vipTotal = d.data.data.total,
             that.setData({
-              total:d.data.data.total,
               vipCourseList:d.data.data.lists
             })
           }else{
@@ -624,12 +620,24 @@ Page({
 
   /*------------------------------------------------------方法---------------------------------------------- */
 
-    //一键置顶
-    toTop:function(){
-      wx.pageScrollTo({
-        scrollTop: 0
-      })
-    },
+  //一键置顶
+  toTop:function(){
+    wx.pageScrollTo({
+      scrollTop: 0
+    })
+  },
+
+    
+  onPageScroll: function (e) {
+    let that = this
+    var top = 0
+      if(e.scrollTop > 350){
+      top = 1
+    }
+    that.setData({
+      top:top
+    })
+  },
 
   //判断当前滚动超过一屏时，设置tab标题滚动条。 
   checkCor: function () {
@@ -656,7 +664,13 @@ Page({
   to_course_detail:function(e){
     let that = this
     var xb = e.currentTarget.dataset.xb
-    var course = that.data.course[xb]
+    let type = e.currentTarget.dataset.type
+    let course 
+    if(type == 1){
+      course = that.data.course[xb]
+    }else if(type == 2){
+      course = that.data.vipCourseList[xb]
+    }
     if(course.type == 0){
       wx.navigateTo({
         url: app.getPagePath('course_detail') + '?kid=' + course.kid,
@@ -672,24 +686,24 @@ Page({
     }
   },
 
-  vip_course_detail:function(e){
-    let that = this
-    var xb = e.currentTarget.dataset.xb
-    var course = that.data.vipCourseList[xb]
-    if(course.type == 0){
-        wx.navigateTo({
-          url: app.getPagePath('course_detail') + '?kid=' + course.kid,
-        })
-    }else if(course.type == 1){
-      wx.navigateTo({
-        url: app.getPagePath('groupBuy') + '?kid=' + course.kid,
-      })
-    }else if(course.type == 2){
-      wx.navigateTo({
-        url: app.getPagePath('course_seckill') + '?kid=' + course.kid,
-      })
-    }
-  },
+  // vip_course_detail:function(e){
+  //   let that = this
+  //   var xb = e.currentTarget.dataset.xb
+  //   var course = that.data.vipCourseList[xb]
+  //   if(course.type == 0){
+  //       wx.navigateTo({
+  //         url: app.getPagePath('course_detail') + '?kid=' + course.kid,
+  //       })
+  //   }else if(course.type == 1){
+  //     wx.navigateTo({
+  //       url: app.getPagePath('groupBuy') + '?kid=' + course.kid,
+  //     })
+  //   }else if(course.type == 2){
+  //     wx.navigateTo({
+  //       url: app.getPagePath('course_seckill') + '?kid=' + course.kid,
+  //     })
+  //   }
+  // },
 
   //热门课程下课程跳转（暂弃用）
   to_course_hot:function(e){
@@ -733,6 +747,7 @@ Page({
   swichNav_special: function (e) {
     var that = this
     that.toTop()   //切换置顶
+    that.subjectCoursePage = 1
     var cur = e.target.dataset.current;
     if (cur == that.data.current_special){
       that.setData({
@@ -755,32 +770,23 @@ Page({
     that.toTop()   //切换置顶
     that.vipCoursePage = 1
     that.subjectCoursePage = 1
+    that.vipTotal = 0
+    that.courseTotal = 0
     var cur = e.target.dataset.current;
-    if(cur == 0){
+    that.setData({
+      current_subject: cur,
+      current_special:-1,
+    })
+    if(cur == 1){
       that.setData({
-        current_subject: cur,
-        current_special:-1,
-      })
-      console.log("推荐模块")
-    }else if(cur == 1){
-      that.setData({
-        current_subject: cur,
-        current_special:-1,
         special:''
       })
-      that.vipCoursePage = 1
-      console.log("vip模块")
       that.v4_viplist()  //获取vip
       that.allVipCourse()   //获取vip课程
     }else{
       that.setData({
-        current_subject: cur,
-        current_special:-1,
         did: that.data.subject[cur].id,
-        courseTotal:''
       })
-      that.subjectCoursePage = 1
-      console.log("普通科目切换")
       that.getcourse()     //获取课程
     }
   },

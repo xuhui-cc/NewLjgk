@@ -374,7 +374,7 @@
       <view class="vip_layout" wx:if="{{vip != '' && vip.datas.valid_days != '已过期'}}"> 
         <view wx:for="{{vipCourseList}}" wx:key="hot2_index">
           <view class="hot_course">
-            <view class="flex" bindtap="vip_course_detail" data-xb="{{index}}">
+            <view class="flex" bindtap="to_course_detail" data-xb="{{index}}" data-type="{{2}}">
               <image class="vip_fm" src="{{item.face}}"></image>
               <image class="vip_laber" wx:if="{{item.buy == 0 || item.buy == 2 || item.buy > 4}}" src="/images/other/vip_laber2.png"></image>
               <image class="laber" wx:if="{{item.buy == 1 || item.buy == 3 || item.buy == 4 }}" src="./resource/isbuy.png"></image>
@@ -461,7 +461,7 @@
   <view style="margin-bottom:100rpx;margin-top:300rpx;" wx:if="{{current_subject > 1}}">
     <view wx:for="{{course}}" wx:key="index">
 
-      <view class="course_layout" bindtap="to_course_detail" data-xb="{{index}}" >
+      <view class="course_layout" bindtap="to_course_detail" data-xb="{{index}}" data-type="{{1}}">
         <image class="vip_laber" style="margin-top:30rpx" wx:if="{{(item.buy == 0 || item.buy == 2 || item.buy > 4) && item.vip == 1}}" src="/images/other/vip_laber2.png"></image>
         <image class="laber"style="margin-top:10rpx" wx:if="{{item.buy == 1 || item.is_buy == 3 || item.is_buy == 4}}" src="./resource/isbuy.png"></image>
         <image class="hot_group"   style="{{item.vip == 1?'margin-left:82rpx;margin-top:20rpx':'margin-top:20rpx'}}" wx:if="{{(item.buy == 0 || item.buy == 6) && item.type == 1}}" src="./resource/hot_group.png"></image>
@@ -582,6 +582,8 @@ wx:if="{{signBtn}}" -->
     <image class="exchange_close" style="margin-top:50rpx" src="/images/other/exchange_close.png" bindtap="exchange_page"></image>
   </view>
   <!-- vip模块立即开通 -->
+
+  <image class="backTopTop_image" src="./resource/backToTop.png" bindtap="toTop" wx:if="{{top}}"></image>
 
 </view>
 <adWindow wx:if="{{adWindowModel}}" imgSrc="{{adWindowModel.picurl}}" type="{{adWindowModel.type}}" attachid="{{adWindowModel.attachid}}"></adWindow>

@@ -1,5 +1,5 @@
-// const URI_base = "http://gkcs.lingjun.net/" //测试域名
-const URI_base = "https://gk.lingjun.net/" // 正式域名
+const URI_base = "http://gkcs.lingjun.net/" //测试域名
+// const URI_base = "https://gk.lingjun.net/" // 正式域名
 // const URI_base = "https://zy.lingjun.net/" // 正式域名
 
 const URI = URI_base + 'api.php/'    //接口地址
@@ -46,11 +46,6 @@ function v4_viplist(params) {
   return fetch.olsfetchpost(URI, 'v1/vipcard/getlist', params,"会员卡列表")
 }
 
-
-// //获取课程目录v4(会员)
-// function course_cata4(params) {
-//   return fetch.olsfetchpost(URI, 'v1/lesson/getoption', params,"课程详情目录")
-// }
 // 我的课程
 function my_course_all4(params) {
   return fetch.olsfetchpost(URI, 'v1/order/getLessonlist', params,"我的课程")
@@ -121,10 +116,6 @@ function coursePushList(params) {
 function v4_myVip(params) {
   return fetch.olsfetchpost(URI, 'v1/vipcard/getvipcard', params,"我的vip")
 }
-//课程页会员列表
-// function v4_courseViplist(params) {
-//   return fetch.olsfetchpost(URI, 'v1/vipcard/getviplist', params,"课程页会员卡列表")
-// }
 function cardInfo(params) {
   return fetch.olsfetchpost(URI, 'v2/vipcard/getviplist', params,"课程页会员卡列表")
 }
@@ -241,7 +232,7 @@ function succeedSign(params) {
 
 module.exports = { login, getclassroom, add_adress, getdefault, setinfo, getlist, discipline, gettoplist, order_all, wrong, my_course_all4, test_ques1, test_ques2, grade_course1, grade_course2, course_info1, course_info2, grade_update, course_cata1, handout, getvideo, getvideo_info, preorder, order_detail, order_wait, order_ed, order_close, test_id, setmark, test_explain, ques_detail, ques_info, cp_ans_submit, update_cpsubmit, cp_report, cp_analysis, cp_ans_id, wrong_id, wrong_detail, get_live, work_submit, cp_comment, update_testsubmit, test_report, end_report1, end_report2, end_report3, end_report4, get_free, user_number, getpushlist, testques_info, getplaypushlist, avatar_update, video_end, video_start, test_start, test_end,judge_share,grade_course4,course_info4,course_cata3,hot_list4,group_preorder3,order_all3,group_del3,group_detail3,group_share3,all_group3,banner3,v4_viplist,v4_vipPreorder,v4_myVip,judge_share4,cheek_code, teacherGetStudentsList, getReocrdTagList, submitReocrd, getStudentRecordListByDay, getPeriodRecordStatusList, getStudentCourseHourInfo, getClearCourseHourList, recordUploadFile, getStudentNewRecord, getRecordUploadPath_h5, haveRelationWithStudent,exchange_code,addImg,parentGetChildsList,dummy,group_del4, refreshUserInfo, get7v1Intro_h5,v5_getTeacherList,v5_getTeacherIntro, getAdWindow,my_about,info_1Vn,check_1Vn,exchange_1Vn,couponShow,couponList,couponTea,subMsg, loginOrGetRegisterPassword , registerWithPassword , essayDetail,coursePushList,vipRight,cardInfo,allVipCourse,allVipCoupon,getVipList,my_course_all,getVipInfo,course_cata,rightBagInfo,clickSign,succeedSign}
 
-// v4_courseViplist,
+
 
 //分享判断
 function judge_share(params) {

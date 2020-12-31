@@ -1,6 +1,14 @@
 page{
   background:rgba(245,245,245,1);
 }
+.backTopTop_image {
+  position: fixed;
+  bottom: 260rpx;
+  right: 33rpx;
+  width: 83rpx;
+  height: 83rpx;
+  z-index: 500;
+}
 .login_read_vip{
   position: absolute;
   margin: 34rpx 3rpx;

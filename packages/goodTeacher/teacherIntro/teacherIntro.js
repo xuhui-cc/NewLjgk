@@ -1,7 +1,7 @@
 // pages/teacherIntro/teacherIntro.js
 const app = getApp()
-let col1H = 0;
-let col2H = 0;
+// let col1H = 0;
+// let col2H = 0;
 Page({
   
   // 分享图片的路径
@@ -42,21 +42,21 @@ Page({
     }
     
     that.getTeacherIntro()   //获取名师详情
-    wx.getSystemInfo({
-      success: (res) => {
-          let ww = res.windowWidth;
-          let wh = res.windowHeight;
-          let imgWidth = ww * 0.48;
-          let scrollH = wh;
+    // wx.getSystemInfo({
+    //   success: (res) => {
+    //       let ww = res.windowWidth;
+    //       let wh = res.windowHeight;
+    //       let imgWidth = ww * 0.48;
+    //       let scrollH = wh;
 
-          this.setData({
-              scrollH: scrollH,
-              imgWidth: imgWidth
-          });
+    //       this.setData({
+    //           scrollH: scrollH,
+    //           imgWidth: imgWidth
+    //       });
 
           
-      }
-  })
+      // }
+  // })
   
   },
 
@@ -102,97 +102,97 @@ Page({
       })
     },
 
-  onImageLoad: function (e) {
+//   onImageLoad: function (e) {
     
-    // console.log("分组图")
-    // console.log(this.data.images)
-    let imageId = e.currentTarget.dataset.id;
-    let oImgW = e.detail.width;         //图片原始宽度
-    let oImgH = e.detail.height;        //图片原始高度
-    let imgWidth = this.data.imgWidth;  //图片设置的宽度
-    let imgHeight =0;      //自适应高度
-    if(oImgW>oImgH){
-      imgHeight = 129
-    }else{
-      imgHeight = 282
-    }
-    // let scale = imgWidth / oImgW;        //比例计算
-    // let imgHeight = oImgH * scale;      //自适应高度
+//     // console.log("分组图")
+//     // console.log(this.data.images)
+//     let imageId = e.currentTarget.dataset.id;
+//     let oImgW = e.detail.width;         //图片原始宽度
+//     let oImgH = e.detail.height;        //图片原始高度
+//     let imgWidth = this.data.imgWidth;  //图片设置的宽度
+//     let imgHeight =0;      //自适应高度
+//     if(oImgW>oImgH){
+//       imgHeight = 129
+//     }else{
+//       imgHeight = 282
+//     }
+//     // let scale = imgWidth / oImgW;        //比例计算
+//     // let imgHeight = oImgH * scale;      //自适应高度
 
-    let images = this.data.video1;
-    let imageObj = null;
-    console.log(imageId,"imageId")
+//     let images = this.data.video1;
+//     let imageObj = null;
+//     console.log(imageId,"imageId")
 
-    for (let i = 0; i < images.length; i++) {
-        let img = images[i];
-        if (i == imageId) {
-            imageObj = img;
-            break;
-        }
-    }
+//     for (let i = 0; i < images.length; i++) {
+//         let img = images[i];
+//         if (i == imageId) {
+//             imageObj = img;
+//             break;
+//         }
+//     }
 
-    imageObj.height = imgHeight;
+//     imageObj.height = imgHeight;
 
-    let loadingCount = this.data.loadingCount - 1;
-    let col1 = this.data.col1;
-    let col2 = this.data.col2;
+//     let loadingCount = this.data.loadingCount - 1;
+//     let col1 = this.data.col1;
+//     let col2 = this.data.col2;
 
-    if(col1H == 0){
-      col1H += imgHeight;
-      col1.push(imageObj);
-      console.log("col1H==0")
-    }else{
-      if(col2H == 0){
-        col2H += imgHeight;
-        col2.push(imageObj);
-        console.log("col2H==0")
-      }else{
-        if (col1H <= col2H) {
-          col1H += imgHeight;
-          col1.push(imageObj);
-      } else {
-          col2H += imgHeight;
-          col2.push(imageObj);
-      }
-      }
-    }
-    // if (col1H <= col2H) {
-    //     col1H += imgHeight;
-    //     col1.push(imageObj);
-    // } else {
-    //     col2H += imgHeight;
-    //     col2.push(imageObj);
-    // }
+//     if(col1H == 0){
+//       col1H += imgHeight;
+//       col1.push(imageObj);
+//       console.log("col1H==0")
+//     }else{
+//       if(col2H == 0){
+//         col2H += imgHeight;
+//         col2.push(imageObj);
+//         console.log("col2H==0")
+//       }else{
+//         if (col1H <= col2H) {
+//           col1H += imgHeight;
+//           col1.push(imageObj);
+//       } else {
+//           col2H += imgHeight;
+//           col2.push(imageObj);
+//       }
+//       }
+//     }
+//     // if (col1H <= col2H) {
+//     //     col1H += imgHeight;
+//     //     col1.push(imageObj);
+//     // } else {
+//     //     col2H += imgHeight;
+//     //     col2.push(imageObj);
+//     // }
 
-    let data = {
-      loadingCount: loadingCount,
-      col1: col1,
-      col2: col2
-    };
+//     let data = {
+//       loadingCount: loadingCount,
+//       col1: col1,
+//       col2: col2
+//     };
 
-    if (!loadingCount) {
-        data.images = [];
-    }
+//     if (!loadingCount) {
+//         data.images = [];
+//     }
 
-    this.setData(data);
-},
+//     this.setData(data);
+// },
 
-loadImages: function () {
-  let that = this
+// loadImages: function () {
+//   let that = this
 
-  let images = that.data.video
+//   let images = that.data.video
 
-  // let baseId = "img-" + (+new Date());
+//   // let baseId = "img-" + (+new Date());
 
-  // for (let i = 0; i < images.length; i++) {
-  //   images[i].csid = baseId + "-" + i;
-  // }
+//   // for (let i = 0; i < images.length; i++) {
+//   //   images[i].csid = baseId + "-" + i;
+//   // }
 
-  this.setData({
-    loadingCount: images.length,
-    video1: images
-  });
-},
+//   this.setData({
+//     loadingCount: images.length,
+//     video1: images
+//   });
+// },
 
 
 
