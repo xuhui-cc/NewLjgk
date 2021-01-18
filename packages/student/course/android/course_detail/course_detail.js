@@ -1,7 +1,6 @@
 // pages/course_detail/course_detail.js
 const app = getApp()
-let col1H = 0;
-let col2H = 0;
+
 Page({
   // 打开的文件路径 在onShow中删除文件
   openFilePath: '',
@@ -32,13 +31,13 @@ Page({
       wx.setStorageSync("gid", options.gid)
       that.setData({
         isshare: options.isshare,
-        gid: options.gid,
-        login: wx.getStorageSync("login")
+        // gid: options.gid,
+        // login: wx.getStorageSync("login")
       })
-      console.log("分享打开")
+      // console.log("分享打开")
 
     } else {
-      that.judge_login()    //登陆判断
+      // that.judge_login()    //登陆判断
       console.log("非分享打开")
     }
     that.course_detail()  //获取课程详情
@@ -53,8 +52,8 @@ Page({
       gid: wx.getStorageSync("gid")
     })
     // console.log(that.data.testlogin, "that.data.testlogin")
-    console.log(that.data.login, "that.data.login")
-    console.log(that.data.gid, "that.data.gid")
+    console.log(that.data.login, "that.data.login",that.data.gid, "that.data.gid")
+    
   },
 
 
@@ -67,20 +66,24 @@ Page({
         "token": wx.getStorageSync("token"),
         "kid": that.data.kid
       }
-      console.log(params, "课程详情接口参数")
-      app.ols.course_info4(params).then(d => {
-        that.handle_data1(d)   //课程详情数据处理
-      })
     }else{
-      var params = {
-        "token": '0',
-        "kid": that.data.kid
+        var params = {
+          "token": '0',
+          "kid": that.data.kid
+        }
       }
-      console.log(params, "课程详情接口参数")
+      // console.log(params, "课程详情接口参数")
       app.ols.course_info4(params).then(d => {
         that.handle_data1(d)   //课程详情数据处理
       })
-    }
+    // }
+    // else{
+      
+    //   console.log(params, "课程详情接口参数")
+    //   app.ols.course_info4(params).then(d => {
+    //     that.handle_data1(d)   //课程详情数据处理
+    //   })
+    // }
     
 
   },
@@ -88,37 +91,37 @@ Page({
   //课程详情介绍数据处理
   handle_data1:function(d){
     let that = this
-    console.log(d, "课程详情接口数据")
+    // console.log(d, "课程详情接口数据")
     if (d.data.code == 0) {
-      console.log(d.data.data)
+      // console.log(d.data.data)
       that.dealAva(d.data.data.face)
       // wx.setStorageSync('face', d.data.data.face)
       d.data.data.content = d.data.data.content.replace(/<img/gi, '<img style="max-width:100%;height:auto;display:block"')
-      that.setData({
-        course_info: d.data.data
-      })
+      
       // var cs = "course_info.content"
       // that.setData({
       //   [cs]: that.data.course_info.content.replace(/<img/gi, '<img style="max-width:100%;height:auto;display:block"')
       // })
-      that.to_free()       //开通免费课
-      if (that.data.course_info.buy == 1 || (that.data.course_info.buy >= 3 && that.data.course_info.buy <= 5)) {
+      if(d.data.data.price == 0 && (d.data.data.buy < 1 || d.data.data.buy > 5 )){
+        that.to_free()       //开通免费课
+      }else if (d.data.data.buy == 1 || (d.data.data.buy >= 3 && d.data.data.buy <= 5)) {
         that.setData({
           currentData: 1
         })
         that.getcourse_cata()  //获取课程目录
       }
+      that.setData({
+        course_info: d.data.data
+      })
       
-    } else {
-      console.log("课程详情介绍接口==============" + d.data.msg)
-    }
+    } 
   },
 
   //看视频
   to_video:function(e){
     let that = this
     var xb = e.currentTarget.dataset.xb
-    console.log(xb)
+    // console.log(xb)
     var id = that.data.course_cata.lists[xb].id
     var kid = that.data.course_cata.lists[xb].kid
     var eid = that.data.course_cata.lists[xb].eid
@@ -150,7 +153,7 @@ Page({
     var eid = that.data.course_cata.lists[xb].eid
     var kid = that.data.course_cata.lists[xb].kid
     var oid = that.data.course_cata.lists[xb].id
-    console.log(eid)
+    // console.log(eid)
     wx.navigateTo({
       url: app.getPagePath('homework') + '?eid=' + eid + "&kid=" + kid + "&oid=" + oid,   //课后作业
     })
@@ -183,7 +186,6 @@ Page({
   //免费课领取
   to_free:function(e){
     let that = this
-    if(that.data.course_info.price == 0 && (that.data.course_info.buy < 1 || that.data.course_info.buy > 5 )){
       var params = {
         "token": wx.getStorageSync("token"),
         "kid": that.data.kid
@@ -196,13 +198,10 @@ Page({
           // that.setData({
           //   currentData:1
           // })
-          console.log("获取免费课程接口调取成功")
-        } else {
-          console.log("获取免费课程==============" + d.data.msg)
-        }
+          // console.log("获取免费课程接口调取成功")
+        } 
       })
-    }
-    
+    // }
   },
 
 
@@ -214,7 +213,7 @@ Page({
       click_file:true
     })
     var xb = e.currentTarget.dataset.xb
-    console.log(xb)
+    // console.log(xb)
     var id = that.data.course_cata.lists[xb].id
     if (that.data.course_cata.lists[xb].annex_num > 1){
       wx.navigateTo({
@@ -229,9 +228,9 @@ Page({
         "id": id
       }
       app.ols.handout(params).then(d => {
-        console.log(d)
+        // console.log(d)
         if (d.data.code == 0) {
-          console.log(d.data.data)
+          // console.log(d.data.data)
           that.setData({
             handout: d.data.data
           })
@@ -277,11 +276,10 @@ Page({
             }
           // }
 
-          if (that.data.handout[0].annex.indexOf(".png") != -1 || that.data.handout[0].annex.indexOf(".jpg") != -1) {
+          if (that.data.handout[0].annex.indexOf(".png") != -1 || that.data.handout[0].annex.indexOf(".jpg") != -1){
             that.previewImage()
-            console.log("图")
+            // console.log("图")
           } else {
-            
             wx.showLoading({
               title: '资料打开中...',
             })
@@ -291,8 +289,8 @@ Page({
               fileName: fileName
             })
             let customFilePath = wx.env.USER_DATA_PATH + "/" + that.data.fileName
-            console.log('得到自定义路径：')
-            console.log(customFilePath)
+            console.log('自定义路径：',customFilePath)
+            // console.log()
 
             wx.downloadFile({
               url: that.data.handout[0].annex, //仅为示例，并非真实的资源
@@ -302,8 +300,8 @@ Page({
 
                 console.log(res)
                 var filePath = res.filePath
-                console.log('返回自定义路径：')
-                console.log(filePath)
+                console.log('返回自定义路径：',filePath)
+                // console.log()
 
                 that.openFilePath = filePath
                 wx.openDocument({
@@ -357,10 +355,8 @@ Page({
 
           
           }
-          console.log("课程讲义接口调取成功")
-        } else {
-          console.log("课程讲义==============" + d.data.msg)
-        }
+          // console.log("课程讲义接口调取成功")
+        } 
       })
     }
     
@@ -478,10 +474,9 @@ Page({
     let that = this
     
     that.judge_login()    //登陆判断
-    if (that.data.currentData == 0){
-      that.course_detail()   //获取课程简介
-    } else if (that.data.currentData == 1){
-      that.course_detail()   //获取课程简介
+    that.course_detail()   //获取课程简介
+    if (that.data.currentData == 1){
+      // that.course_detail()   //获取课程简介
       that.getcourse_cata()   //课程目录接口
     }
     
@@ -540,6 +535,7 @@ Page({
       }
     })
   },
+  
   //课程权限提示
   course_authority:function(){
     let that = this

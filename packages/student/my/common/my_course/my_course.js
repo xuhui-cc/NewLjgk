@@ -16,7 +16,7 @@ Page({
    */
   onLoad: function (options) {
     let that = this
-    that.get_courselist()
+    // that.get_courselist()
   },
 
   //获取课程列表
@@ -28,7 +28,6 @@ Page({
       "page":that.coursePage
     }
     app.ols.my_course_all(params).then(d => {
-      console.log(d)
       if (d.data.code == 0) {
         if(that.coursePage == 1){
           that.setData({
@@ -59,40 +58,10 @@ Page({
   },
 
 
-  // //获取课程列表
-  // get_courselist:function(){
-  //   let that = this
-  //   var params = {
-  //     "token": wx.getStorageSync("token"),
-  //   }
-  //   app.ols.my_course_all4(params).then(d => {
-  //     console.log(d)
-  //     if (d.data.code == 0) {
-  //       that.setData({
-  //         course: d.data.data
-  //       })
-  //       for(var i=0;i<that.data.course.length;i++){
-  //       }
-  //     } else if (d.data.code == 5){
-  //       that.setData({
-  //         course: ''
-  //       })
-  //     }else{
-  //       console.log(d.data.code, "code", d.data.msg)
-  //       wx.showToast({
-  //         title: d.data.msg,
-  //         icon:"none",
-  //         duration:2000
-  //       })
-  //     }
-  //   })
-  // },
-
   //课程详情跳转
   to_course_detail: function (e) {
     let that = this
     var xb = e.currentTarget.dataset.xb
-    console.log(xb)
     wx.navigateTo({
       url: app.getPagePath('course_detail') + '?kid=' + that.data.courseList[xb].kid,
     })

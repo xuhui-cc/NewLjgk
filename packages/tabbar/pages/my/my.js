@@ -19,14 +19,14 @@ Page({
       wx.setStorageSync("gid", options.gid)
       that.setData({
         isshare: options.isshare,
-        gid: options.gid,
-        login: wx.getStorageSync("login")
+        // gid: options.gid,
+        // login: wx.getStorageSync("login")
       })
      
       console.log("分享打开", that.data.isshare, that.data.gid)
 
     } else {
-      that.judge_login()    //登陆判断
+      // that.judge_login()    //登陆判断
       
       console.log("非分享打开")
     }
@@ -35,16 +35,16 @@ Page({
 
   my_vip: function () {
     let that = this
-    if(that.data.login){
-      var params = {
-        "token": wx.getStorageSync("token"),
-      }
-    }else{
-      var params = {
-        // "token": wx.getStorageSync("token"),
-      }
+    // if(that.data.login){
+      
+    // }else{
+    //   var params = {
+    //     // "token": wx.getStorageSync("token"),
+    //   }
+    // }
+    var params = {
+      "token": wx.getStorageSync("token"),
     }
-    
     app.ols.cardInfo(params).then(d => {
       console.log(d)
       if (d.data.code == 0) {
@@ -120,8 +120,8 @@ Page({
       gid: wx.getStorageSync("gid")
     })
     // console.log(that.data.testlogin, "that.data.testlogin")
-    console.log(that.data.login, "that.data.login")
-    console.log(that.data.gid, "that.data.gid")
+    console.log(that.data.login, "that.data.login",that.data.gid, "that.data.gid")
+    // console.log()
     if(that.data.login){
       that.my_vip()
     }
@@ -166,16 +166,16 @@ Page({
   // 跳转我的课程
   gourlCourse: function () {
     let that = this
-    if(!that.data.login){
-      wx.showToast({
-        title: '请先登录',
-        icon:"none"
-      })
-    }else{
+    // if(!that.data.login){
+    //   wx.showToast({
+    //     title: '请先登录',
+    //     icon:"none"
+    //   })
+    // }else{
       wx.navigateTo({
         url: app.getPagePath('my_course'),
       })
-    }
+    // }
     
   },
   // 跳转我的错题本

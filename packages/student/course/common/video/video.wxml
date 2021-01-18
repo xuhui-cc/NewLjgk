@@ -36,20 +36,22 @@
       <view class="course_layout" data-xb="{{index}}" bindtap="to_course_detail">
         <view class="title">{{item.title}}</view>
         <view class="intro">{{item.intro}}</view>
-        <view class="flex" style="margin-left:40rpx;">
+        <view class="flex" style="margin-left:40rpx;" >
           <view class="flex"  wx:for="{{item.teacher}}" wx:key="index_tea" wx:for-item="tea">
-            <view>
+            <view >
               <image class="avatar" src="{{tea.avatar}}"></image>
               <view class="name">{{tea.nick}}</view>
             </view>
+          </view>
          
+          <view  style="{{item.teacher == ''?'margin-left:80rpx;':''}}">
+            <view class="buy_num">{{item.order_num}}人学习</view>
+            <view class="num_layout">
+              <view class="course_num">{{item.class_hour}}课时</view>
+            </view>
           </view>
 
-          <view class="buy_num">{{item.order_num}}人学习</view>
-          
-          <view class="num_layout">
-            <view class="course_num">{{item.class_hour}}课时</view>
-          </view>
+         
 
           <view class="course_price" hidden="{{btn_buy}}">
             <view style="margin-right:8rpx;margin-top:5rpx;">¥</view>

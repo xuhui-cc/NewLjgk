@@ -41,21 +41,21 @@
   </view>
 
   <view class="course-ul" hidden="true">
+    <view class="course-li" bindtap="gourlCourse">
+      <text class="course-li-title">我的课程</text>
+      <image  src="./resource/my_course.png"  class="course-li-img"  mode="aspectFit"></image>
+    </view>
+  
+    <view class="course-li" bindtap="gourlError">
+      <text class="course-li-title">错题本</text>
+      <image  src="./resource/my_error.png"  class="course-li-imgzhong" mode="aspectFit"></image>
+    </view>
       
-      <view class="course-li" bindtap="gourlCourse">
-          <text class="course-li-title">我的课程</text>
-          <image  src="./resource/my_course.png"  class="course-li-img"  mode="aspectFit"></image>
-      </view>
-      
-      <view class="course-li" bindtap="gourlError">
-          <text class="course-li-title">错题本</text>
-          <image  src="./resource/my_error.png"  class="course-li-imgzhong" mode="aspectFit"></image>
-      </view>
-      
-      <view class="course-li" bindtap="gourlOrder">
-           <text class="course-li-title">我的订单</text>
-          <image  src="./resource/my_order.png" class="course-li-img"  mode="aspectFit"></image>
-      </view>
+    <view class="course-li" bindtap="gourlOrder">
+      <text class="course-li-title">我的订单</text>
+      <image  src="./resource/my_order.png" class="course-li-img"  mode="aspectFit"></image>
+    </view>
+    
   </view>
   <!-- 列表 -->
   <view class="list">

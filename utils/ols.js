@@ -110,7 +110,10 @@ function essayDetail(params) {
 function coursePushList(params) {
   return fetch.olsfetchpost(URI, 'v1/coupon/getCodePushList', params,"后台推荐课程")
 }
-
+//获取免费课
+function get_free(params) {
+  return fetch.olsfetchpost(URI, 'wepay/freeorder', params,"开通免费课")
+}
 /*v2调整/新增接口 */
 //我的页面vip信息
 function v4_myVip(params) {
@@ -363,7 +366,7 @@ function course_cata3(params) {
 
 //获取课程讲义列表
 function handout(params) {
-  return fetch.olsfetchpost(URI, 'lesson/getannex', params)
+  return fetch.olsfetchpost(URI, 'lesson/getannex', params,"课程讲义列表")
 }
 
 
@@ -498,10 +501,7 @@ function end_report4(params) {
   return fetch.olsfetchpost(URI, 'v5/report/getstudyresult', params)
 }
 
-//获取免费课
-function get_free(params) {
-  return fetch.olsfetchpost(URI, 'wepay/freeorder', params,"开通免费课")
-}
+
 
 
 

@@ -14,7 +14,6 @@
     <view wx:if="{{!login}}" class="nick">请登录</view>
     <view class="flex" wx:if="{{login && vip ==''}}" >
       <open-data type="userNickName" class="nick"></open-data>
-      <!-- <view class="btn" bindtap="vip_buy" hidden="{{btn_buy}}">立即开通</view> -->
     </view>
     <view style="margin-top: 15rpx;" wx:if="{{vip}}">
       <open-data type="userNickName" class="nick"></open-data>

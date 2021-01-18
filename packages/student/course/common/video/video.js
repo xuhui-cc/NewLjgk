@@ -6,7 +6,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-   
     isload: 0,
     btn_buy:app.globalData.btn_buy
   },
@@ -61,7 +60,6 @@ Page({
   onShow: function () {
     let that = this
     if(wx.getStorageSync("token")){
-     
     that.getvideo_info()  //获取视频断点
     that.getCourse()  //获取视频页附加课程数据
     }
@@ -75,11 +73,11 @@ Page({
       "token": wx.getStorageSync("token"),
       "id": that.data.id
     }
-    console.log(params,"课程视频接口参数")
+    // console.log(params,"课程视频接口参数")
     app.ols.getvideo(params).then(d => {
-      console.log(d,"课程视频接口数据")
+      // console.log(d,"课程视频接口数据")
       if (d.data.code == 0) {
-        console.log(d.data.data)
+        // console.log(d.data.data)
         that.setData({
           getvideo: d.data.data
         })
@@ -157,7 +155,7 @@ Page({
       app.ols.handout(params).then(d => {
         console.log(d)
         if (d.data.code == 0) {
-          console.log(d.data.data)
+          // console.log(d.data.data)
           that.setData({
             handout: d.data.data
           })
@@ -189,7 +187,7 @@ Page({
           }
           that.openFile()  //打开单一讲义
 
-          console.log("课程讲义接口调取成功")
+          // console.log("课程讲义接口调取成功")
         } else {
           console.log("课程讲义==============" + d.data.msg)
         }
@@ -202,7 +200,7 @@ Page({
   to_course_detail: function (e) {
     let that = this
     var xb = e.currentTarget.dataset.xb
-    console.log(xb)
+    // console.log(xb)
     wx.navigateTo({
       url: app.getPagePath('course_detail') + '?kid=' + that.data.course.lists[xb].kid,
     })
@@ -228,11 +226,11 @@ Page({
       "duration": timeline,
       "percent": precent
     }
-    console.log(params,"视频结束状态更新参数")
+    // console.log(params,"视频结束状态更新参数")
     app.ols.video_end(params).then(d => {
-      console.log(d,"视频结束状态更新数据")
+      // console.log(d,"视频结束状态更新数据")
       if (d.data.code == 0) {
-        console.log("视频结束状态更新成功")
+        // console.log("视频结束状态更新成功")
       } else {
         console.log("视频结束状态更新失败==============" + d.data.msg)
       }
@@ -243,8 +241,8 @@ Page({
   update_start: function () {
 
     let that = this
-    var timestamp = (Date.parse(new Date()))/1000
-    console.log(timestamp,"timestamp")
+    // var timestamp = (Date.parse(new Date()))/1000
+    // console.log(timestamp,"timestamp")
 
     var params = {
       "token": wx.getStorageSync("token"),
@@ -252,16 +250,16 @@ Page({
       "kid": that.data.kid,
       "type":2
     }
-    console.log(params, "视频开始状态更新参数")
+    // console.log(params, "视频开始状态更新参数")
     app.ols.video_start(params).then(d => {
-      console.log(d, "视频开始状态更新数据")
-      var timestamp = (Date.parse(new Date()))/1000
-      console.log(timestamp,"timestamp")
+      // console.log(d, "视频开始状态更新数据")
+      // var timestamp = (Date.parse(new Date()))/1000
+      // console.log(timestamp,"timestamp")
       that.setData({
         hid:d.data.data.hid,
       })
       if (d.data.code == 0) {
-        console.log("视频开始状态更新成功")
+        // console.log("视频开始状态更新成功")
       } else {
         console.log("视频开始状态更新失败==============" + d.data.msg)
       }
@@ -279,9 +277,9 @@ Page({
       "gid":wx.getStorageSync('gid')
     }
     app.ols.getplaypushlist(params).then(d => {
-      console.log(d)
+      // console.log(d)
       if (d.data.code == 0) {
-        console.log(d.data.data)
+        // console.log(d.data.data)
         that.setData({
           course: d.data.data
         })

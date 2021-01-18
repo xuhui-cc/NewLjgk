@@ -172,9 +172,9 @@
   opacity:1;
 }
 .num_layout{
-  position: absolute;
-  /* margin-left: 400rpx; */
-  margin-top: 100rpx;
+  /* position: absolute; */
+  margin-left: 440rpx;
+  margin-top: 20rpx;
   margin-bottom: 20rpx;
   right: 60rpx;
   width:92rpx;
@@ -210,10 +210,10 @@
   opacity:1;
 }
 .buy_num{
-  position: absolute;
-  margin-left: 525rpx;
-  margin-top: 53rpx;
-  width:140rpx;
+  /* position: absolute; */
+  margin-left: 400rpx;
+  margin-top: 30rpx;
+  width:150rpx;
   height:30rpx;
   font-size:22rpx;
   font-family:PingFang SC;

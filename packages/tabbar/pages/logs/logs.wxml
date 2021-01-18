@@ -458,7 +458,7 @@
   </view>
   <!-- vip结束 -->
 
-  <view style="margin-bottom:100rpx;margin-top:300rpx;" wx:if="{{current_subject > 1}}">
+  <view style="margin-top:300rpx;" wx:if="{{current_subject > 1}}">
     <view wx:for="{{course}}" wx:key="index">
 
       <view class="course_layout" bindtap="to_course_detail" data-xb="{{index}}" data-type="{{1}}">

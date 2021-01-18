@@ -1,15 +1,22 @@
 // pages/course_detail/course_detail.js
 const app = getApp()
+
 Page({
   // 打开的文件路径 在onShow中删除文件
   openFilePath: '',
+
+  // 分享图片的路径
+  shareImagePath: '',
+
   /**
    * 页面的初始数据
    */
   data: {
     currentData: 0,
     btn_buy:app.globalData.btn_buy,
-    coupon_use:false
+    coupon_use:false,
+    showCanvas:false,
+    
   },
 
   /**
@@ -24,22 +31,16 @@ Page({
       wx.setStorageSync("gid", options.gid)
       that.setData({
         isshare: options.isshare,
-        gid: options.gid,
-        
-        login: wx.getStorageSync("login")
+        // gid: options.gid,
+        // login: wx.getStorageSync("login")
       })
-      // wx.setStorageSync("gid", options.gid)
-      console.log("分享打开", that.data.isshare, that.data.gid, that.data.gid)
+      // console.log("分享打开")
 
     } else {
-      that.judge_login()    //登陆判断
-     
+      // that.judge_login()    //登陆判断
       console.log("非分享打开")
     }
-
-    
     that.course_detail()  //获取课程详情
-    
   },
 
   //登录判断
@@ -51,8 +52,8 @@ Page({
       gid: wx.getStorageSync("gid")
     })
     // console.log(that.data.testlogin, "that.data.testlogin")
-    console.log(that.data.login, "that.data.login")
-    console.log(that.data.gid, "that.data.gid")
+    console.log(that.data.login, "that.data.login",that.data.gid, "that.data.gid")
+    
   },
 
 
@@ -65,20 +66,24 @@ Page({
         "token": wx.getStorageSync("token"),
         "kid": that.data.kid
       }
-      console.log(params, "课程详情接口参数")
-      app.ols.course_info4(params).then(d => {
-        that.handle_data1(d)   //课程详情数据处理
-      })
     }else{
-      var params = {
-        "token": '',
-        "kid": that.data.kid
+        var params = {
+          "token": '0',
+          "kid": that.data.kid
+        }
       }
-      console.log(params, "课程详情接口参数")
+      // console.log(params, "课程详情接口参数")
       app.ols.course_info4(params).then(d => {
         that.handle_data1(d)   //课程详情数据处理
       })
-    }
+    // }
+    // else{
+      
+    //   console.log(params, "课程详情接口参数")
+    //   app.ols.course_info4(params).then(d => {
+    //     that.handle_data1(d)   //课程详情数据处理
+    //   })
+    // }
     
 
   },
@@ -86,34 +91,37 @@ Page({
   //课程详情介绍数据处理
   handle_data1:function(d){
     let that = this
-    console.log(d, "课程详情接口数据")
+    // console.log(d, "课程详情接口数据")
     if (d.data.code == 0) {
-      console.log(d.data.data)
+      // console.log(d.data.data)
+      that.dealAva(d.data.data.face)
+      // wx.setStorageSync('face', d.data.data.face)
       d.data.data.content = d.data.data.content.replace(/<img/gi, '<img style="max-width:100%;height:auto;display:block"')
-      that.setData({
-        course_info: d.data.data
-      })
+      
       // var cs = "course_info.content"
       // that.setData({
       //   [cs]: that.data.course_info.content.replace(/<img/gi, '<img style="max-width:100%;height:auto;display:block"')
       // })
-      that.to_free()       //开通免费课
-      if (that.data.course_info.buy == 1 || (that.data.course_info.buy >= 3 && that.data.course_info.buy <= 5)) {
+      if(d.data.data.price == 0 && (d.data.data.buy < 1 || d.data.data.buy > 5 )){
+        that.to_free()       //开通免费课
+      }else if (d.data.data.buy == 1 || (d.data.data.buy >= 3 && d.data.data.buy <= 5)) {
         that.setData({
           currentData: 1
         })
         that.getcourse_cata()  //获取课程目录
       }
-    } else {
-      console.log("课程详情介绍接口==============" + d.data.msg)
-    }
+      that.setData({
+        course_info: d.data.data
+      })
+      
+    } 
   },
 
   //看视频
   to_video:function(e){
     let that = this
     var xb = e.currentTarget.dataset.xb
-    console.log(xb)
+    // console.log(xb)
     var id = that.data.course_cata.lists[xb].id
     var kid = that.data.course_cata.lists[xb].kid
     var eid = that.data.course_cata.lists[xb].eid
@@ -145,7 +153,7 @@ Page({
     var eid = that.data.course_cata.lists[xb].eid
     var kid = that.data.course_cata.lists[xb].kid
     var oid = that.data.course_cata.lists[xb].id
-    console.log(eid)
+    // console.log(eid)
     wx.navigateTo({
       url: app.getPagePath('homework') + '?eid=' + eid + "&kid=" + kid + "&oid=" + oid,   //课后作业
     })
@@ -178,7 +186,6 @@ Page({
   //免费课领取
   to_free:function(e){
     let that = this
-    if(that.data.course_info.price == 0 && (that.data.course_info.buy < 1 || that.data.course_info.buy > 5 )){
       var params = {
         "token": wx.getStorageSync("token"),
         "kid": that.data.kid
@@ -191,13 +198,10 @@ Page({
           // that.setData({
           //   currentData:1
           // })
-          console.log("获取免费课程接口调取成功")
-        } else {
-          console.log("获取免费课程==============" + d.data.msg)
-        }
+          // console.log("获取免费课程接口调取成功")
+        } 
       })
-    }
-    
+    // }
   },
 
 
@@ -209,7 +213,7 @@ Page({
       click_file:true
     })
     var xb = e.currentTarget.dataset.xb
-    console.log(xb)
+    // console.log(xb)
     var id = that.data.course_cata.lists[xb].id
     if (that.data.course_cata.lists[xb].annex_num > 1){
       wx.navigateTo({
@@ -224,9 +228,9 @@ Page({
         "id": id
       }
       app.ols.handout(params).then(d => {
-        console.log(d)
+        // console.log(d)
         if (d.data.code == 0) {
-          console.log(d.data.data)
+          // console.log(d.data.data)
           that.setData({
             handout: d.data.data
           })
@@ -272,11 +276,10 @@ Page({
             }
           // }
 
-          if (that.data.handout[0].annex.indexOf(".png") != -1 || that.data.handout[0].annex.indexOf(".jpg") != -1) {
+          if (that.data.handout[0].annex.indexOf(".png") != -1 || that.data.handout[0].annex.indexOf(".jpg") != -1){
             that.previewImage()
-            console.log("图")
+            // console.log("图")
           } else {
-            
             wx.showLoading({
               title: '资料打开中...',
             })
@@ -286,8 +289,8 @@ Page({
               fileName: fileName
             })
             let customFilePath = wx.env.USER_DATA_PATH + "/" + that.data.fileName
-            console.log('得到自定义路径：')
-            console.log(customFilePath)
+            console.log('自定义路径：',customFilePath)
+            // console.log()
 
             wx.downloadFile({
               url: that.data.handout[0].annex, //仅为示例，并非真实的资源
@@ -297,8 +300,8 @@ Page({
 
                 console.log(res)
                 var filePath = res.filePath
-                console.log('返回自定义路径：')
-                console.log(filePath)
+                console.log('返回自定义路径：',filePath)
+                // console.log()
 
                 that.openFilePath = filePath
                 wx.openDocument({
@@ -352,10 +355,8 @@ Page({
 
           
           }
-          console.log("课程讲义接口调取成功")
-        } else {
-          console.log("课程讲义==============" + d.data.msg)
-        }
+          // console.log("课程讲义接口调取成功")
+        } 
       })
     }
     
@@ -371,7 +372,7 @@ Page({
       }
     }else{
       var params = {
-        "token": '',
+        "token": '0',
         "kid": that.data.kid
       }
     }
@@ -473,10 +474,9 @@ Page({
     let that = this
     
     that.judge_login()    //登陆判断
-    if (that.data.currentData == 0){
-      that.course_detail()   //获取课程简介
-    } else if (that.data.currentData == 1){
-      that.course_detail()   //获取课程简介
+    that.course_detail()   //获取课程简介
+    if (that.data.currentData == 1){
+      // that.course_detail()   //获取课程简介
       that.getcourse_cata()   //课程目录接口
     }
     
@@ -493,7 +493,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    let that = this
+    
   },
 
   /**
@@ -534,8 +535,9 @@ Page({
       }
     })
   },
+  
   //课程权限提示
-  course_authority:function(e){
+  course_authority:function(){
     let that = this
     // var xb = e.currentTarget.dataset.xb
     // console.log(xb)
@@ -663,6 +665,221 @@ Page({
   onShareAppMessage: function () {
     let that = this;
     let paramsStr = 'isshare=1&gid=' + that.data.gid + '&kid=' + that.data.kid
-    return app.shareTool.getShareReturnInfo('0,1', 'course_detail', paramsStr, '/images/other/share1.png')
+    return app.shareTool.getShareReturnInfo('0,1', 'course_detail', paramsStr, this.shareImagePath ? this.shareImagePath : '', that.data.course_info.title)
   },
+
+
+  /**
+   * 点击报名
+   */
+  toSubMsg:function(){
+    let that = this 
+    var params = {
+      "openid":app.loginTool.getOpenid(),
+      "kid":that.data.kid
+    }
+    app.ols.clickSign(params).then(d => {
+      
+    })
+    if(that.data.course_info.buy ==1 || (that.data.course_info.buy >= 3 && that.data.course_info.buy <= 5)){
+      console.log("触发报名")
+    wx.requestSubscribeMessage({
+      tmplIds: ['leet7lbTpajEaI84ml4bop06JleNT7Gn4XjiJjbDQOk'], // 此处可填写多个模板 ID，但低版本微信不兼容只能授权一个
+      success(res) { 
+        console.log(res)
+        var params = {
+          "token":wx.getStorageSync('token'),
+          "course_id":that.data.kid
+        }
+        app.ols.subMsg(params).then(d => {
+          if (d.data.code == 0 || d.data.code == 4) {
+            that.course_detail()
+            that.getcourse_cata()
+            var params = {
+              "kid":that.data.kid
+            }
+            app.ols.succeedSign(params).then(d => {
+              
+            })
+          }
+        })
+      },
+      fail(res){
+        console.log("报名失败")
+        wx.showModal({
+          title: '提示', //提示的标题,
+          content: '请打开订阅消息权限', //提示的内容,
+          showCancel: true, //是否显示取消按钮,
+          
+          success: res => {
+            if (res.confirm) {
+              wx.openSetting({
+                success(res) {
+                },
+                fail(res) {
+                }
+              })
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        });
+    } 
+    })
+    }else{
+      that.getcourse_cata()
+      that.course_authority()
+    }
+    
+  },
+
+  /*-----------------------------------------------------分享图------------------------------------- */
+
+// 处理图片
+dealAva:function(face){
+  let that = this 
+  
+    wx.getImageInfo({
+      src: face,
+      success: function (res) {
+        console.log(res,"res");
+        var face = res.path
+        that.drawShareImage(face)
+      }
+    })
+    // console.log(promise3,"promise3")
+  
+},
+
+
+/**
+   * 绘制分享图片
+  */
+ drawShareImage: function (face) {
+  this.setData({
+    showCanvas: true
+  })
+  var title1,title2
+  if(this.data.course_info.title.length > 12){
+    var title1 = this.data.course_info.title.substr(0,12)
+    var title2 = this.data.course_info.title.substr(12,12)
+    console.log(title1)
+    console.log(title2)
+  }else{
+    var title1 = this.data.course_info.title
+  }
+  // var title = "判断推理系统课判断推理系统课判断推理系统课"
+  
+  const ctx = wx.createCanvasContext('shareCanvas')
+  ctx.drawImage(face, 0, 0, 375, 170)
+  ctx.drawImage("/images/other/share_course.png", 0, 131, 375, 170)
+
+  // //画头像
+  // ctx.save();
+  // ctx.beginPath();
+  // ctx.arc(187 , 80, 37, 0, 2 * Math.PI);
+  // ctx.setStrokeStyle('white')
+  // ctx.stroke()
+  // ctx.clip()
+  // ctx.drawImage(face, 150, 43, 80, 100)
+
+  //画昵称
+  ctx.restore()
+  ctx.beginPath()
+  ctx.setFontSize(20)
+  ctx.setFillStyle('#272727')
+  ctx.font = "bold 20px sans-serif";
+  ctx.setTextAlign('center')
+  // ctx.setStrokeStyle('white')
+  ctx.fillText(title1, 187, 207,300)
+  if(title2){
+    ctx.fillText(title2 + "...", 187, 235,300)
+  }
+  ctx.stroke()
+  if(title2){
+    ctx.drawImage("/images/other/num_bg.png", 140, 250, 100, 20)
+  }else{
+    ctx.drawImage("/images/other/num_bg.png", 140, 230, 100, 20)
+  }
+  
+
+  ctx.restore()
+  ctx.beginPath()
+  ctx.setFontSize(12)
+  ctx.setFillStyle('#FFFFFF')
+  ctx.setTextAlign('center')
+  if(title2){
+    ctx.fillText(this.data.course_info.order_num + "人学习", 190,265 ,100)
+  }else{
+    ctx.fillText(this.data.course_info.order_num + "人学习", 190,245 ,100)
+  }
+  
+  ctx.stroke()
+  // //画职位
+  // ctx.restore()
+  // ctx.beginPath()
+  // ctx.setFontSize(16)
+  // ctx.setFillStyle('#13E0B2')
+  // ctx.setTextAlign('center')
+  // ctx.fillText(this.data.teacherIntro.discipline, 187, 175 ,120)
+  // ctx.stroke()
+
+  // //画简介
+  // ctx.restore()
+  // ctx.beginPath()
+  // ctx.setFontSize(17)
+  // ctx.setFillStyle('#FFFFFF')
+  // ctx.setTextAlign('left')
+  // ctx.fillText('this.data.teacherIntro.intro', 40,260)
+  ctx.stroke()
+
+
+  // ctx.beginPath();
+  
+  // ctx.closePath();
+  //   // ctx.fill();
+  // ctx.clip()
+  // // 底图
+  
+  
+  
+
+  
+
+  
+
+  console.log("画图完成")
+
+  let that = this
+  ctx.draw(true,function(e) {
+    console.log("开始画图")
+    wx.canvasToTempFilePath({
+      x: 0,
+      y: 0,
+      width: 375,
+      height: 320,
+      canvasId: 'shareCanvas',
+      success(res) {
+        console.log(res.tempFilePath)
+        that.shareImagePath = res.tempFilePath
+        console.log(that.shareImagePath,"图片地址")
+        // wx.previewImage({
+        //   urls: [that.shareImagePath],
+        // })
+        that.setData({
+          showCanvas: false,
+          teacher_info:true
+        })
+      },
+      fail (res) {
+        console.log("失败")
+        that.setData({
+          showCanvas: false,
+          teacher_info:true
+        })
+      }
+    })
+  })
+
+},
 })

@@ -16,7 +16,7 @@ Page({
     current_subject: 0,
     btn_buy:app.globalData.btn_buy,
     // did:-1,
-
+    vip:'',
     // 广告弹窗读对象
     adWindowModel: null,
   },
@@ -48,17 +48,20 @@ Page({
   
   onShow: function () {
     let that = this
-    that.vipCoursePage = 1
-    that.subjectCoursePage = 1
-    that.setData({
-      current_special:-1,
-    })
-
+    // that.vipCoursePage = 1
+    // that.subjectCoursePage = 1
+    // that.setData({
+    //   current_special:-1,
+    // })
     that.judge_login()    //登陆判断
-    that.getgrade()    //获取年级 
-    that.getsubject()   //获取学科
-    that.get_banner3()  //轮播图
+    // that.getgrade()    //获取年级 
+    // that.getsubject()   //获取学科
+    // that.get_banner3()  //轮播图
     that.couponShow()    //优惠券显示状态
+
+
+
+
     // that.coursePushList()   //后台推荐课程
     // if(that.data.grade){
     //   for (var i = 0; i < that.data.grade.length; i++) {
@@ -114,27 +117,19 @@ Page({
    */
   onReachBottom: function() {
     let that = this 
-    console.log("触底")
+    // console.log("触底")
     if(that.data.current_subject == 1){
       if(that.data.vipCourseList.length < that.vipTotal){
         that.vipCoursePage += 1
         that.allVipCourse()
-      }
-      else{
       }
     }else if(that.data.current_subject > 1){
       if(that.data.course.length < that.courseTotal){
         that.subjectCoursePage += 1
       that.getcourse()
       }
-      else{
-      }
     }
-
   },
-
-  
-
 
    /**
    * 生命周期函数--监听页面隐藏
@@ -144,7 +139,6 @@ Page({
     clearInterval(ms_timer); 
   },
 
-  
   /*-------------------------------------------------------接口------------------------------------------------ */
   //获取科目接口
   getsubject: function () {
@@ -153,7 +147,6 @@ Page({
       "gid": that.data.gid
     }
     app.ols.discipline(params).then(d => {
-      // console.log(d)
       if (d.data.code == 0) {
         var subject=[ {'id':-1, 'title': '推荐'},{'id':-2, 'title': 'VIP'}]
         for (let i in d.data.data) {
@@ -206,9 +199,9 @@ Page({
       }
       app.ols.grade_course4(params).then(d => {
       // app.ols.grade_course2(params).then(d => {
-        console.log(d)
+        // console.log(d)
         if (d.data.code == 0) {
-          console.log(d.data.data)
+          // console.log(d.data.data)
           that.setData({
             course: d.data.data
           })
@@ -485,7 +478,6 @@ Page({
         "token":0
       }
     }
-    
     app.ols.coursePushList(params).then(d => {
       if (d.data.code == 0) {
         that.setData({
@@ -511,15 +503,7 @@ Page({
           that.setData({
             vip:d.data.data
           })
-        } else {
-          that.setData({
-            vip:''
-          })
-        }
-      })
-    }else{
-      that.setData({
-        vip:''
+        } 
       })
     }
   },
@@ -646,9 +630,7 @@ Page({
         scrollLeft: 300
       })
     } else {
-      this.setData({
-        scrollLeft: 0
-      })
+      this.toTop()
     }
   },
 
@@ -729,10 +711,27 @@ Page({
   //登录判断
   judge_login: function () {
     let that = this
-    that.setData({
-      login: wx.getStorageSync("login"),
-      gid: wx.getStorageSync("gid")
-    })
+    if(wx.getStorageSync("login") != that.data.login){
+      that.setData({
+        login: wx.getStorageSync("login"),
+        gid: wx.getStorageSync("gid"),
+        // ,
+        current_subject:0
+      })
+      that.vipCoursePage = 1
+      that.subjectCoursePage = 1
+      that.getgrade()    //获取年级 
+      that.getsubject()   //获取学科
+      that.get_banner3()  //轮播图
+      that.toTop()
+    }else{
+      that.setData({
+        login: wx.getStorageSync("login"),
+        gid: wx.getStorageSync("gid"),
+        // current_special:-1,
+      })
+    }
+    
   },
 
   //年级弹框
@@ -1074,11 +1073,11 @@ Page({
           })
         }else{
           that.setData({
-          signBtn:false,
+          // signBtn:false,
           codeinfo:d.data.data,
           exchange_page:true,
-          code_layout:false,
-          code:''
+          // code_layout:false,
+          // code:''
         })
         }
       } else if(d.data.code == 5){
@@ -1088,9 +1087,9 @@ Page({
           
         })
       }
-      else{
-        console.log("会员列表失败==============" + d.data.msg)
-      }
+      // else{
+      //   console.log("会员列表失败==============" + d.data.msg)
+      // }
     })
   },
 
@@ -1103,19 +1102,21 @@ Page({
       "id":that.data.codeinfo.id
     }
     app.ols.exchange_code(params).then(d => {
-      
+      that.setData({
+        exchange_page:false,
+        code:'',
+      })
       if (d.data.code == 0) {
         wx.showToast({
           title: "兑换成功",
           icon:"none",
         })
-        that.v4_viplist()   //获取vip
-      that.allVipCourse()   //获取vip课程
+      //   that.v4_viplist()   //获取vip
+      // that.allVipCourse()   //获取vip课程
         
         that.setData({
-          exchange_page:false,
-          
-          code:'',
+          // exchange_page:false,
+          // code:'',
           sign_title:d.data.data.title,
           sign_remark:d.data.data.remark,
         })
@@ -1124,14 +1125,12 @@ Page({
           title: d.data.msg,
           icon:"none",
         })
-        that.setData({
-          exchange_page:false,
-          code:'',
-        })
-        that.v4_viplist()   //获取vip
-      that.allVipCourse()   //获取vip课程
+        
         
       }
+
+      that.v4_viplist()   //获取vip
+      that.allVipCourse()   //获取vip课程
     })
   },
 

@@ -127,9 +127,10 @@ getPhoneNumber: function (e) {
 fold:function(e){
   let that = this
   console.log(e.currentTarget.dataset.xb)
-  var fold = "couponList[" + e.currentTarget.dataset.xb + "].fold"
+  var xb = e.currentTarget.dataset.xb
+  var fold = "couponList[" + xb + "].fold"
   that.setData({
-    [fold]:!that.data.couponList[e.currentTarget.dataset.xb].fold
+    [fold]:!that.data.couponList[xb].fold
   })
 },
 
@@ -146,12 +147,11 @@ fold:function(e){
     }
     app.ols.couponList(params).then(d => {
       if (d.data.code == 0) {
-        for(var i = 0;i<d.data.data.length;i++ ){
+        for(let i = 0;i<d.data.data.length;i++ ){
           if(d.data.data[i].memo){
             d.data.data[i].memoLength = d.data.data[i].memo.length
             d.data.data[i].fold = false
           }
-          
         }
         that.setData({
           couponList:d.data.data
