@@ -7,20 +7,24 @@ function showPay() {
     case 'devtools': {
       // 开发工具
       showPay = true
+      // wx.setStorageSync('showPay', showPay)
       break
     }
     case 'ios': {
       // iphone/ipad
-      showPay = true
+      showPay = false
+      // wx.setStorageSync('showPay', showPay)
       break
     }
     case 'android': {
       // 安卓
       showPay = true
+      // wx.setStorageSync('showPay', showPay)
       break
     }
     case 'mac': {
       showPay = true
+      // wx.setStorageSync('showPay', showPay)
       break
     }
     case 'windows': {
@@ -28,6 +32,7 @@ function showPay() {
       break
     }
   }
+  wx.setStorageSync('showPay', showPay)
   return showPay
 }
 

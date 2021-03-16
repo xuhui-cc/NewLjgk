@@ -48,16 +48,29 @@ Page({
   
   onShow: function () {
     let that = this
+    // console.log(wx.getStorageSync('showPay'),"showPay")
+    that.setData({
+      showPay:wx.getStorageSync('showPay')
+    })
+    that.judge_login()    //登陆判断
+    that.vipCoursePage = 1
+    that.subjectCoursePage = 1
+    that.getgrade()    //获取年级 
+    that.getsubject()   //获取学科
+    that.get_banner3()  //轮播图
+    that.coursePushList()   //获取后台推荐课
+    that.couponShow()    //优惠券显示状态
+    that.toTop()
     // that.vipCoursePage = 1
     // that.subjectCoursePage = 1
     // that.setData({
     //   current_special:-1,
     // })
-    that.judge_login()    //登陆判断
+    
     // that.getgrade()    //获取年级 
     // that.getsubject()   //获取学科
     // that.get_banner3()  //轮播图
-    that.couponShow()    //优惠券显示状态
+    
 
 
 
@@ -119,10 +132,15 @@ Page({
     let that = this 
     // console.log("触底")
     if(that.data.current_subject == 1){
-      if(that.data.vipCourseList.length < that.vipTotal){
-        that.vipCoursePage += 1
-        that.allVipCourse()
+      if(that.data.vip == ''|| that.data.vip.datas.valid_days == '已过期' ){
+        return
+      }else{
+        if(that.data.vipCourseList.length < that.vipTotal){
+          that.vipCoursePage += 1
+          that.allVipCourse()
+        }
       }
+      
     }else if(that.data.current_subject > 1){
       if(that.data.course.length < that.courseTotal){
         that.subjectCoursePage += 1
@@ -343,7 +361,11 @@ Page({
               grade_select: false
             })
             console.log("更新接口存班级")
-          } 
+          } else{
+            that.setData({
+              grade_select: false
+            })
+          }
         })
       }else{
         clearInterval(timer);   
@@ -539,7 +561,7 @@ Page({
               //   course:''
               // })
               that.subjectCoursePage = 1
-              this.courseTotal = 0
+              that.courseTotal = 0
               that.getcourse()     //获取课程
             }
           }
@@ -711,26 +733,25 @@ Page({
   //登录判断
   judge_login: function () {
     let that = this
-    if(wx.getStorageSync("login") != that.data.login){
-      that.setData({
-        login: wx.getStorageSync("login"),
-        gid: wx.getStorageSync("gid"),
-        // ,
-        current_subject:0
-      })
-      that.vipCoursePage = 1
-      that.subjectCoursePage = 1
-      that.getgrade()    //获取年级 
-      that.getsubject()   //获取学科
-      that.get_banner3()  //轮播图
-      that.toTop()
-    }else{
+    // if(wx.getStorageSync("login") != that.data.login){
+    //   that.setData({
+    //     login: wx.getStorageSync("login"),
+    //     gid: wx.getStorageSync("gid"),
+    //     current_subject:0
+    //   })
+    //   that.vipCoursePage = 1
+    //   that.subjectCoursePage = 1
+    //   that.getgrade()    //获取年级 
+    //   that.getsubject()   //获取学科
+    //   that.get_banner3()  //轮播图
+    //   that.toTop()
+    // }else{
       that.setData({
         login: wx.getStorageSync("login"),
         gid: wx.getStorageSync("gid"),
         // current_special:-1,
       })
-    }
+    // }
     
   },
 
@@ -782,12 +803,16 @@ Page({
       })
       that.v4_viplist()  //获取vip
       that.allVipCourse()   //获取vip课程
+    }else if(cur == 0){
+      that.coursePushList() //后台推荐课
     }else{
       that.setData({
         did: that.data.subject[cur].id,
       })
       that.getcourse()     //获取课程
     }
+      
+    
   },
 
   //广告条跳转
@@ -986,10 +1011,13 @@ Page({
             if(coursePushList[i].price == 0){
               that.to_free(msgKid)
             }else{
-              wx.showToast({
-                title: '暂无课程权限，请联系分校老师',
-                icon:"none"
+              wx.navigateTo({
+                url: app.getPagePath('course_detail') + '?kid=' + msgKid,
               })
+              // wx.showToast({
+              //   title: '暂无课程权限，请联系分校老师',
+              //   icon:"none"
+              // })
             }
           }
         }
@@ -1011,10 +1039,13 @@ Page({
             if(course[i].price == 0){
               that.to_free(msgKid)
             }else{
-              wx.showToast({
-                title: '暂无课程权限，请联系分校老师',
-                icon:"none"
+              wx.navigateTo({
+                url: app.getPagePath('course_detail') + '?kid=' + msgKid,
               })
+              // wx.showToast({
+              //   title: '暂无课程权限，请联系分校老师',
+              //   icon:"none"
+              // })
             }
           }
         }
@@ -1090,6 +1121,16 @@ Page({
       // else{
       //   console.log("会员列表失败==============" + d.data.msg)
       // }
+    })
+  },
+
+   //兑换页关闭
+   exchange_page:function(){
+    let that = this
+    that.setData({
+      exchange_page:false,
+      code:'',
+      checkCode:1,
     })
   },
 

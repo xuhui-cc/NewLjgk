@@ -3,7 +3,7 @@ const ols = require('./ols')
 const pagePath = require('./pagePath.js')
 
 // 注册口令 (废弃)
-var password = null
+// var password = null
 
 var openid = null
 var session_key = null
@@ -69,7 +69,7 @@ function register(e, gid, callback) {
     iv: iv,
     encryptedData: encryptedData,
     gid: gid,
-    password: password,
+    // password: password,
     session_key: session_key,
     openid: openid
   }

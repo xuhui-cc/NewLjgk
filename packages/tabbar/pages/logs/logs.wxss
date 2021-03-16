@@ -3,7 +3,7 @@ page{
 }
 .backTopTop_image {
   position: fixed;
-  bottom: 260rpx;
+  bottom: 110rpx;
   right: 33rpx;
   width: 83rpx;
   height: 83rpx;
@@ -276,7 +276,6 @@ page{
 .free{
   
   margin-top: 48rpx;
-  
   width:84rpx;
   height:40rpx;
   font-size:28rpx;
@@ -292,12 +291,13 @@ page{
   height:33rpx;
 }
 .course_price{
-  margin-left: 10rpx;
+  /* margin-left: 10rpx; */
   height:49rpx;
   font-size:35rpx;
   font-family:PingFang SC;
   font-weight:bold;
   line-height:49rpx;
+  text-align: right;
   color:rgba(255,75,32,1);
 }
 
@@ -874,14 +874,14 @@ page{
 }
 .couponShow{
   position: fixed;
-  right: 5rpx;
+  left: 5rpx;
   bottom: 20rpx;
   width: 167rpx;
   height: 211rpx;
 }
 .coupon_price{
   position: fixed;
-  right: 25rpx;
+  left: 25rpx;
   bottom: 80rpx;
   width: 130rpx;
   height: 59rpx;

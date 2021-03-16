@@ -163,7 +163,18 @@ Page({
           that.setData({
             open_rightBag:true
           })
-        } 
+        } else{
+          wx.showToast({
+            title: d.data.msg,
+            icon: "none",
+            duration: 2950
+          })
+          setTimeout(function () {
+            wx.switchTab({
+              url: app.getPagePath('logs'),
+            })
+          }, 3000)
+        }
       })
       
    

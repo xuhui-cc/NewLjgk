@@ -385,6 +385,7 @@ Page({
   //查看会员权益
   success_yes:function(){
     let that = this 
+    that.onShow()
     // that.v4_viplist()
     that.setData({
       pay:false
@@ -474,7 +475,7 @@ onPageScroll: function (e) {
   onShareAppMessage: function () {
     let that = this;
     let paramStr = 'isshare=1&gid=' + wx.getStorageSync('gid') + "&code_layout=" + that.data.code_layout
-    return app.shareTool.getShareReturnInfo('0,1', 'vip_detail', paramStr, '/images/other/share1.png', '领军网校')
+    return app.shareTool.getShareReturnInfo('0,1', 'vip_detail', paramStr, '/images/other/share1.png', '领军公考')
   },
 
   /*-------------------------------------------------------接口------------------------------------------------- */

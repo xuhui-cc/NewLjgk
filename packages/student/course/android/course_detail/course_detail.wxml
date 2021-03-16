@@ -32,7 +32,8 @@
     <view wx:for="{{course_cata.lists}}" wx:key="index">
       <button class="login_read2" wx:if="{{!login}}"  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
       <!-- 直播课 -->
-      <view wx:if="{{item.cateid == 1 ||item.cateid == 2}}" bindtap="course_authority" >
+      <view wx:if="{{item.cateid == 1 ||item.cateid == 2}}"  >
+        <!-- bindtap="course_authority" -->
         
         <view class="flex">
           <view wx:if="{{index < 9}}" class="course_order">0{{index + 1}}</view>
@@ -60,36 +61,37 @@
           </view>
           <view wx:else="{{item.mt == 0}}" class="study_rate" >直播已删除</view>
           <!-- wx:if="{{item.mt == 1}}" -->
-          <!-- <image class="xu" src="/images/other/xu.png" ></image> -->
-          <!-- <view class="flex" bindtap="{{click_file?'':'to_course_file'}}"  data-xb="{{index}}" wx:if="{{item.annex_num > 0 }}">
+          <image class="xu" src="/images/other/xu.png" wx:if="{{item.annex_num > 0 ||  item.eid > 0}}"></image>
+          <view class="flex" bindtap="{{click_file?'':'to_course_file'}}"  data-xb="{{index}}" wx:if="{{item.annex_num > 0 }}">
             <image class="file-img1" src="/images/other/file1.png"></image>
             <view class="file" style="color:rgba(32,32,32,1);">讲义资料</view>
             <view class="file_num">查看</view>
             <image class="next" src="/images/navi/next.png"></image>
-          </view> -->
-          <!-- <view class="flex" wx:if="{{item.eid > 0}}" >
+          </view>
+          <view class="flex" wx:if="{{item.eid > 0}}" >
             <image class="file-img1" src="/images/other/work1.png"></image>
             <view class="file" style="color:rgba(32,32,32,1);">课后作业</view>
             <view class="work_finish" wx:if="{{item.mark_status == 0 || item.mark_status == null}}" bindtap="to_homework" data-xb="{{index}}">待完成</view>
             <view class="work_finish" wx:elif="{{item.mark_status == 1}}" style="color:rgba(164,164,164,1);">批改中</view>
             <view class="work_finish" wx:else="{{item.mark_status == 2}}" style="color:rgba(77,151,246,1);" bindtap="to_homework_report" data-mid="{{item.mid}}">查看报告</view>
             <image class="next" src="/images/navi/next.png"></image>
-          </view> -->
+          </view>
           <view class="heng3"></view>
         </view>
 
 
-        <!-- <view class="flex" wx:if="{{course_info.buy == 0 || buy == 6}}">
-          <image class="file_img" src="/images/other/file.png"></image>
-          <view class="file">讲义资料</view>
-          <view class="shu"></view>
-          <image class="work_img" src="/images/other/work.png"></image>
-          <view class="file">课后作业</view>
-        </view> -->
-        <view class="heng2" wx:if="{{course_info.buy == 0 || course_info.buy == 6}}"></view>
+        <view class="flex" wx:if="{{course_info.buy == 0 || buy == 6}}">
+          <image class="file_img" src="/images/other/file.png" wx:if="{{item.annex_num >0}}"></image>
+          <view class="file" wx:if="{{item.annex_num >0}}">讲义资料</view>
+          <view class="shu" wx:if="{{item.paper > 0 && item.annex_num >0}}"></view>
+          <image class="work_img" src="/images/other/work.png" wx:if="{{item.paper >0}}"></image>
+          <view class="file" wx:if="{{item.paper >0}}">课后作业</view>
+        </view>
+        <view class="heng2" wx:if="{{!login ||(course_info.price > 0 && (course_info.buy == 0 || course_info.buy == 6))}}"></view>
       </view>
 
-      <view wx:if="{{item.cateid == 0}}" bindtap="course_authority" >
+      <view wx:if="{{item.cateid == 0}}" >
+        <!-- bindtap="course_authority"  -->
         <view class="flex">
           <view wx:if="{{index < 9}}" class="course_order">0{{index + 1}}</view>
           <view wx:else class="course_order">{{index + 1}}</view>
@@ -109,37 +111,39 @@
           <view wx:if="{{item.percent == 0}}" class="study_rate" >未学习</view>
           <view wx:elif="{{item.percent < 100 && item.percent > 0}}" class="study_rate" >已学习{{item.percent}}%</view>
           <view wx:else="{{item.percent == 100}}" class="study_rate" style="color:#A4A4A4;">已学习{{item.percent}}%</view>
-          <!-- <image class="xu" src="/images/other/xu.png" ></image> -->
-          <!-- <view class="flex" bindtap="{{click_file?'':'to_course_file'}}" data-xb="{{index}}" wx:if="{{item.annex_num > 0 }}">
+          <image class="xu" src="/images/other/xu.png" wx:if="{{item.annex_num > 0 ||  item.eid > 0}}" ></image>
+          <view class="flex" bindtap="{{click_file?'':'to_course_file'}}" data-xb="{{index}}" wx:if="{{item.annex_num > 0 }}">
             <image class="file-img1" src="/images/other/file1.png"></image>
             <view class="file" style="color:rgba(32,32,32,1);">讲义资料</view>
             <view class="file_num">查看</view>
             <image class="next" src="/images/navi/next.png"></image>
-          </view> -->
-          <!-- <view class="flex" wx:if="{{item.eid > 0}}">
+          </view>
+          <view class="flex" wx:if="{{item.eid > 0}}">
             <image class="file-img1" src="/images/other/work1.png"></image>
             <view class="file" style="color:rgba(32,32,32,1);">课后作业</view>
             <view class="work_finish" wx:if="{{item.mark_status == 0 || item.mark_status == null}}" bindtap="to_homework" data-xb="{{index}}">待完成</view>
             <view class="work_finish" wx:elif="{{item.mark_status == 1}}" style="color:rgba(164,164,164,1);">批改中</view>
             <view class="work_finish" wx:else="{{item.mark_status == 2}}" style="color:rgba(77,151,246,1);" bindtap="to_homework_report" data-mid="{{item.mid}}">查看报告</view>
             <image class="next" src="/images/navi/next.png"></image>
-          </view> -->
+          </view>
           <view class="heng3"></view>
         </view>
 
 
-        <!-- <view class="flex" wx:if="{{course_info.buy == 0 || course_info.buy == 6 }}">
-          <image class="file_img" src="/images/other/file.png"></image>
-          <view class="file">讲义资料</view>
-          <view class="shu"></view>
-          <image class="work_img" src="/images/other/work.png"></image>
-          <view class="file">课后作业</view>
-        </view> -->
-        <view class="heng2" wx:if="{{course_info.buy == 0 || course_info.buy == 6 }}"></view>
+        <view class="flex" wx:if="{{course_info.buy == 0 || course_info.buy == 6 }}">
+          <image class="file_img" src="/images/other/file.png" wx:if="{{item.annex_num >0}}"></image>
+          <view class="file" wx:if="{{item.annex_num >0}}">讲义资料</view>
+          <view class="shu" wx:if="{{item.paper > 0 && item.annex_num >0}}"></view>
+          <image class="work_img" wx:if="{{item.paper >0}}" src="/images/other/work.png"></image>
+          <view class="file" wx:if="{{item.paper >0}}">课后作业</view>
+        </view>
+        <view class="heng2" wx:if="{{!login ||(course_info.price > 0 && (course_info.buy == 0 || course_info.buy == 6))}}"></view>
       </view>
     </view>
 
-    <view class="end_test" hidden="true">
+
+    <!-- hidden="true" -->
+    <view class="end_test" wx:if="{{course_cata.res.eid > 0}}">
       <view class="btn_end_test" wx:if="{{(course_cata.res.buy == 1 || course_cata.res.buy == 3 || course_cata.res.buy == 4 || course_cata.res.buy == 5) && course_cata.res.mark_status == 0 }}" bindtap="to_test">去考试</view>
       <view class="btn_end_test" wx:if="{{course_cata.res.mark_status == 1 && (course_cata.res.buy == 1 || course_cata.res.buy == 3 || course_cata.res.buy == 4 || course_cata.res.buy == 5)}}"  style="background:rgba(204,204,204,1);">批改中</view>
       <view class="btn_end_test" wx:if="{{course_cata.res.mark_status == 2 && (course_cata.res.buy == 1 || course_cata.res.buy == 3 || course_cata.res.buy == 4 || course_cata.res.buy == 5)}}" bindtap="to_test_report" style="background:rgba(77,151,246,1);">查看报告</view>
@@ -149,20 +153,37 @@
     
   </view>
 
+  <button class="login_read_sign"  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" wx:if="{{!login}}"></button>
+  <view class="sign" bindtap="toSubMsg" wx:if="{{course_info.price == 0 && course_info.live == 1 && course_info.apply == 0}}">预约直播</view>
+    <!-- <view class="sign" wx:if="{{course_info.price == 0 && course_info.live == 1 && course_info.apply == 0 && !login }}">预约直播</view> -->
 
-  <view class="course_buy"  wx:if="{{course_info.buy  == 0 || course_info.buy == 6}}" hidden="{{btn_buy}}">   
+  <view class="course_buy"  wx:if="{{(course_info.live == 0) && course_info.price == 0 &&(course_info.buy  == 0 || course_info.buy == 6) }}" >   
+    <!-- hidden="{{btn_buy}}" -->
     <!-- course_info.pay_status :  1 未购买；2已购买 -->
     <view class="yuan">¥</view>
     <view class="price">{{course_info.price}}</view>
     <button class="login_read"  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" wx:if="{{!login}}"></button>
-    <!--  -->
-    <view wx:if="{{course_info.price == 0 && login}}" class="button_buy"  bindtap="to_free" >立即报名</view>
-    <view wx:elif="{{course_info.price == 0 && !login}}" class="button_buy"  >立即报名</view>
-    <view wx:elif="{{course_info.price > 0 && login}}" class="button_buy"  bindtap="to_pay" >立即购买</view>
     
-    <view wx:else="{{course_info.price > 0 && !login}}" class="button_buy" >立即购买</view>
+    <view wx:if="{{login}}" class="button_buy"  bindtap="to_free" >立即领取</view>
+    <view wx:else="" class="button_buy" >立即领取</view>
+    
+   
+  </view>
+
+  <view class="course_buy"  wx:if="{{course_info.price > 0 && (course_info.buy  == 0 || course_info.buy == 6)}}" >   
+    <!-- hidden="{{btn_buy}}" -->
+    <!-- course_info.pay_status :  1 未购买；2已购买 -->
+    <view class="yuan">¥</view>
+    <view class="price">{{course_info.price}}</view>
+    <button class="login_read"  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" wx:if="{{!login}}"></button>
+   
+    <view wx:if="{{login}}" class="button_buy"  bindtap="to_pay" >立即购买</view>
+    
+    <view wx:else="" class="button_buy" >立即购买</view>
   </view>
   
+
+  <!-- <view class="sign" bindtap="toSubMsg" wx:if="{{course_info.live == 1 && course_info.apply == 0 }}">预约直播</view> -->
 
   <!-- 登录蒙层 -->
   <!-- <view class="mask1" wx:if="{{login == false && isshare == 1}}"></view>
@@ -191,9 +212,9 @@
 
 
 
-  <button class="login_read_sign"  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" wx:if="{{!login && course_info.live == 1 && course_info.apply == 0}}"></button>
-  <view class="sign" bindtap="toSubMsg" wx:if="{{course_info.live == 1 && course_info.apply == 0 }}">立即报名</view>
-  
+  <!-- <button class="login_read_sign"  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" wx:if="{{!login && course_info.live == 1 && course_info.apply == 0}}"></button> -->
+ 
+  <view class="sign" bindtap="toSubMsg" wx:if="{{course_info.price >= 0 && (course_info.buy > 0 && course_info.buy < 6) && course_info.live == 1 && course_info.apply == 0 && login }}">预约直播</view>
 <!-- container -->
 </view>
 <canvas canvas-id="shareCanvas" style="width:375px; height:320px;top:500rpx;" wx:if="{{showCanvas}}"></canvas>

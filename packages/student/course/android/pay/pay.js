@@ -45,10 +45,14 @@ Page({
       "token": wx.getStorageSync("token"),
       "kid": kid
     }
-    app.ols.course_info1(params).then(d => {
+    app.ols.course_info4(params).then(d => {
       console.log(d)
       if (d.data.code == 0) {
         console.log(d.data.data)
+        if(d.data.data.teacher && d.data.data.teacher.length > 3){
+          d.data.data.teacher.splice(3)
+          // console.log(d.data.data.teacher)
+        }
         that.setData({
           course_info: d.data.data
         })
@@ -204,6 +208,11 @@ Page({
                       that.laqizhifu(timeStamp, nonceStr, pack, paySign)
                       console.log("预支付接口成功")
                     } else {
+                      wx.showToast({
+                        title: '请填写地址信息！',
+                        icon:"none",
+                        duration:2000
+                      })
                       console.log("预支付接口失败", d)
                     }
                   })

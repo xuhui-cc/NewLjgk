@@ -94,6 +94,7 @@ Page({
     // console.log(d, "课程详情接口数据")
     if (d.data.code == 0) {
       // console.log(d.data.data)
+      that.getcourse_cata()  //获取课程目录
       that.dealAva(d.data.data.face)
       // wx.setStorageSync('face', d.data.data.face)
       d.data.data.content = d.data.data.content.replace(/<img/gi, '<img style="max-width:100%;height:auto;display:block"')
@@ -103,12 +104,12 @@ Page({
       //   [cs]: that.data.course_info.content.replace(/<img/gi, '<img style="max-width:100%;height:auto;display:block"')
       // })
       if(d.data.data.price == 0 && (d.data.data.buy < 1 || d.data.data.buy > 5 )){
-        that.to_free()       //开通免费课
+        // that.to_free()       //开通免费课
       }else if (d.data.data.buy == 1 || (d.data.data.buy >= 3 && d.data.data.buy <= 5)) {
         that.setData({
           currentData: 1
         })
-        that.getcourse_cata()  //获取课程目录
+        
       }
       that.setData({
         course_info: d.data.data
@@ -186,6 +187,7 @@ Page({
   //免费课领取
   to_free:function(e){
     let that = this
+    if(that.data.course_info.price == 0){
       var params = {
         "token": wx.getStorageSync("token"),
         "kid": that.data.kid
@@ -194,6 +196,9 @@ Page({
         console.log(d)
         if (d.data.code == 0) {
           that.course_detail() //获取课程详情
+          if(that.data.course_info.live == 1 && that.data.course_info.apply == 0){
+            that.toSubMsg()
+          }
           // that.getcourse_cata()   //获取课程目录
           // that.setData({
           //   currentData:1
@@ -201,6 +206,10 @@ Page({
           // console.log("获取免费课程接口调取成功")
         } 
       })
+    }else{
+      that.course_authority()
+    }
+     
     // }
   },
 
@@ -698,6 +707,10 @@ Page({
             var params = {
               "kid":that.data.kid
             }
+            wx.showToast({
+              title: '预约成功',
+              duration:2000
+            })
             app.ols.succeedSign(params).then(d => {
               
             })
@@ -727,8 +740,9 @@ Page({
     } 
     })
     }else{
-      that.getcourse_cata()
-      that.course_authority()
+      that.to_free()
+      // that.getcourse_cata()
+      // that.course_authority()
     }
     
   },

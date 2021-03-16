@@ -51,7 +51,7 @@
       <image  src="./resource/my_error.png"  class="course-li-imgzhong" mode="aspectFit"></image>
     </view>
       
-    <view class="course-li" bindtap="gourlOrder">
+    <view class="course-li" bindtap="gourlOrder" >
       <text class="course-li-title">我的订单</text>
       <image  src="./resource/my_order.png" class="course-li-img"  mode="aspectFit"></image>
     </view>
@@ -68,13 +68,14 @@
         </view>
     </view>
     <view class="heng"></view>
-    <view class="list-li" >
-        <image  src="./resource/my_about.png" class="item-img" mode="aspectFit"></image>
-        <view class="item" bindtap="gourlabout">
-           <text class="item-text">关于我们</text>
+    <view class="list-li" wx:if="{{showPay}}">
+        <image  src="./resource/my_order.png" class="item-img" mode="aspectFit"></image>
+        <view class="item" bindtap="gourlOrder">
+           <text class="item-text">我的订单</text>
            <view class="right-img"></view>
         </view>
     </view>
+    
     <view class="heng"></view>
     <view class="list-li">
         <image  src="./resource/my_course2.png" class="item-img" mode="aspectFit"></image>
@@ -84,10 +85,19 @@
         </view>
     </view>
     <view class="heng"></view>
+    
     <view class="list-li">
         <image  src="./resource/yhq_1.png" class="item-img" mode="aspectFit"></image>
         <view class="item" bindtap="to_myCoupon">
            <text class="item-text">我的优惠券</text>
+           <view class="right-img"></view>
+        </view>
+    </view>
+    <view class="heng"></view>
+    <view class="list-li" >
+        <image  src="./resource/my_about.png" class="item-img" mode="aspectFit"></image>
+        <view class="item" bindtap="gourlabout">
+           <text class="item-text">关于我们</text>
            <view class="right-img"></view>
         </view>
     </view>

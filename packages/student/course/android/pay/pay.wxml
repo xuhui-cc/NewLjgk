@@ -40,7 +40,7 @@
       </view>
       <view class="course_text"><text style="color:#03B683;">{{course_info.order_num}}人</text>购买</view>
       <view class="num_layout">
-        <view class="course_num">{{class_hour}}课时</view>
+        <view class="course_num">{{course_info.class_hour}}课时</view>
       </view>
       <view class="course_price">
         <view style="margin-right:8rpx;margin-top:5rpx;">¥</view>

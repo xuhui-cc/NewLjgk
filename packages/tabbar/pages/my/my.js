@@ -70,6 +70,9 @@ Page({
    */
   onShow: function () {
     let that = this
+    that.setData({
+      showPay:wx.getStorageSync('showPay')
+    })
     that.judge_login()  //登录判断
     // that.my_vip()
   },
